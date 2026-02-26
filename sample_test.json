@@ -1,7 +1,7 @@
 {
   "testName": "Тестовый пример",
   "dateGenerated": "2026-02-26T12:00:00.000Z",
-  "expires": "2026-02-28T23:59:59.000Z",
+  "expires": "2026-12-31T23:59:59.000Z",
   "maxViolations": 2,
   "questions": [
     {
@@ -57,7 +57,7 @@
       "optC": "R = U × I",
       "optD": "U = I / R",
       "correct": "A",
-      "explanation": "Закон Ома: U = I × R",
+      "explanation": "Закон Ома: I = U / R (или U = I × R)",
       "points": 2
     },
     {
@@ -113,7 +113,7 @@
       "optC": "Java",
       "optD": "JavaScript",
       "correct": "A, C",
-      "explanation": "C++ и Java компилируются в машинный код или байт-код",
+      "explanation": "C++ компилируется в машинный код, Java компилируется в байт-код",
       "points": 3
     },
     {
@@ -127,7 +127,7 @@
       "optC": "Миссисипи",
       "optD": "Янцзы",
       "correct": "A",
-      "explanation": "Амазонка считается самой длинной рекой в мире",
+      "explanation": "Амазонка считается самой длинной рекой в мире (около 7000 км)",
       "points": 1
     },
     {
