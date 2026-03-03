@@ -1494,6 +1494,85 @@
         window.onload = function() {
             loadTestFromGitHub();
         };
+            // Функция для получения параметра из URL
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Функция для загрузки теста
+    async function loadQuiz() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const errorScreen = document.getElementById('errorScreen');
+        const startScreen = document.getElementById('startScreen');
+        
+        try {
+            // Получаем название теста из URL параметра 'test'
+            let testFile = getUrlParameter('test');
+            
+            // Если параметр не указан, используем файл по умолчанию
+            if (!testFile) {
+                testFile = 'test_телеком_опрос__2_2026-03-03.json';
+            }
+            
+            // Формируем полный путь к файлу
+            // Для GitHub Pages файлы должны быть в той же директории или поддиректориях
+            const quizUrl = `./${testFile}`;
+            
+            // Показываем URL загрузки для отладки
+            document.getElementById('loadingUrl').textContent = `Загрузка: ${quizUrl}`;
+            
+            // Загружаем JSON файл
+            const response = await fetch(quizUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Файл ${testFile} не найден (HTTP ${response.status})`);
+            }
+            
+            const quizData = await response.json();
+            
+            // Сохраняем данные теста в глобальную переменную или localStorage
+            window.quizData = quizData;
+            
+            // Отображаем информацию о тесте на стартовом экране
+            displayTestInfo(quizData);
+            
+            // Скрываем загрузку, показываем стартовый экран
+            loadingScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            
+            // Обновляем заголовки
+            document.getElementById('mainTitle').textContent = quizData.title || '📋 Тестирование';
+            document.getElementById('headerSubtitle').textContent = quizData.description || '';
+            
+        } catch (error) {
+            // Показываем ошибку
+            loadingScreen.classList.add('hidden');
+            errorScreen.classList.remove('hidden');
+            document.getElementById('errorMessage').innerHTML = `
+                <strong>Ошибка загрузки теста:</strong><br>
+                ${error.message}<br><br>
+                <small>Проверьте, что файл существует в репозитории и имя указано правильно.</small>
+            `;
+        }
+    }
+
+    // Функция для отображения информации о тесте
+    function displayTestInfo(quizData) {
+        const testInfo = document.getElementById('testInfo');
+        // Здесь добавьте код для отображения информации о тесте
+        // в зависимости от структуры вашего JSON
+        testInfo.innerHTML = `
+            <div class="test-info-item">📊 Вопросов: ${quizData.questions?.length || 0}</div>
+            <div class="test-info-item">⏱️ Время: ${quizData.timeLimit || 'Не ограничено'}</div>
+            ${quizData.topics ? quizData.topics.map(topic => 
+                `<span class="settings-badge">📌 ${topic}</span>`
+            ).join('') : ''}
+        `;
+    }
+
+    // Загружаем тест при открытии страницы
+    document.addEventListener('DOMContentLoaded', loadQuiz);
     </script>
 </body>
 </html>
