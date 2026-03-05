@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📡 Телеком-опросник</title>
+    <title>📋 Тестирование</title>
     <style>
         * {
             box-sizing: border-box;
@@ -44,234 +44,76 @@
             padding: 30px;
         }
 
-        /* Кнопка входа в режим преподавателя */
-        .teacher-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border: 2px solid #2563eb;
-            color: #2563eb;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transition: all 0.3s;
+        /* Загрузочный экран */
+        .loading-screen {
+            text-align: center;
+            padding: 60px;
         }
 
-        .teacher-button:hover {
-            background: #2563eb;
-            color: white;
+        .loading-spinner {
+            border: 5px solid #f3f4f6;
+            border-top: 5px solid #2563eb;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
-        /* Модальное окно */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .modal.active {
-            display: flex;
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
         }
 
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 1000px;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 30px;
-            position: relative;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h2 {
-            color: #2563eb;
-        }
-
-        .close-button {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #64748b;
-        }
-
-        /* Парольный вход */
-        .password-prompt {
+        /* Стартовый экран */
+        .start-screen {
             text-align: center;
             padding: 40px;
         }
 
-        .password-prompt input {
-            padding: 12px 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            width: 300px;
-            margin: 20px 0;
-            font-size: 1em;
-        }
-
-        /* Панель преподавателя */
-        .teacher-panel {
+        .test-info {
             background: #f8fafc;
             border-radius: 16px;
-            padding: 25px;
-        }
-
-        .teacher-panel h3 {
-            color: #2563eb;
-            margin: 20px 0 15px 0;
-        }
-
-        .teacher-panel h3:first-of-type {
-            margin-top: 0;
-        }
-
-        .status-bar {
-            background: #dbeafe;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-badge {
-            background: #2563eb;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-        }
-
-        .file-upload {
-            border: 2px dashed #2563eb;
-            border-radius: 10px;
             padding: 30px;
-            text-align: center;
-            background: #f0f9ff;
-            margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-upload:hover {
-            background: #e0f2fe;
-        }
-
-        .file-upload input {
-            display: none;
-        }
-
-        .file-info {
-            margin-top: 15px;
-            font-weight: 600;
-            color: #059669;
-        }
-
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin: 20px 0;
-        }
-
-        .setting-group {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
+            margin: 30px 0;
             border: 1px solid #e2e8f0;
         }
 
-        .setting-group h4 {
-            color: #2563eb;
-            margin-bottom: 15px;
+        .test-info-item {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 20px;
+            background: #dbeafe;
+            border-radius: 30px;
+            color: #1e40af;
+            font-weight: 600;
         }
 
-        .setting-item {
-            margin-bottom: 15px;
-        }
-
-        .setting-item label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 500;
+        .settings-badge {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 15px;
+            background: #f1f5f9;
+            border-radius: 20px;
+            font-size: 0.9em;
             color: #475569;
         }
 
-        .setting-item input[type="number"],
-        .setting-item input[type="text"],
-        .setting-item input[type="password"] {
-            width: 100%;
-            padding: 10px;
+        .user-name-input {
+            padding: 15px;
+            width: 300px;
             border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1em;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 5px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-        }
-
-        .grading-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0;
-        }
-
-        .grading-table th,
-        .grading-table td {
-            padding: 10px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-
-        .grading-table input {
-            width: 70px;
-            padding: 5px;
-            text-align: center;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
             margin: 20px 0;
-            flex-wrap: wrap;
         }
 
         .btn {
@@ -287,6 +129,17 @@
             color: #2563eb;
         }
 
+        .btn-success {
+            background: #2563eb;
+            color: white;
+            border: 2px solid #2563eb;
+        }
+
+        .btn-success:hover {
+            background: #1e40af;
+            border-color: #1e40af;
+        }
+
         .btn-primary {
             background: #2563eb;
             color: white;
@@ -295,38 +148,13 @@
 
         .btn-primary:hover {
             background: #1e40af;
-            border-color: #1e40af;
         }
 
-        .btn-success {
-            background: #059669;
-            color: white;
-            border: 2px solid #059669;
+        .hidden {
+            display: none;
         }
 
-        .btn-success:hover {
-            background: #047857;
-            border-color: #047857;
-        }
-
-        .btn-warning {
-            background: #d97706;
-            color: white;
-            border: 2px solid #d97706;
-        }
-
-        .preview-box {
-            background: #1e293b;
-            color: #d1d5db;
-            padding: 20px;
-            border-radius: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-            font-family: monospace;
-            margin: 20px 0;
-        }
-
-        /* Основная страница опроса */
+        /* Страница опроса */
         .quiz-header {
             display: flex;
             justify-content: space-between;
@@ -341,15 +169,6 @@
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-
-        .user-info input {
-            padding: 10px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1em;
-            width: 250px;
-            background: #f1f5f9;
         }
 
         .progress-info {
@@ -389,6 +208,7 @@
         .badge-basic { background: #dbeafe; color: #1e40af; }
         .badge-medium { background: #fef3c7; color: #92400e; }
         .badge-hard { background: #fee2e2; color: #991b1b; }
+        .badge-topic { background: #cbd5e1; color: #334155; }
         .badge-type { background: #cbd5e1; color: #334155; }
 
         .question-text {
@@ -475,20 +295,6 @@
             border-left: 5px solid #dc2626;
         }
 
-        .explanation-box.correct .correct-answer {
-            color: #059669;
-        }
-
-        .explanation-box.incorrect .correct-answer {
-            color: #dc2626;
-        }
-
-        .explanation-box .correct-answer {
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-
         .nav-buttons {
             display: flex;
             justify-content: space-between;
@@ -496,10 +302,7 @@
             margin-top: 30px;
         }
 
-        .hidden {
-            display: none;
-        }
-
+        /* Результаты */
         .results-container {
             background: white;
             border-radius: 16px;
@@ -527,11 +330,6 @@
             color: #2563eb;
         }
 
-        .result-card .label {
-            color: #64748b;
-            margin-top: 5px;
-        }
-
         .answer-detail-card {
             margin: 15px 0;
             padding: 20px;
@@ -544,26 +342,6 @@
             font-weight: 600;
             font-size: 1.1em;
             margin-bottom: 15px;
-            color: #1e293b;
-        }
-
-        .answer-detail-options {
-            margin: 15px 0;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .options-title {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #475569;
-        }
-
-        .options-list-detailed {
-            line-height: 1.8;
-            color: #334155;
         }
 
         .answer-detail-row {
@@ -579,11 +357,6 @@
             font-weight: 600;
             width: 140px;
             color: #475569;
-        }
-
-        .answer-value {
-            flex: 1;
-            color: #1e293b;
         }
 
         .answer-detail-result {
@@ -612,9 +385,26 @@
             border: 1px solid #fde047;
         }
 
-        /* ==============================================
-           НОЧНОЙ РЕЖИМ
-           ============================================== */
+        /* Overlay для полноэкранного режима */
+        #fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Ночной режим */
         @media (prefers-color-scheme: dark) {
             body {
                 background: #1a1e2c;
@@ -623,52 +413,20 @@
 
             .container {
                 background: #2d3748;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             }
 
             header {
                 background: linear-gradient(135deg, #1e40af, #1e293b);
             }
 
-            .teacher-panel,
-            .setting-group,
-            .quiz-header,
+            .start-screen,
+            .test-info,
             .question-container,
             .results-container,
             .result-card,
-            .status-bar,
-            .modal-content,
-            .file-upload {
+            .quiz-header,
+            .answer-detail-card {
                 background: #1e293b;
-                border-color: #475569;
-                color: #e2e8f0;
-            }
-
-            .setting-group {
-                background: #0f172a;
-                border-color: #334155;
-            }
-
-            .setting-group h3,
-            .setting-group h4,
-            .modal-header h2 {
-                color: #90caf9;
-            }
-
-            h1, h2, h3, h4, h5, h6 {
-                color: #f1f5f9;
-            }
-
-            p, label, span:not(.badge):not(.status-badge):not(.btn) {
-                color: #cbd5e1;
-            }
-
-            input[type="text"],
-            input[type="number"],
-            input[type="password"],
-            select,
-            textarea {
-                background: #0f172a;
                 border-color: #475569;
                 color: #e2e8f0;
             }
@@ -677,11 +435,6 @@
                 background: #1e293b;
                 border-color: #475569;
                 color: #e2e8f0;
-            }
-
-            .option-item:hover {
-                background: #334155;
-                border-color: #64748b;
             }
 
             .option-item.selected {
@@ -695,377 +448,51 @@
                 color: #3b82f6;
             }
 
+            .btn-success,
             .btn-primary {
                 background: #2563eb;
-                border-color: #3b82f6;
                 color: white;
-            }
-
-            .btn-primary:hover {
-                background: #1e40af;
-            }
-
-            .btn-success {
-                background: #047857;
-                border-color: #059669;
-                color: white;
-            }
-
-            .btn-warning {
-                background: #b45309;
-                border-color: #d97706;
-                color: white;
-            }
-
-            .badge-level0 { background: #4c1d95; color: #ddd6fe; }
-            .badge-level1 { background: #854d0e; color: #fef9c3; }
-            .badge-level2 { background: #991b1b; color: #fee2e2; }
-            .badge-basic { background: #1e3a8a; color: #dbeafe; }
-            .badge-medium { background: #92400e; color: #fef3c7; }
-            .badge-hard { background: #991b1b; color: #fee2e2; }
-            .badge-type { background: #334155; color: #e2e8f0; }
-
-            .status-bar {
-                background: #0f172a;
-            }
-
-            .progress-info {
-                background: #1e3a8a;
-                color: #dbeafe;
-            }
-
-            .explanation-box.correct {
-                background: #064e3b;
-                border-left-color: #10b981;
-            }
-
-            .explanation-box.incorrect {
-                background: #7f1d1d;
-                border-left-color: #ef4444;
-            }
-
-            .grading-table th,
-            .grading-table td {
-                border-color: #475569;
-                color: #e2e8f0;
-            }
-
-            .grading-table input {
-                background: #0f172a;
-                color: #e2e8f0;
-                border-color: #475569;
-            }
-
-            .result-card {
-                background: #1e293b;
-                border-color: #475569;
-            }
-
-            .result-card .value {
-                color: #60a5fa;
-            }
-
-            .modal-content {
-                background: #1e293b;
-            }
-
-            .file-upload {
-                background: #0f172a;
-                border-color: #3b82f6;
-            }
-
-            .preview-box {
-                background: #0f172a;
-                color: #a5f3fc;
-                border: 1px solid #2563eb;
-            }
-
-            .answer-detail-card {
-                background: #1e293b !important;
-                border-color: #334155 !important;
-            }
-
-            .answer-detail-question {
-                color: #f1f5f9 !important;
-            }
-
-            .answer-detail-options {
-                background: #0f172a !important;
-                border-color: #334155 !important;
-            }
-
-            .options-title {
-                color: #94a3b8 !important;
-            }
-
-            .options-list-detailed {
-                color: #cbd5e1 !important;
-            }
-
-            .answer-detail-row {
-                background: #0f172a !important;
-                border-color: #334155 !important;
-            }
-
-            .answer-label {
-                color: #94a3b8 !important;
-            }
-
-            .answer-value {
-                color: #e2e8f0 !important;
-            }
-
-            .result-correct {
-                background: #064e3b !important;
-                color: #4ade80 !important;
-                border-color: #059669 !important;
-            }
-
-            .result-incorrect {
-                background: #7f1d1d !important;
-                color: #fca5a5 !important;
-                border-color: #b91c1c !important;
-            }
-
-            .result-not-submitted {
-                background: #854d0e !important;
-                color: #fef9c3 !important;
-                border-color: #a16207 !important;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Кнопка входа в режим преподавателя -->
-    <div class="teacher-button" onclick="openTeacherModal()">👨‍🏫 Режим преподавателя</div>
-
-    <!-- Модальное окно преподавателя -->
-    <div class="modal" id="teacherModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>👨‍🏫 Панель преподавателя</h2>
-                <button class="close-button" onclick="closeTeacherModal()">&times;</button>
-            </div>
-            
-            <!-- Ввод пароля -->
-            <div id="teacherPasswordPrompt" class="password-prompt">
-                <h3>Введите пароль для доступа</h3>
-                <input type="password" id="teacherPassword" placeholder="Пароль" value="">
-                <div>
-                    <button class="btn btn-primary" onclick="checkTeacherPassword()">Войти</button>
-                </div>
-            </div>
-
-            <!-- Панель преподавателя (после ввода пароля) -->
-            <div id="teacherPanel" style="display: none;">
-                <div class="teacher-panel">
-                    <h3>📊 Статус данных</h3>
-                    <div class="status-bar" id="dataStatus">
-                        <span>Текущие данные:</span>
-                        <span class="status-badge" id="dataStatusBadge">Нет данных</span>
-                    </div>
-
-                    <h3>📂 Загрузка вопросов</h3>
-                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                        <div>📁 Нажмите для выбора Excel-файла</div>
-                        <div style="font-size: 0.9em; color: #64748b; margin-top: 10px;">
-                            Формат: колонки Вопрос, Уровень, Сложность, Тема, Тип, Варианты, Правильный ответ, Объяснение
-                        </div>
-                        <input type="file" id="fileInput" accept=".xlsx,.xls" onchange="handleFileUpload(this.files[0])">
-                        <div id="fileInfo" class="file-info"></div>
-                    </div>
-
-                    <h3>⚙️ Настройки теста по умолчанию</h3>
-                    <div class="settings-grid">
-                        <div class="setting-group">
-                            <h4>Основные</h4>
-                            <div class="setting-item">
-                                <label>Количество вопросов:</label>
-                                <input type="number" id="defaultQuestionCount" min="1" max="200" value="6">
-                            </div>
-                            <!-- НОВОЕ ПОЛЕ -->
-                            <div class="setting-item">
-                                <label>Целевая сумма баллов:</label>
-                                <input type="number" id="targetTotalPoints" min="1" max="1000" value="100">
-                            </div>
-                            <div class="setting-item">
-                                <label>Имя студента по умолчанию:</label>
-                                <input type="text" id="defaultName" value="Студент">
-                            </div>
-                            <div class="setting-item">
-                                <label>Название теста:</label>
-                                <input type="text" id="testName" value="Телеком-опрос">
-                            </div>
-                            <!-- НОВЫЙ БЛОК С РЕКОМЕНДАЦИЕЙ -->
-                            <div class="setting-item" style="background: #e8f0fe; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                                <label style="font-weight: bold; color: #1e40af;">📊 Рекомендация по количеству вопросов:</label>
-                                <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-                                    <input type="number" id="recommendedQuestionCount" readonly style="background: #f0f9ff; width: 100px; font-weight: bold; color: #2563eb;">
-                                    <span id="recommendedPointsInfo" style="color: #2563eb;"></span>
-                                </div>
-                                <div style="font-size: 0.9em; color: #4b5563; margin-top: 10px;" id="calculationDetails"></div>
-                                <button class="btn" onclick="applyRecommendedCount()" style="margin-top: 10px;">🔄 Применить рекомендацию</button>
-                                <button class="btn" onclick="calculateRecommendedQuestions()" style="margin-top: 10px; margin-left: 10px;">🔄 Пересчитать сейчас</button>
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>Распределение по уровням (%)</h4>
-                            <div class="setting-item">
-                                <label>Level-0:</label>
-                                <input type="number" id="level0Percent" min="0" max="100" value="40">
-                            </div>
-                            <div class="setting-item">
-                                <label>Level-1:</label>
-                                <input type="number" id="level1Percent" min="0" max="100" value="35">
-                            </div>
-                            <div class="setting-item">
-                                <label>Level-2:</label>
-                                <input type="number" id="level2Percent" min="0" max="100" value="25">
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>Распределение по сложности (%)</h4>
-                            <div class="setting-item">
-                                <label>Базовый:</label>
-                                <input type="number" id="easyPercent" min="0" max="100" value="40">
-                            </div>
-                            <div class="setting-item">
-                                <label>Средний:</label>
-                                <input type="number" id="mediumPercent" min="0" max="100" value="35">
-                            </div>
-                            <div class="setting-item">
-                                <label>Сложный:</label>
-                                <input type="number" id="hardPercent" min="0" max="100" value="25">
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>Распределение по типам вопросов (%)</h4>
-                            <div class="setting-item">
-                                <label>True/False:</label>
-                                <input type="number" id="tfPercent" min="0" max="100" value="33">
-                            </div>
-                            <div class="setting-item">
-                                <label>Single Choice:</label>
-                                <input type="number" id="singlePercent" min="0" max="100" value="34">
-                            </div>
-                            <div class="setting-item">
-                                <label>Multi Choice:</label>
-                                <input type="number" id="multiPercent" min="0" max="100" value="33">
-                            </div>
-                            <div style="font-size: 0.9em; margin-top: 5px;" id="typePercentSum">Сумма: 100%</div>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>Система оценок (баллы)</h4>
-                            <table class="grading-table">
-                                <tr>
-                                    <th></th>
-                                    <th>Базовый</th>
-                                    <th>Средний</th>
-                                    <th>Сложный</th>
-                                </tr>
-                                <tr>
-                                    <th>Level-0</th>
-                                    <td><input type="number" id="score_L0_Basic" value="1" min="0" step="0.5"></td>
-                                    <td><input type="number" id="score_L0_Medium" value="2" min="0" step="0.5"></td>
-                                    <td><input type="number" id="score_L0_Hard" value="3" min="0" step="0.5"></td>
-                                </tr>
-                                <tr>
-                                    <th>Level-1</th>
-                                    <td><input type="number" id="score_L1_Basic" value="2" min="0" step="0.5"></td>
-                                    <td><input type="number" id="score_L1_Medium" value="3" min="0" step="0.5"></td>
-                                    <td><input type="number" id="score_L1_Hard" value="4" min="0" step="0.5"></td>
-                                </tr>
-                                <tr>
-                                    <th>Level-2</th>
-                                    <td><input type="number" id="score_L2_Basic" value="3" min="0" step="0.5"></td>
-                                    <td><input type="number" id="score_L2_Medium" value="4" min="0" step="0.5"></td>
-                                    <td><input type="number" id="score_L2_Hard" value="5" min="0" step="0.5"></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>Темы для включения</h4>
-                            <div class="checkbox-group" id="topicsList">
-                                <!-- Будут заполнены темы из Excel -->
-                            </div>
-                            <div style="margin-top: 10px;">
-                                <button class="btn" onclick="selectAllTopics(true)">Выбрать все</button>
-                                <button class="btn" onclick="selectAllTopics(false)">Снять все</button>
-                            </div>
-                        </div>
-
-                        <div class="setting-group">
-                            <h4>Защита теста</h4>
-                            <div class="setting-item">
-                                <label>Максимальное количество нарушений:</label>
-                                <input type="number" id="maxViolations" min="1" max="5" value="1">
-                            </div>
-                            <div style="font-size: 0.9em; color: #64748b;">
-                                (0 = первое нарушение завершает тест, 1 = второе нарушение завершает)
-                            </div>
-                        </div>
-                    </div>
-
-                    <h3>🔐 Безопасность</h3>
-                    <div class="settings-grid">
-                        <div class="setting-group">
-                            <h4>Смена пароля преподавателя</h4>
-                            <div class="setting-item">
-                                <label>Текущий пароль:</label>
-                                <input type="password" id="currentPassword" placeholder="Введите текущий пароль">
-                            </div>
-                            <div class="setting-item">
-                                <label>Новый пароль:</label>
-                                <input type="password" id="newPassword" placeholder="Введите новый пароль">
-                            </div>
-                            <div class="setting-item">
-                                <label>Подтверждение:</label>
-                                <input type="password" id="confirmPassword" placeholder="Подтвердите новый пароль">
-                            </div>
-                            <div style="display: flex; gap: 10px;">
-                                <button class="btn" onclick="changeTeacherPassword()">🔄 Сменить пароль</button>
-                                <button class="btn" onclick="resetPasswordToAdmin()">↺ Сбросить на admin</button>
-                            </div>
-                            <div id="passwordMessage" style="margin-top: 10px; font-size: 0.9em;"></div>
-                        </div>
-                    </div>
-
-                    <div class="button-group">
-                        <button class="btn btn-primary" onclick="encryptAndSaveData()">💾 Встроить данные в HTML</button>
-                        <button class="btn btn-success" onclick="saveHTMLFile()">📥 Сохранить HTML-файл</button>
-                        <button class="btn" onclick="saveTeacherSettings()">📝 Сохранить настройки</button>
-                        <button class="btn btn-warning" onclick="clearAllData()">🗑️ Очистить данные</button>
-                    </div>
-
-                    <!-- Предпросмотр -->
-                    <div id="previewBox" class="preview-box" style="display: none;"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container">
         <header>
-            <h1 id="mainTitle">📡 Телеком-опросник</h1>
-            <p id="headerSubtitle">Загрузка данных...</p>
+            <h1 id="mainTitle">📋 Загрузка теста...</h1>
+            <p id="headerSubtitle"></p>
         </header>
 
         <div class="main-content">
+            <!-- Экран загрузки -->
+            <div id="loadingScreen" class="loading-screen">
+                <div class="loading-spinner"></div>
+                <p>Загрузка теста с GitHub...</p>
+                <p id="loadingUrl" style="font-size: 0.9em; color: #64748b; margin-top: 20px;"></p>
+            </div>
+
+            <!-- Экран ошибки -->
+            <div id="errorScreen" class="hidden">
+                <div class="error-message" id="errorMessage"></div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="location.reload()">🔄 Попробовать снова</button>
+                </div>
+            </div>
+
             <!-- Стартовый экран -->
-            <div id="startScreen">
-                <div style="text-align: center; padding: 40px;">
+            <div id="startScreen" class="hidden">
+                <div class="start-screen">
                     <h2 id="welcomeTitle">Добро пожаловать!</h2>
-                    <p id="questionsCount">Загрузка...</p>
-                    <div id="testNameDisplay" style="font-size: 1.3em; margin: 20px 0; color: #2563eb; font-weight: 600;"></div>
-                    <div style="margin: 30px 0;">
-                        <input type="text" id="userName" placeholder="Введите ваше имя" style="padding: 15px; width: 300px; border: 2px solid #e2e8f0; border-radius: 10px; font-size: 1.1em;">
+                    
+                    <div class="test-info" id="testInfo">
+                        <!-- Заполняется из JSON -->
                     </div>
-                    <button class="btn btn-success" onclick="startQuiz()" id="startTestBtn" disabled>▶️ Начать тест</button>
+
+                    <div style="margin: 30px 0;">
+                        <input type="text" id="userName" class="user-name-input" placeholder="Введите ваше имя">
+                    </div>
+
+                    <button class="btn btn-success" onclick="startQuiz()" id="startTestBtn">▶️ Начать тест</button>
                 </div>
             </div>
 
@@ -1103,452 +530,402 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
         // ==============================================
         // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
         // ==============================================
-        let quizData = null;
+        let testData = null;
         let questions = [];
         let currentQuestions = [];
         let currentIndex = 0;
         let userAnswers = [];
         let submitted = [];
         let score = 0;
-        let topics = new Set();
-        let currentTestName = 'Телеком-опрос';
         let maxViolations = 1;
+        
+        // Для защиты
         let isTestActive = false;
         let securityLogs = [];
         let fullscreenEnabled = false;
         let testForcedEnd = false;
         let violationCount = 0;
+        let fullscreenBlockInterval = null;
 
         // ==============================================
-        // УПРАВЛЕНИЕ ПАРОЛЕМ ПРЕПОДАВАТЕЛЯ
+        // ЗАГРУЗКА ТЕСТА С GITHUB
         // ==============================================
 
-        function simpleHash(str) {
-            if (!str) return 0;
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash;
-            }
-            return Math.abs(hash);
-        }
-
-        function getStoredPasswordHash() {
-            const stored = localStorage.getItem('teacher_password_hash');
-            if (stored) return parseInt(stored, 10);
-            const adminHash = simpleHash('admin');
-            localStorage.setItem('teacher_password_hash', adminHash.toString());
-            return adminHash;
-        }
-
-        function checkTeacherPassword() {
-            const password = document.getElementById('teacherPassword').value;
-            const storedHash = getStoredPasswordHash();
-            const inputHash = simpleHash(password);
+        function getTestFileName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let testFile = urlParams.get('test');
             
-            if (inputHash === storedHash) {
-                document.getElementById('teacherPasswordPrompt').style.display = 'none';
-                document.getElementById('teacherPanel').style.display = 'block';
-                if (quizData && quizData.length > 0) updateTopicsList();
-                document.getElementById('teacherPassword').value = '';
-            } else {
-                alert('❌ Неверный пароль!');
+            if (!testFile) {
+                testFile = 'sample_test';
             }
+            
+            if (!testFile.endsWith('.json')) {
+                testFile += '.json';
+            }
+            
+            return testFile;
         }
 
-        function changeTeacherPassword() {
-            const currentPass = document.getElementById('currentPassword').value;
-            const newPass = document.getElementById('newPassword').value;
-            const confirmPass = document.getElementById('confirmPassword').value;
-            const messageEl = document.getElementById('passwordMessage');
+        function loadTestFromGitHub() {
+            const testFile = getTestFileName();
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
+            const testUrl = baseUrl + testFile;
             
-            if (simpleHash(currentPass) !== getStoredPasswordHash()) {
-                messageEl.innerHTML = '<span style="color: #dc2626;">❌ Неверный текущий пароль</span>';
+            document.getElementById('loadingUrl').textContent = `Загрузка: ${testFile}`;
+            
+            fetch(testUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    validateAndSetTestData(data);
+                })
+                .catch(error => {
+                    showError(`Ошибка загрузки теста: ${error.message}\n\nУбедитесь, что файл ${testFile} существует в той же папке.`);
+                });
+        }
+
+        function validateAndSetTestData(data) {
+            // Проверяем структуру
+            if (!data.questions || !Array.isArray(data.questions)) {
+                showError('Ошибка: файл теста не содержит вопросов');
                 return;
             }
-            
-            if (newPass.length < 4) {
-                messageEl.innerHTML = '<span style="color: #dc2626;">❌ Пароль должен быть не менее 4 символов</span>';
+
+            if (data.questions.length === 0) {
+                showError('Ошибка: тест не содержит вопросов');
                 return;
             }
-            
-            if (newPass !== confirmPass) {
-                messageEl.innerHTML = '<span style="color: #dc2626;">❌ Пароли не совпадают</span>';
-                return;
-            }
-            
-            localStorage.setItem('teacher_password_hash', simpleHash(newPass).toString());
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmPassword').value = '';
-            messageEl.innerHTML = '<span style="color: #059669;">✅ Пароль успешно изменён!</span>';
-        }
 
-        function resetPasswordToAdmin() {
-            if (confirm('Сбросить пароль на "admin"?')) {
-                localStorage.setItem('teacher_password_hash', simpleHash('admin').toString());
-                alert('✅ Пароль сброшен на "admin"');
-            }
-        }
-
-        // ==============================================
-        // ИНИЦИАЛИЗАЦИЯ
-        // ==============================================
-
-        (function initPassword() {
-            if (!localStorage.getItem('teacher_password_hash')) {
-                localStorage.setItem('teacher_password_hash', simpleHash('admin').toString());
-            }
-        })();
-
-        window.onload = function() {
-            checkForEmbeddedData();
-            loadMaxViolations();
-        };
-
-        function loadMaxViolations() {
-            const saved = localStorage.getItem('telecom_quiz_maxViolations');
-            maxViolations = saved ? parseInt(saved) : 1;
-            const input = document.getElementById('maxViolations');
-            if (input) input.value = maxViolations;
-        }
-
-        function saveMaxViolations() {
-            const input = document.getElementById('maxViolations');
-            if (input) {
-                maxViolations = parseInt(input.value) || 1;
-                localStorage.setItem('telecom_quiz_maxViolations', maxViolations.toString());
-            }
-        }
-
-        function updateTestNameDisplay() {
-            currentTestName = localStorage.getItem('telecom_quiz_testName') || 'Телеком-опрос';
-            const testNameDisplay = document.getElementById('testNameDisplay');
-            if (testNameDisplay) testNameDisplay.textContent = currentTestName;
-            const quizTestName = document.getElementById('quizTestName');
-            if (quizTestName) quizTestName.textContent = `📋 ${currentTestName}`;
-            const mainTitle = document.getElementById('mainTitle');
-            if (mainTitle) mainTitle.textContent = `📡 ${currentTestName}`;
-        }
-
-        function checkForEmbeddedData() {
-            const embeddedDiv = document.getElementById('embeddedQuizData');
-            if (embeddedDiv) {
-                const encrypted = embeddedDiv.dataset.encrypted;
-                const key = embeddedDiv.dataset.key;
-                const testName = embeddedDiv.dataset.testname;
-                const maxViol = embeddedDiv.dataset.maxviolations;
+            // Проверка срока действия
+            if (data.expires) {
+                const now = new Date();
+                const expiryDate = new Date(data.expires);
                 
-                if (encrypted && key) {
-                    try {
-                        localStorage.setItem('telecom_quiz_encrypted', encrypted);
-                        localStorage.setItem('telecom_quiz_key', key);
-                        if (testName) localStorage.setItem('telecom_quiz_testName', testName);
-                        if (maxViol) localStorage.setItem('telecom_quiz_maxViolations', maxViol);
-                        
-                        const decrypted = CryptoJS.AES.decrypt(encrypted, key);
-                        questions = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-                        
-                        updateTestNameDisplay();
-                        loadMaxViolations();
-                        
-                        document.getElementById('headerSubtitle').textContent = `📚 Загружено ${questions.length} вопросов`;
-                        document.getElementById('questionsCount').textContent = `Доступно вопросов: ${questions.length}`;
-                        document.getElementById('startTestBtn').disabled = false;
-                        document.getElementById('dataStatusBadge').textContent = `${questions.length} вопросов`;
-                        return;
-                    } catch (e) {
-                        console.error('Ошибка загрузки данных');
-                    }
-                }
-            }
-            
-            const savedEncrypted = localStorage.getItem('telecom_quiz_encrypted');
-            const savedKey = localStorage.getItem('telecom_quiz_key');
-            
-            if (savedEncrypted && savedKey) {
-                try {
-                    const decrypted = CryptoJS.AES.decrypt(savedEncrypted, savedKey);
-                    questions = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-                    
-                    updateTestNameDisplay();
-                    loadMaxViolations();
-                    
-                    document.getElementById('headerSubtitle').textContent = `📚 Загружено ${questions.length} вопросов`;
-                    document.getElementById('questionsCount').textContent = `Доступно вопросов: ${questions.length}`;
-                    document.getElementById('startTestBtn').disabled = false;
-                    document.getElementById('dataStatusBadge').textContent = `${questions.length} вопросов`;
-                } catch (e) {
-                    document.getElementById('headerSubtitle').textContent = '❌ Ошибка загрузки данных';
-                }
-            } else {
-                document.getElementById('headerSubtitle').textContent = '📭 Нет данных. Войдите в режим преподавателя';
-                document.getElementById('questionsCount').textContent = 'Нет загруженных вопросов';
-            }
-            setTimeout(() => {
-                calculateRecommendedQuestions();
-            }, 500);
-        }
-
-        // ==============================================
-        // РЕЖИМ ПРЕПОДАВАТЕЛЯ
-        // ==============================================
-
-        function openTeacherModal() {
-            document.getElementById('teacherModal').classList.add('active');
-            document.getElementById('teacherPasswordPrompt').style.display = 'block';
-            document.getElementById('teacherPanel').style.display = 'none';
-            document.getElementById('teacherPassword').value = '';
-        }
-
-        function closeTeacherModal() {
-            document.getElementById('teacherModal').classList.remove('active');
-        }
-
-        function handleFileUpload(file) {
-            if (!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, { type: 'array' });
-                    let worksheet = null;
-                    
-                    for (const sheetName of workbook.SheetNames) {
-                        const sheet = workbook.Sheets[sheetName];
-                        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-                        if (jsonData.length > 5 && jsonData[0].includes('Вопрос')) {
-                            worksheet = XLSX.utils.sheet_to_json(sheet);
-                            break;
-                        }
-                    }
-                    
-                    if (!worksheet) {
-                        worksheet = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-                    }
-                    
-                    quizData = worksheet;
-                    
-                    topics.clear();
-                    quizData.forEach(q => {
-                        if (q['Тема']) topics.add(q['Тема']);
+                if (now > expiryDate) {
+                    const expiryStr = expiryDate.toLocaleString('ru-RU', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
                     });
-                    
-                    document.getElementById('fileInfo').innerHTML = `✅ Загружено ${quizData.length} вопросов`;
-                    updateTopicsList();
-                    
-                    const previewBox = document.getElementById('previewBox');
-                    previewBox.style.display = 'block';
-                    previewBox.innerHTML = `✅ Загружено ${quizData.length} вопросов<br>📌 Темы: ${Array.from(topics).join(', ')}`;
-                    
-                } catch (error) {
-                    alert('Ошибка при чтении файла');
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        function updateTopicsList() {
-            const topicsList = document.getElementById('topicsList');
-            topicsList.innerHTML = '';
-            Array.from(topics).sort().forEach(topic => {
-                const div = document.createElement('div');
-                div.className = 'checkbox-item';
-                div.innerHTML = `
-                    <input type="checkbox" class="topic-checkbox" value="${topic}" checked>
-                    <label>${topic}</label>
-                `;
-                topicsList.appendChild(div);
-            });
-        }
-
-        function selectAllTopics(select) {
-            document.querySelectorAll('.topic-checkbox').forEach(cb => cb.checked = select);
-        }
-
-        function saveTeacherSettings() {
-            if (!validateTypePercentages()) {
-                alert('❌ Сумма процентов для типов вопросов должна быть 100%');
-                return;
-            }
-            saveMaxViolations();
-            closeTeacherModal();
-            alert('✅ Настройки сохранены');
-        }
-
-        function validateTypePercentages() {
-            const tf = parseFloat(document.getElementById('tfPercent')?.value) || 0;
-            const single = parseFloat(document.getElementById('singlePercent')?.value) || 0;
-            const multi = parseFloat(document.getElementById('multiPercent')?.value) || 0;
-            const sum = tf + single + multi;
-            const sumElement = document.getElementById('typePercentSum');
-            if (sumElement) {
-                if (Math.abs(sum - 100) < 0.1) {
-                    sumElement.style.color = '#059669';
-                    sumElement.innerHTML = `✅ Сумма: ${sum}%`;
-                    return true;
-                } else {
-                    sumElement.style.color = '#dc2626';
-                    sumElement.innerHTML = `❌ Сумма: ${sum}% (должна быть 100%)`;
-                    return false;
+                    showError(`❌ Срок действия теста истек ${expiryStr}`);
+                    return;
                 }
             }
-            return true;
-        }
 
-        function encryptAndSaveData() {
-            if (!quizData) {
-                alert('Сначала загрузите Excel-файл');
-                return;
+            // Устанавливаем настройки отображения (со значениями по умолчанию)
+            data.showResults = data.showResults || {
+                showCorrectnessDuringTest: true,
+                showExplanationsDuringTest: true,
+                showDetailedResults: true
+            };
+
+            // Проверяем каждый вопрос
+            for (let i = 0; i < data.questions.length; i++) {
+                const q = data.questions[i];
+                if (!q.question) {
+                    showError(`Ошибка: вопрос #${i+1} не имеет текста`);
+                    return;
+                }
             }
 
-            const key = document.getElementById('encryptionKey')?.value || 'telecom-quiz-2024';
-            const testName = document.getElementById('testName').value;
-            
-            const scoreMap = {
-                'Level-0_Базовый': parseFloat(document.getElementById('score_L0_Basic')?.value) || 1,
-                'Level-0_Средний': parseFloat(document.getElementById('score_L0_Medium')?.value) || 2,
-                'Level-0_Сложный': parseFloat(document.getElementById('score_L0_Hard')?.value) || 3,
-                'Level-1_Базовый': parseFloat(document.getElementById('score_L1_Basic')?.value) || 2,
-                'Level-1_Средний': parseFloat(document.getElementById('score_L1_Medium')?.value) || 3,
-                'Level-1_Сложный': parseFloat(document.getElementById('score_L1_Hard')?.value) || 4,
-                'Level-2_Базовый': parseFloat(document.getElementById('score_L2_Basic')?.value) || 3,
-                'Level-2_Средний': parseFloat(document.getElementById('score_L2_Medium')?.value) || 4,
-                'Level-2_Сложный': parseFloat(document.getElementById('score_L2_Hard')?.value) || 5
-            };
-            
-            const cleanData = quizData.map((q, index) => {
-                const level = q['Уровень'] || 'Level-0';
-                const difficulty = q['Сложность'] || 'Базовый';
-                return {
-                    level: level,
-                    difficulty: difficulty,
-                    topic: q['Тема'] || '',
-                    type: q['Тип'] || '',
-                    question: q['Вопрос'] || '',
-                    optA: q['Вариант A'] || '',
-                    optB: q['Вариант B'] || '',
-                    optC: q['Вариант C'] || '',
-                    optD: q['Вариант D'] || '',
-                    correct: q['Правильный ответ'] || q['Правильные ответы'] || '',
-                    explanation: q['Объяснение'] || '',
-                    points: scoreMap[`${level}_${difficulty}`] || 1
-                };
-            });
+            testData = data;
+            questions = data.questions;
+            maxViolations = data.maxViolations || 1;
 
-            const jsonStr = JSON.stringify(cleanData);
-            const encrypted = CryptoJS.AES.encrypt(jsonStr, key).toString();
+            // Обновляем заголовок
+            document.getElementById('mainTitle').textContent = `📋 ${data.testName || 'Тест'}`;
             
-            localStorage.setItem('telecom_quiz_encrypted', encrypted);
-            localStorage.setItem('telecom_quiz_key', key);
-            localStorage.setItem('telecom_quiz_testName', testName);
-            localStorage.setItem('telecom_quiz_maxViolations', document.getElementById('maxViolations')?.value || '1');
+            // Показываем стартовый экран
+            showStartScreen();
+        }
+
+        function showError(message) {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('errorScreen').classList.remove('hidden');
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        function showStartScreen() {
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('errorScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+
+            // Заполняем информацию о тесте
+            const testInfo = document.getElementById('testInfo');
             
-            questions = cleanData;
+            const totalPoints = questions.reduce((sum, q) => sum + (q.points || 1), 0);
             
-            document.getElementById('previewBox').style.display = 'block';
-            document.getElementById('previewBox').innerHTML = `
-                <strong style="color: #059669;">✅ Данные успешно встроены!</strong><br>
-                📊 Вопросов: ${cleanData.length}<br>
-                📝 Тест: ${testName}<br>
-                Теперь нажмите кнопку "Сохранить HTML-файл".
+            let expiryHtml = '';
+            if (testData.expires) {
+                const expiryDate = new Date(testData.expires);
+                expiryHtml = `<p style="margin-top: 10px; color: #dc2626; font-weight: 500;">
+                    ⏰ Тест действителен до: ${expiryDate.toLocaleString('ru-RU')}
+                </p>`;
+            }
+
+            // Показываем настройки отображения
+            const showResults = testData.showResults;
+            const settingsHtml = `
+                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                    <span class="settings-badge">📝 Правильность ответов: ${showResults.showCorrectnessDuringTest ? '✅ показывать' : '❌ скрыто'}</span>
+                    <span class="settings-badge">📖 Пояснения: ${showResults.showExplanationsDuringTest ? '✅ показывать' : '❌ скрыто'}</span>
+                    <span class="settings-badge">📊 Детализация: ${showResults.showDetailedResults ? '✅ подробно' : '❌ только итоги'}</span>
+                </div>
             `;
             
-            document.getElementById('dataStatusBadge').textContent = `${cleanData.length} вопросов`;
-            document.getElementById('headerSubtitle').textContent = `📚 Загружено ${cleanData.length} вопросов`;
-            document.getElementById('startTestBtn').disabled = false;
+            testInfo.innerHTML = `
+                <h3>${testData.testName || 'Тест'}</h3>
+                <div>
+                    <span class="test-info-item">📊 Вопросов: ${questions.length}</span>
+                    <span class="test-info-item">💰 Всего баллов: ${totalPoints}</span>
+                </div>
+                ${expiryHtml}
+                ${settingsHtml}
+                ${testData.dateGenerated ? `<p style="margin-top: 15px; color: #64748b;">Сгенерирован: ${new Date(testData.dateGenerated).toLocaleString('ru-RU')}</p>` : ''}
+            `;
+
+            document.getElementById('quizTestName').textContent = `📋 ${testData.testName || 'Тест'}`;
+        }
+
+        // ==============================================
+        // ЗАЩИТА
+        // ==============================================
+
+        function logSecurityEvent(eventType, details = '') {
+            securityLogs.push({
+                timestamp: new Date().toISOString(),
+                event: eventType,
+                details: details
+            });
+            if (securityLogs.length > 100) securityLogs.shift();
+        }
+
+        function checkViolations(reason) {
+            if (!isTestActive || testForcedEnd) return false;
             
-            updateTestNameDisplay();
-            loadMaxViolations();
+            violationCount++;
+            logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
             
-            alert('✅ Данные зашифрованы и встроены!');
-        
-            setTimeout(() => {
-                calculateRecommendedQuestions();
+            if (violationCount > maxViolations) {
+                forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+                return true;
+            }
+            return false;
+        }
+
+        document.addEventListener('visibilitychange', function() {
+            if (!isTestActive || testForcedEnd) return;
+            
+            if (document.hidden) {
+                logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
+                violationCount++;
+                
+                if (violationCount > maxViolations) {
+                    forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+                } else {
+                    alert(`⚠️ ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ЗАПРЕЩЕНО!\n\nНарушение #${violationCount}`);
+                }
+            }
+        });
+
+        document.addEventListener('fullscreenchange', function() {
+            if (!isTestActive || testForcedEnd) return;
+            
+            if (!document.fullscreenElement && fullscreenEnabled) {
+                logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
+                checkFullscreenLoop();
+            }
+        });
+
+        function checkFullscreenLoop() {
+            if (!isTestActive || testForcedEnd) return;
+            
+            if (fullscreenBlockInterval) {
+                clearInterval(fullscreenBlockInterval);
+            }
+            
+            alert('⚠️ ВЫ ВЫШЛИ ИЗ ПОЛНОЭКРАННОГО РЕЖИМА!\n\nТест приостановлен до возврата.\nНажмите F11 для продолжения.');
+            
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (!overlay) {
+                const div = document.createElement('div');
+                div.id = 'fullscreen-overlay';
+                div.innerHTML = `
+                    <div style="margin-bottom: 30px;">⚠️ ПОЛНОЭКРАННЫЙ РЕЖИМ ОТКЛЮЧЁН</div>
+                    <div style="margin-bottom: 20px;">Тест продолжается только в полноэкранном режиме</div>
+                    <div style="margin-bottom: 30px;">Нажмите F11 для возврата</div>
+                    <button onclick="retryFullscreen()" style="
+                        padding: 15px 40px;
+                        font-size: 20px;
+                        background: #2563eb;
+                        color: white;
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    ">🔄 ВЕРНУТЬСЯ В ПОЛНОЭКРАННЫЙ РЕЖИМ</button>
+                `;
+                document.body.appendChild(div);
+            }
+            
+            fullscreenBlockInterval = setInterval(() => {
+                if (!isTestActive || testForcedEnd) {
+                    clearInterval(fullscreenBlockInterval);
+                    const overlay = document.getElementById('fullscreen-overlay');
+                    if (overlay) overlay.remove();
+                    return;
+                }
+                
+                if (document.fullscreenElement) {
+                    const overlay = document.getElementById('fullscreen-overlay');
+                    if (overlay) overlay.remove();
+                    
+                    clearInterval(fullscreenBlockInterval);
+                    
+                    logSecurityEvent('fullscreen_restored', 'Режим восстановлен');
+                    violationCount++;
+                    
+                    if (violationCount > maxViolations) {
+                        forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+                    }
+                }
             }, 500);
         }
 
-        function saveHTMLFile() {
-            const encrypted = localStorage.getItem('telecom_quiz_encrypted');
-            const key = localStorage.getItem('telecom_quiz_key');
-            const testName = localStorage.getItem('telecom_quiz_testName') || 'Телеком-опрос';
-            const maxViolations = localStorage.getItem('telecom_quiz_maxViolations') || '1';
-            
-            if (!encrypted || !key) {
-                alert('❌ Нет данных для сохранения. Сначала встройте данные в HTML.');
-                return;
+        function retryFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().then(() => {
+                    const overlay = document.getElementById('fullscreen-overlay');
+                    if (overlay) overlay.remove();
+                });
             }
-            
-            let dataDiv = document.getElementById('embeddedQuizData');
-            if (!dataDiv) {
-                dataDiv = document.createElement('div');
-                dataDiv.id = 'embeddedQuizData';
-                dataDiv.style.display = 'none';
-                document.body.appendChild(dataDiv);
-            }
-            
-            dataDiv.dataset.encrypted = encrypted;
-            dataDiv.dataset.key = key;
-            dataDiv.dataset.testname = testName;
-            dataDiv.dataset.maxviolations = maxViolations;
-            
-            closeTeacherModal();
-            document.getElementById('startScreen').classList.remove('hidden');
-            document.getElementById('quizPage').classList.add('hidden');
-            document.getElementById('resultsPage').classList.add('hidden');
-            
-            setTimeout(() => {
-                const htmlContent = document.documentElement.outerHTML;
-                const blob = new Blob([htmlContent], { type: 'text/html' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                const date = new Date();
-                const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,'0')}-${date.getDate().toString().padStart(2,'0')}`;
-                link.download = `telecom_quiz_${dateStr}.html`;
-                link.click();
-                alert('✅ HTML-файл сохранен!');
-            }, 200);
         }
 
-        function clearAllData() {
-            if (confirm('Очистить все данные? Это также сбросит пароль на "admin".')) {
-                localStorage.removeItem('telecom_quiz_encrypted');
-                localStorage.removeItem('telecom_quiz_key');
-                localStorage.removeItem('telecom_quiz_testName');
-                localStorage.setItem('teacher_password_hash', simpleHash('admin').toString());
-                
-                questions = [];
-                quizData = null;
-                
-                document.getElementById('headerSubtitle').textContent = '📭 Нет данных. Войдите в режим преподавателя';
-                document.getElementById('questionsCount').textContent = 'Нет загруженных вопросов';
-                document.getElementById('dataStatusBadge').textContent = 'Нет данных';
-                document.getElementById('testNameDisplay').textContent = 'Тест не загружен';
-                document.getElementById('previewBox').style.display = 'none';
-                
-                alert('Данные очищены. Пароль сброшен на "admin"');
+        document.addEventListener('keydown', function(e) {
+            if (!isTestActive || testForcedEnd) return;
+            
+            const blockedKeys = [
+                { cond: e.altKey && e.key === 'Tab', name: 'Alt+Tab' },
+                { cond: e.key === 'Meta' || e.key === 'OS', name: 'Windows key' },
+                { cond: e.ctrlKey && e.key === 'w', name: 'Ctrl+W' },
+                { cond: (e.ctrlKey && e.key === 'r') || e.key === 'F5', name: 'Refresh' },
+                { cond: e.ctrlKey && e.shiftKey && e.key === 'I', name: 'DevTools' },
+                { cond: e.key === 'F12', name: 'F12' }
+            ];
+            
+            for (let item of blockedKeys) {
+                if (item.cond) {
+                    e.preventDefault();
+                    const shouldEnd = checkViolations(`Использование ${item.name}`);
+                    if (!shouldEnd) {
+                        alert(`⚠️ Использование ${item.name} запрещено!\n\nНарушение #${violationCount}`);
+                    }
+                    return;
+                }
             }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            if (isTestActive && !testForcedEnd) {
+                e.preventDefault();
+                checkViolations('Контекстное меню');
+            }
+        });
+
+        ['copy', 'paste', 'cut'].forEach(event => {
+            document.addEventListener(event, function(e) {
+                if (isTestActive && !testForcedEnd) {
+                    e.preventDefault();
+                    checkViolations(event);
+                }
+            });
+        });
+
+        function activateLockdown() {
+            return new Promise((resolve) => {
+                isTestActive = false;
+                testForcedEnd = false;
+                violationCount = 0;
+                
+                if (!confirm('🔒 ТЕСТ БУДЕТ ПРОХОДИТЬ В ПОЛНОЭКРАННОМ РЕЖИМЕ\n\n' +
+                    `• Максимум нарушений: ${maxViolations}\n\nНажмите ОК для начала.`)) {
+                    resolve(false);
+                    return;
+                }
+                
+                const elem = document.documentElement;
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen().then(() => {
+                        fullscreenEnabled = true;
+                        isTestActive = true;
+                        resolve(true);
+                    }).catch(() => {
+                        alert('❌ Не удалось активировать полноэкранный режим');
+                        resolve(false);
+                    });
+                } else {
+                    alert('❌ Браузер не поддерживает полноэкранный режим');
+                    resolve(false);
+                }
+            });
+        }
+
+        function deactivateLockdown() {
+            if (!isTestActive) return;
+            
+            isTestActive = false;
+            
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (overlay) overlay.remove();
+            
+            if (fullscreenBlockInterval) {
+                clearInterval(fullscreenBlockInterval);
+                fullscreenBlockInterval = null;
+            }
+            
+            if (fullscreenEnabled && document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+
+        function forceEndTest(reason) {
+            if (!isTestActive || testForcedEnd) return;
+            
+            testForcedEnd = true;
+            
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (overlay) overlay.remove();
+            
+            if (fullscreenBlockInterval) {
+                clearInterval(fullscreenBlockInterval);
+            }
+            
+            alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
+            
+            isTestActive = false;
+            
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            
+            document.getElementById('quizPage').classList.add('hidden');
+            document.getElementById('resultsPage').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
         }
 
         // ==============================================
         // ЛОГИКА ТЕСТИРОВАНИЯ
         // ==============================================
-
-        function showTeacherButton() {
-            document.querySelector('.teacher-button').style.display = 'block';
-        }
-
-        function hideTeacherButton() {
-            document.querySelector('.teacher-button').style.display = 'none';
-        }
 
         async function startQuiz() {
             const name = document.getElementById('userName').value;
@@ -1557,169 +934,50 @@
                 return;
             }
 
-            if (!validateTypePercentages()) {
-                if (!confirm('⚠️ Сумма процентов для типов вопросов не равна 100%. Продолжить всё равно?')) {
-                    return;
-                }
-            }
-            
-            if (questions.length === 0) {
-                const savedEncrypted = localStorage.getItem('telecom_quiz_encrypted');
-                const savedKey = localStorage.getItem('telecom_quiz_key');
-                if (savedEncrypted && savedKey) {
-                    try {
-                        const decrypted = CryptoJS.AES.decrypt(savedEncrypted, savedKey);
-                        questions = JSON.parse(decrypted.toString(CryptoJS.enc.Utf8));
-                        updateTestNameDisplay();
-                    } catch (e) {
-                        alert('Ошибка загрузки данных');
-                        return;
-                    }
-                } else {
-                    alert('Нет загруженных вопросов');
-                    return;
-                }
-            }
-            
             const lockdownActivated = await activateLockdown();
             if (!lockdownActivated) return;
-            
-            const count = parseInt(document.getElementById('defaultQuestionCount').value);
-            const tfPercent = parseFloat(document.getElementById('tfPercent')?.value || 33) / 100;
-            const singlePercent = parseFloat(document.getElementById('singlePercent')?.value || 34) / 100;
-            const multiPercent = parseFloat(document.getElementById('multiPercent')?.value || 33) / 100;
 
-            // УЛУЧШЕННАЯ ФУНКЦИЯ ПЕРЕМЕШИВАНИЯ С ИСПОЛЬЗОВАНИЕМ СЛУЧАЙНОГО СИДА
-            function getRandomShuffle(arr) {
-                // Создаем копию массива
-                const newArr = [...arr];
-                
-                // Алгоритм Фишера-Йейтса с использованием текущего времени для большей случайности
-                for (let i = newArr.length - 1; i > 0; i--) {
-                    // Используем комбинацию random и времени для большей энтропии
-                    const randomSeed = (Math.random() * Date.now()) % 1;
-                    const j = Math.floor(randomSeed * (i + 1));
-                    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
-                }
-                return newArr;
-            }
-
-            function getQuestionType(q) {
-                const type = q.type || '';
-                if (type.includes('True/False') || (q.optA === 'Верно' && q.optB === 'Неверно')) return 'tf';
-                if (type.includes('Multi Choice')) return 'multi';
-                return 'single';
-            }
-
-            // Группируем вопросы по типам
-            const groupedByType = {
-                tf: questions.filter(q => getQuestionType(q) === 'tf'),
-                single: questions.filter(q => getQuestionType(q) === 'single'),
-                multi: questions.filter(q => getQuestionType(q) === 'multi')
-            };
-
-            // ДОПОЛНИТЕЛЬНОЕ ПЕРЕМЕШИВАНИЕ КАЖДОЙ ГРУППЫ
-            groupedByType.tf = getRandomShuffle(groupedByType.tf);
-            groupedByType.single = getRandomShuffle(groupedByType.single);
-            groupedByType.multi = getRandomShuffle(groupedByType.multi);
-
-            console.log('📊 Доступно вопросов по типам:', {
-                tf: groupedByType.tf.length,
-                single: groupedByType.single.length,
-                multi: groupedByType.multi.length
-            });
-
-            // Рассчитываем нужное количество каждого типа
-            let tfCount = Math.round(tfPercent * count);
-            let singleCount = Math.round(singlePercent * count);
-            let multiCount = Math.round(multiPercent * count);
-
-            // Корректировка суммы (из-за округления может быть не ровно count)
-            const sum = tfCount + singleCount + multiCount;
-            if (sum < count) {
-                // Добавляем недостающие к самому многочисленному типу
-                const maxType = Math.max(groupedByType.tf.length, groupedByType.single.length, groupedByType.multi.length);
-                if (maxType === groupedByType.tf.length) tfCount++;
-                else if (maxType === groupedByType.single.length) singleCount++;
-                else multiCount++;
-            } else if (sum > count) {
-                // Убираем лишние из самого многочисленного типа
-                const maxType = Math.max(groupedByType.tf.length, groupedByType.single.length, groupedByType.multi.length);
-                if (maxType === groupedByType.tf.length) tfCount--;
-                else if (maxType === groupedByType.single.length) singleCount--;
-                else multiCount--;
-            }
-
-            // Выбираем вопросы каждого типа (уже из перемешанных групп)
-            let selectedQuestions = [];
-            
-            // Берем первые N вопросов из каждой перемешанной группы
-            selectedQuestions = selectedQuestions.concat(
-                groupedByType.tf.slice(0, Math.min(tfCount, groupedByType.tf.length)),
-                groupedByType.single.slice(0, Math.min(singleCount, groupedByType.single.length)),
-                groupedByType.multi.slice(0, Math.min(multiCount, groupedByType.multi.length))
-            );
-
-            // Если всё ещё не хватает вопросов, добираем из любых доступных
-            if (selectedQuestions.length < count) {
-                const remaining = questions.filter(q => !selectedQuestions.includes(q));
-                const shuffledRemaining = getRandomShuffle(remaining);
-                selectedQuestions = selectedQuestions.concat(
-                    shuffledRemaining.slice(0, count - selectedQuestions.length)
-                );
-            }
-
-            // ФИНАЛЬНОЕ ПЕРЕМЕШИВАНИЕ (чтобы вопросы разных типов чередовались)
-            currentQuestions = getRandomShuffle(selectedQuestions).slice(0, count).map(q => ({ ...q }));
-            
-            // Добавляем уникальный идентификатор для каждого вопроса (на всякий случай)
-            currentQuestions = currentQuestions.map((q, index) => ({
-                ...q,
-                uniqueId: `${index}_${Date.now()}_${Math.random()}`
-            }));
-            
+            // Используем все вопросы из загруженного теста
+            currentQuestions = questions.map(q => ({ ...q }));
             userAnswers = new Array(currentQuestions.length).fill(null);
             submitted = new Array(currentQuestions.length).fill(false);
-            
+
             document.getElementById('displayName').textContent = name;
             document.getElementById('startScreen').classList.add('hidden');
             document.getElementById('quizPage').classList.remove('hidden');
-            hideTeacherButton();
-            
+
             currentIndex = 0;
             showQuestion();
-            
-            console.log(`✅ Выбрано ${currentQuestions.length} вопросов для теста`);
         }
 
         function showQuestion() {
             const q = currentQuestions[currentIndex];
             const content = document.getElementById('quizContent');
-            
+
             const isMulti = q.type?.includes('Multi Choice');
             const isTrueFalse = q.type?.includes('True/False') || (q.optA === 'Верно' && q.optB === 'Неверно');
-            
+
             let displayType = q.type || '';
             if (isTrueFalse) displayType = 'True/False';
             else if (isMulti) displayType = 'Multi Choice';
             else if (displayType.includes('Single')) displayType = 'Single Choice';
-            
+
             let optionsHtml = '';
             const letters = ['A', 'B', 'C', 'D'];
             const optKeys = ['optA', 'optB', 'optC', 'optD'];
-            
+
             optKeys.forEach((key, i) => {
                 const letter = letters[i];
                 const text = q[key];
                 if (!text) return;
                 if (isTrueFalse && (letter === 'C' || letter === 'D')) return;
-                
+
                 const checked = userAnswers[currentIndex] && 
                     (isMulti ? userAnswers[currentIndex].includes(letter) : userAnswers[currentIndex] === letter);
-                
+
                 const inputType = isMulti ? 'checkbox' : 'radio';
                 const name = isMulti ? `q${currentIndex}` : 'answer';
-                
+
                 optionsHtml += `
                     <div class="option-item ${checked ? 'selected' : ''}" onclick="selectOption('${letter}')">
                         <input type="${inputType}" name="${name}" value="${letter}" ${checked ? 'checked' : ''}>
@@ -1727,28 +985,28 @@
                     </div>
                 `;
             });
-            
+
             const levelClass = {
                 'Level-0': 'badge-level0',
                 'Level-1': 'badge-level1',
                 'Level-2': 'badge-level2'
             }[q.level] || '';
-            
+
             const difficultyClass = {
                 'Базовый': 'badge-basic',
                 'Средний': 'badge-medium',
                 'Сложный': 'badge-hard'
             }[q.difficulty] || '';
-            
+
             const isLast = currentIndex === currentQuestions.length - 1;
             document.getElementById('finishBtn').style.display = isLast ? 'inline-block' : 'none';
             document.getElementById('nextBtn').style.display = isLast ? 'none' : 'inline-block';
-            
+
             let isAnswerCorrect = false;
             if (submitted[currentIndex] && userAnswers[currentIndex]) {
                 const answer = userAnswers[currentIndex];
                 const correct = q.correct || '';
-                
+
                 if (!isMulti) {
                     isAnswerCorrect = answer === correct;
                 } else {
@@ -1757,11 +1015,36 @@
                     isAnswerCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
                 }
             }
-            
-            const explanationClass = submitted[currentIndex] ? 
-                (isAnswerCorrect ? 'explanation-box correct' : 'explanation-box incorrect') : 
-                'explanation-box';
-            
+
+            // Проверяем настройки отображения
+            const showCorrectness = testData?.showResults?.showCorrectnessDuringTest !== false;
+            const showExplanations = testData?.showResults?.showExplanationsDuringTest !== false;
+
+            // Формируем блок объяснения с учетом настроек
+            let explanationHtml = '';
+            if (submitted[currentIndex]) {
+                const explanationClass = isAnswerCorrect ? 'explanation-box correct' : 'explanation-box incorrect';
+                
+                let correctAnswerHtml = '';
+                if (showCorrectness) {
+                    correctAnswerHtml = `<div class="correct-answer">✅ Правильный ответ: ${q.correct}</div>`;
+                }
+                
+                let explanationTextHtml = '';
+                if (showExplanations && q.explanation) {
+                    explanationTextHtml = `<div class="explanation-text">${q.explanation}</div>`;
+                }
+                
+                if (correctAnswerHtml || explanationTextHtml) {
+                    explanationHtml = `
+                        <div class="${explanationClass}" style="display: block;">
+                            ${correctAnswerHtml}
+                            ${explanationTextHtml}
+                        </div>
+                    `;
+                }
+            }
+
             content.innerHTML = `
                 <div class="question-container">
                     <div class="question-meta">
@@ -1781,23 +1064,20 @@
                         ${submitted[currentIndex] ? '✓ Ответ принят' : '📤 Отправить ответ'}
                     </button>
                     
-                    <div class="${explanationClass}" id="explanationBox" style="display: ${submitted[currentIndex] ? 'block' : 'none'};">
-                        <div class="correct-answer">✅ Правильный ответ: ${q.correct}</div>
-                        <div class="explanation-text">${q.explanation || 'Пояснение отсутствует'}</div>
-                    </div>
+                    ${explanationHtml}
                 </div>
             `;
-            
+
             document.getElementById('progressInfo').textContent = 
                 `Вопрос ${currentIndex + 1} из ${currentQuestions.length}`;
         }
 
         function selectOption(letter) {
             if (submitted[currentIndex]) return;
-            
+
             const q = currentQuestions[currentIndex];
             const isMulti = q.type?.includes('Multi Choice');
-            
+
             if (!isMulti) {
                 userAnswers[currentIndex] = letter;
             } else {
@@ -1806,7 +1086,7 @@
                 if (idx === -1) userAnswers[currentIndex].push(letter);
                 else userAnswers[currentIndex].splice(idx, 1);
             }
-            
+
             showQuestion();
         }
 
@@ -1833,835 +1113,146 @@
             }
         }
 
-// Функция для проверки уникальности вопросов в тесте
-function checkQuestionUniqueness(questions_array) {
-    const uniqueQuestions = new Set();
-    const duplicates = [];
-    
-    questions_array.forEach((q, index) => {
-        // Используем текст вопроса как идентификатор
-        if (uniqueQuestions.has(q.question)) {
-            duplicates.push(index);
-        } else {
-            uniqueQuestions.add(q.question);
-        }
-    });
-    
-    if (duplicates.length > 0) {
-        console.warn('⚠️ Найдены дубликаты вопросов на позициях:', duplicates);
-        return false;
-    }
-    return true;
-}
-
-// Вызовите эту функцию после выбора вопросов:
-// checkQuestionUniqueness(currentQuestions);
-
-function finishQuiz() {
-    if (testForcedEnd) {
-        alert('⚠️ Тест был прерван из-за нарушения правил безопасности.\n\nРезультаты не могут быть сохранены.');
-        restartQuiz();
-        return;
-    }
-    
-    score = 0;
-    let totalPossibleScore = 0;
-    let questionScores = [];
-    
-    deactivateLockdown();
-    
-    currentQuestions.forEach((q, idx) => {
-        const questionPoints = q.points || 1;
-        totalPossibleScore += questionPoints;
-        
-        if (!submitted[idx]) {
-            questionScores[idx] = { points: 0, maxPoints: questionPoints };
-            return;
-        }
-        
-        const answer = userAnswers[idx];
-        const correct = q.correct || '';
-        const isMulti = q.type?.includes('Multi Choice');
-        
-        let isCorrect = false;
-        if (!isMulti) {
-            // Очищаем правильный ответ: оставляем только букву (A, B, C, D)
-            let cleanedCorrect = String(correct).trim().replace(/[^A-D]/gi, '');
-            // Берём первую букву, если есть
-            cleanedCorrect = cleanedCorrect.charAt(0).toUpperCase();
+        function finishQuiz() {
+            // Проверяем, нужно ли показывать детальные результаты
+            const showDetailed = testData?.showResults?.showDetailedResults !== false;
             
-            // Очищаем ответ студента (на всякий случай)
-            let cleanedAnswer = String(answer).trim().replace(/[^A-D]/gi, '');
-            cleanedAnswer = cleanedAnswer.charAt(0).toUpperCase();
+            if (testForcedEnd) {
+                alert('⚠️ Тест был прерван из-за нарушения правил.\n\nРезультаты не могут быть сохранены.');
+                restartQuiz();
+                return;
+            }
 
-            isCorrect = cleanedAnswer === cleanedCorrect;
-        } else {
-            const correctArray = correct.split(',').map(s => s.trim()).sort();
-            const userArray = answer?.sort ? answer.sort() : [];
-            isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+            score = 0;
+            let totalPossibleScore = 0;
+            let questionScores = [];
+
+            deactivateLockdown();
+
+            currentQuestions.forEach((q, idx) => {
+                const questionPoints = q.points || 1;
+                totalPossibleScore += questionPoints;
+
+                if (!submitted[idx]) {
+                    questionScores[idx] = { points: 0, maxPoints: questionPoints };
+                    return;
+                }
+
+                const answer = userAnswers[idx];
+                const correct = q.correct || '';
+                const isMulti = q.type?.includes('Multi Choice');
+
+                let isCorrect = false;
+                if (!isMulti) {
+                    isCorrect = answer === correct;
+                } else {
+                    const correctArray = correct.split(',').map(s => s.trim()).sort();
+                    const userArray = answer?.sort ? answer.sort() : [];
+                    isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+                }
+
+                if (isCorrect) {
+                    score += questionPoints;
+                    questionScores[idx] = { points: questionPoints, maxPoints: questionPoints };
+                } else {
+                    questionScores[idx] = { points: 0, maxPoints: questionPoints };
+                }
+            });
+
+            document.getElementById('quizPage').classList.add('hidden');
+            document.getElementById('resultsPage').classList.remove('hidden');
+
+            const percent = Math.round((score / totalPossibleScore) * 100);
+
+            // Формируем детализацию только если разрешено
+            let answersHtml = '';
+            if (showDetailed) {
+                currentQuestions.forEach((q, idx) => {
+                    const answer = userAnswers[idx];
+                    const correct = q.correct || '';
+                    const isMulti = q.type?.includes('Multi Choice');
+                    const questionScore = questionScores[idx];
+
+                    let answerText = 'Не отвечен';
+                    if (answer) {
+                        if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
+                        else answerText = answer;
+                    }
+
+                    let resultClass = '', resultText = '', scoreText = '';
+
+                    if (!submitted[idx]) {
+                        resultClass = 'result-not-submitted';
+                        resultText = '⏳ Не отвечен';
+                        scoreText = `0/${questionScore.maxPoints}`;
+                    } else {
+                        const isCorrect = questionScore.points > 0;
+                        resultClass = isCorrect ? 'result-correct' : 'result-incorrect';
+                        resultText = isCorrect ? '✅ Верно' : '❌ Неверно';
+                        scoreText = `${questionScore.points}/${questionScore.maxPoints}`;
+                    }
+
+                    answersHtml += `
+                        <div class="answer-detail-card">
+                            <div class="answer-detail-question">${idx+1}. ${q.question}</div>
+                            <div class="answer-detail-row">
+                                <span class="answer-label">Ваш ответ:</span>
+                                <span class="answer-value">${answerText}</span>
+                            </div>
+                            <div class="answer-detail-row">
+                                <span class="answer-label">Правильный ответ:</span>
+                                <span class="answer-value">${correct}</span>
+                            </div>
+                            <div class="answer-detail-row">
+                                <span class="answer-label">Баллы:</span>
+                                <span class="answer-value">${scoreText}</span>
+                            </div>
+                            <div class="answer-detail-result ${resultClass}">${resultText}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('resultsContent').innerHTML = `
+                <div class="results-summary">
+                    <div class="result-card">
+                        <div class="value">${score}</div>
+                        <div class="label">Набрано баллов</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="value">${totalPossibleScore}</div>
+                        <div class="label">Максимум баллов</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="value">${percent}%</div>
+                        <div class="label">Успешность</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <strong>Студент:</strong> ${document.getElementById('displayName').textContent}<br>
+                    <strong>Правильных ответов:</strong> ${currentQuestions.filter((_, idx) => questionScores[idx]?.points > 0).length} из ${currentQuestions.length}
+                </div>
+                
+                ${showDetailed ? `<h3>📋 Детализация ответов</h3>${answersHtml}` : ''}
+                
+                <!-- Кнопки экспорта результатов -->
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
+                    <button class="btn btn-primary" onclick="exportResultsToTXT()" style="margin-right: 10px;">
+                        📥 Сохранить результаты (TXT)
+                    </button>
+                    <button class="btn btn-success" onclick="exportResultsToHTML()">
+                        📥 Сохранить результаты (HTML)
+                    </button>
+                </div>
+            `;
         }
-        
-        if (isCorrect) {
-            score += questionPoints;
-            questionScores[idx] = { points: questionPoints, maxPoints: questionPoints };
-        } else {
-            questionScores[idx] = { points: 0, maxPoints: questionPoints };
-        }
-    });
-    
-    document.getElementById('quizPage').classList.add('hidden');
-    document.getElementById('resultsPage').classList.remove('hidden');
-    
-    const percent = Math.round((score / totalPossibleScore) * 100);
-    
-    let answersHtml = '';
-    currentQuestions.forEach((q, idx) => {
-        const answer = userAnswers[idx];
-        const correct = q.correct || '';
-        const isMulti = q.type?.includes('Multi Choice');
-        const questionScore = questionScores[idx];
-        
-        let answerText = 'Не отвечен';
-        if (answer) {
-            if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
-            else answerText = answer;
-        }
-        
-        let optionsText = '';
-        if (q.optA) optionsText += `A: ${q.optA}<br>`;
-        if (q.optB) optionsText += `B: ${q.optB}<br>`;
-        if (q.optC) optionsText += `C: ${q.optC}<br>`;
-        if (q.optD) optionsText += `D: ${q.optD}<br>`;
-        
-        let resultClass = '', resultText = '', scoreText = '';
-        
-        if (!submitted[idx]) {
-            resultClass = 'result-not-submitted';
-            resultText = '⏳ Не отвечен';
-            scoreText = `0/${questionScore.maxPoints} баллов`;
-        } else {
-            const isCorrect = questionScore.points > 0;
-            resultClass = isCorrect ? 'result-correct' : 'result-incorrect';
-            resultText = isCorrect ? '✅ Верно' : '❌ Неверно';
-            scoreText = `${questionScore.points}/${questionScore.maxPoints} баллов`;
-        }
-        
-        answersHtml += `
-            <div class="answer-detail-card">
-                <div class="answer-detail-question">${idx+1}. ${q.question}</div>
-                <div class="answer-detail-options">
-                    <div class="options-title">Варианты ответов:</div>
-                    <div class="options-list-detailed">${optionsText}</div>
-                </div>
-                <div class="answer-detail-row">
-                    <span class="answer-label">Уровень/сложность:</span>
-                    <span class="answer-value">${q.level || 'Level-0'} / ${q.difficulty || 'Базовый'}</span>
-                </div>
-                <div class="answer-detail-row">
-                    <span class="answer-label">Ваш ответ:</span>
-                    <span class="answer-value">${answerText}</span>
-                </div>
-                <div class="answer-detail-row">
-                    <span class="answer-label">Правильный ответ:</span>
-                    <span class="answer-value">${correct}</span>
-                </div>
-                <div class="answer-detail-row">
-                    <span class="answer-label">Баллы:</span>
-                    <span class="answer-value">${scoreText}</span>
-                </div>
-                <div class="answer-detail-result ${resultClass}">${resultText}</div>
-            </div>
-        `;
-    });
-    
-    document.getElementById('resultsContent').innerHTML = `
-        <div class="results-summary">
-            <div class="result-card">
-                <div class="value">${score}</div>
-                <div class="label">Набрано баллов</div>
-            </div>
-            <div class="result-card">
-                <div class="value">${totalPossibleScore}</div>
-                <div class="label">Максимум баллов</div>
-            </div>
-            <div class="result-card">
-                <div class="value">${percent}%</div>
-                <div class="label">Успешность</div>
-            </div>
-        </div>
-        <div style="text-align: center; margin: 20px 0;">
-            <strong>Студент:</strong> ${document.getElementById('displayName').textContent}<br>
-            <strong>Тест:</strong> ${currentTestName}<br>
-            <strong>Дата:</strong> ${new Date().toLocaleString('ru-RU')}<br>
-            <strong>Правильных ответов:</strong> ${currentQuestions.filter((_, idx) => questionScores[idx]?.points > 0).length} из ${currentQuestions.length}
-        </div>
-        
-        <h3 style="margin-top: 30px;">📋 Детализация ответов</h3>
-        ${answersHtml}
-        
-        <!-- ДОБАВЛЕННАЯ КНОПКА ЭКСПОРТА -->
-        <div style="text-align: center; margin-top: 30px;">
-            <button class="btn btn-primary" onclick="exportResultsToTXT()">📥 Экспорт результатов в TXT</button>
-            <button class="btn btn-success" onclick="exportResultsToHTML()">📥 Экспорт результатов в HTML</button>
-        </div>
-    `;
-}
 
         function restartQuiz() {
             deactivateLockdown();
             document.getElementById('resultsPage').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
-            showTeacherButton();
         }
 
-        // ==============================================
-        // ЗАЩИТА И ЛОГИРОВАНИЕ ДЕЙСТВИЙ СТУДЕНТА
-        // ==============================================
-
-        function logSecurityEvent(eventType, details = '') {
-            securityLogs.push({
-                timestamp: new Date().toISOString(),
-                timeFormatted: new Date().toLocaleTimeString('ru-RU'),
-                event: eventType,
-                details: details
-            });
-            if (securityLogs.length > 100) securityLogs.shift();
-        }
-
-        function checkViolations(reason) {
-            if (!isTestActive || testForcedEnd) return false;
-            
-            violationCount++;
-            logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
-            
-            if (violationCount > maxViolations) {
-                forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-                return true;
-            }
-            return false;
-        }
-
-        document.addEventListener('visibilitychange', function() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (document.hidden) {
-                logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
-                violationCount++;
-                logSecurityEvent('violation', `Нарушение #${violationCount}: Переключение вкладки`);
-                
-                if (violationCount > maxViolations) {
-                    forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-                } else {
-                    alert(`⚠️ ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ЗАПРЕЩЕНО!\n\nНарушение #${violationCount}`);
-                }
-            }
-        });
-
-document.addEventListener('fullscreenchange', function() {
-    if (!isTestActive || testForcedEnd) return;
-    
-    if (!document.fullscreenElement && fullscreenEnabled) {
-        fullscreenAttempts++;
-        logSecurityEvent('fullscreen_exit', `Попытка выхода из полноэкранного режима #${fullscreenAttempts}`);
-        
-        // Запускаем проверку
-        checkFullscreenLoop();
-    }
-});
-
-let fullscreenBlockInterval = null;
-
-function checkFullscreenLoop() {
-    if (!isTestActive || testForcedEnd) return;
-    
-    // Останавливаем предыдущий интервал, если был
-    if (fullscreenBlockInterval) {
-        clearInterval(fullscreenBlockInterval);
-        fullscreenBlockInterval = null;
-    }
-    
-    // Показываем первое предупреждение
-    alert('⚠️ ВЫ ВЫШЛИ ИЗ ПОЛНОЭКРАННОГО РЕЖИМА!\n\nТест приостановлен до возврата в полноэкранный режим.\nНажмите F11 для продолжения.');
-    
-    // Создаем наложение, которое блокирует тест
-    const overlay = document.getElementById('fullscreen-overlay');
-    if (!overlay) {
-        const div = document.createElement('div');
-        div.id = 'fullscreen-overlay';
-        div.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            font-size: 24px;
-            text-align: center;
-            padding: 20px;
-        `;
-        div.innerHTML = `
-            <div style="margin-bottom: 30px;">⚠️ ПОЛНОЭКРАННЫЙ РЕЖИМ ОТКЛЮЧЁН</div>
-            <div style="margin-bottom: 20px;">Тест продолжается только в полноэкранном режиме</div>
-            <div style="margin-bottom: 30px;">Нажмите F11 для возврата</div>
-            <button onclick="retryFullscreen()" style="
-                padding: 15px 40px;
-                font-size: 20px;
-                background: #2563eb;
-                color: white;
-                border: none;
-                border-radius: 10px;
-                cursor: pointer;
-            ">🔄 ВЕРНУТЬСЯ В ПОЛНОЭКРАННЫЙ РЕЖИМ</button>
-        `;
-        document.body.appendChild(div);
-    }
-    
-    // Запускаем цикл проверки
-    fullscreenBlockInterval = setInterval(() => {
-        if (!isTestActive || testForcedEnd) {
-            clearInterval(fullscreenBlockInterval);
-            fullscreenBlockInterval = null;
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (overlay) overlay.remove();
-            return;
-        }
-        
-        if (document.fullscreenElement) {
-            // Вернулись в полноэкранный режим - убираем overlay
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (overlay) overlay.remove();
-            
-            clearInterval(fullscreenBlockInterval);
-            fullscreenBlockInterval = null;
-            
-            logSecurityEvent('fullscreen_restored', 'Полноэкранный режим восстановлен');
-            
-            // Считаем это нарушением
-            violationCount++;
-            logSecurityEvent('violation', `Нарушение #${violationCount}: Выход из полноэкранного режима`);
-            
-            if (violationCount > maxViolations) {
-                forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-            }
-        }
-    }, 500); // Проверяем каждые 500мс
-}
-
-function retryFullscreen() {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen().then(() => {
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (overlay) overlay.remove();
-        }).catch(() => {});
-    }
-}
-
-
-        document.addEventListener('keydown', function(e) {
-            if (!isTestActive || testForcedEnd) return;
-            
-            const blockedKeys = [
-                { cond: e.altKey && e.key === 'Tab', name: 'Alt+Tab' },
-                { cond: e.key === 'Meta' || e.key === 'OS', name: 'Windows key' },
-                { cond: e.ctrlKey && e.key === 'w', name: 'Ctrl+W' },
-                { cond: (e.ctrlKey && e.key === 'r') || e.key === 'F5', name: 'Refresh' },
-                { cond: e.ctrlKey && e.shiftKey && e.key === 'I', name: 'DevTools (Ctrl+Shift+I)' },
-                { cond: e.ctrlKey && e.shiftKey && e.key === 'J', name: 'DevTools Console' },
-                { cond: e.key === 'F12', name: 'DevTools (F12)' },
-                { cond: e.altKey && e.key === 'F4', name: 'Alt+F4' },
-                { cond: e.ctrlKey && e.key === 'Tab', name: 'Ctrl+Tab' },
-                { cond: e.ctrlKey && e.key === 'n', name: 'Ctrl+N' },
-                { cond: e.ctrlKey && e.key === 't', name: 'Ctrl+T' },
-                { cond: (e.ctrlKey && e.key === 'p') || (e.ctrlKey && e.key === 'P'), name: 'Print' },
-                { cond: (e.ctrlKey && e.key === 's') || (e.ctrlKey && e.key === 'S'), name: 'Save' }
-            ];
-            
-            for (let item of blockedKeys) {
-                if (item.cond) {
-                    e.preventDefault();
-                    logSecurityEvent('key_blocked', item.name);
-                    
-                    const shouldEnd = checkViolations(`Использование ${item.name}`);
-                    if (!shouldEnd) {
-                        alert(`⚠️ Использование ${item.name} запрещено!\n\nЭто нарушение #${violationCount}. При следующем нарушении тест будет завершён.`);
-                    }
-                    return;
-                }
-            }
-            
-            if (e.key.startsWith('F') && !isNaN(parseInt(e.key.slice(1))) && e.key !== 'F11') {
-                e.preventDefault();
-                logSecurityEvent('key_blocked', `Function key ${e.key}`);
-                
-                const shouldEnd = checkViolations(`Использование клавиши ${e.key}`);
-                if (!shouldEnd) {
-                    alert(`⚠️ Использование клавиши ${e.key} запрещено!\n\nЭто нарушение #${violationCount}. При следующем нарушении тест будет завершён.`);
-                }
-            }
-        });
-
-        document.addEventListener('contextmenu', function(e) {
-            if (isTestActive && !testForcedEnd) {
-                e.preventDefault();
-                logSecurityEvent('contextmenu', 'Правая кнопка мыши');
-                const shouldEnd = checkViolations('Использование контекстного меню');
-                if (!shouldEnd) {
-                    alert(`⚠️ Использование контекстного меню запрещено!\n\nЭто нарушение #${violationCount}. При следующем нарушении тест будет завершён.`);
-                }
-            }
-        });
-
-        ['copy', 'paste', 'cut'].forEach(event => {
-            document.addEventListener(event, function(e) {
-                if (isTestActive && !testForcedEnd) {
-                    e.preventDefault();
-                    logSecurityEvent('clipboard', `Попытка ${event}`);
-                    const shouldEnd = checkViolations(`Попытка ${event}`);
-                    if (!shouldEnd) {
-                        alert(`⚠️ ${event === 'copy' ? 'Копирование' : event === 'paste' ? 'Вставка' : 'Вырезание'} запрещено!\n\nЭто нарушение #${violationCount}. При следующем нарушении тест будет завершён.`);
-                    }
-                }
-            });
-        });
-
-        window.addEventListener('beforeunload', function(e) {
-            if (isTestActive && !testForcedEnd) {
-                logSecurityEvent('tab_close_attempt', 'Попытка закрыть вкладку');
-                e.preventDefault();
-                e.returnValue = 'Тест ещё не завершён! Все действия будут сохранены.';
-            }
-        });
-
-        function activateLockdown() {
-            return new Promise((resolve) => {
-                isTestActive = false;
-                testForcedEnd = false;
-                securityLogs = [];
-                fullscreenEnabled = false;
-                violationCount = 0;
-                
-                if (!confirm('🔒 ТЕСТ БУДЕТ ПРОХОДИТЬ В ПОЛНОЭКРАННОМ РЕЖИМЕ\n\n' +
-                    'Правила:\n• Тест только в полноэкранном режиме\n• При выходе из полноэкранного режима тест приостанавливается\n' +
-                    `• Максимум нарушений: ${maxViolations}\n\nНажмите ОК для начала теста.`)) {
-                    logSecurityEvent('test_cancelled', 'Студент отказался от полноэкранного режима');
-                    resolve(false);
-                    return;
-                }
-                
-                const elem = document.documentElement;
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen().then(() => {
-                        fullscreenEnabled = true;
-                        logSecurityEvent('fullscreen_entered', 'Полноэкранный режим активирован');
-                        isTestActive = true;
-                        logSecurityEvent('test_start', 'Начало тестирования');
-                        resolve(true);
-                    }).catch(err => {
-                        logSecurityEvent('fullscreen_error', err.message);
-                        alert('❌ Не удалось активировать полноэкранный режим.');
-                        resolve(false);
-                    });
-                } else {
-                    alert('❌ Ваш браузер не поддерживает полноэкранный режим.');
-                    resolve(false);
-                }
-            });
-        }
-
-function deactivateLockdown() {
-    if (!isTestActive) return;
-    
-    logSecurityEvent('test_end', 'Завершение тестирования');
-    isTestActive = false;
-    
-    // Очищаем overlay
-    const overlay = document.getElementById('fullscreen-overlay');
-    if (overlay) overlay.remove();
-    
-    // Очищаем интервал
-    if (fullscreenBlockInterval) {
-        clearInterval(fullscreenBlockInterval);
-        fullscreenBlockInterval = null;
-    }
-    
-    if (fullscreenEnabled && document.exitFullscreen) {
-        document.exitFullscreen();
-    }
-}
-
-function forceEndTest(reason) {
-    if (!isTestActive || testForcedEnd) return;
-    
-    // Сохраняем результаты перед завершением
-    const currentScore = calculateCurrentScore();
-    const userName = document.getElementById('displayName').textContent || 'Аноним';
-    const date = new Date().toLocaleString('ru-RU');
-    
-    // Генерируем HTML отчет о нарушениях
-    const violationReport = generateViolationReport(reason, currentScore, userName, date);
-    
-    // Создаем и скачиваем файл с результатами
-    const blob = new Blob([violationReport], { type: 'text/html;charset=utf-8' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    
-    const dateStr = new Date().toISOString().slice(0,19).replace(/:/g, '-');
-    link.download = `прерванный_тест_${userName}_${dateStr}.html`;
-    link.click();
-    URL.revokeObjectURL(link.href);
-    
-    testForcedEnd = true;
-    logSecurityEvent('test_force_ended', reason);
-    
-    // Очищаем overlay
-    const overlay = document.getElementById('fullscreen-overlay');
-    if (overlay) overlay.remove();
-    
-    // Очищаем интервал
-    if (fullscreenBlockInterval) {
-        clearInterval(fullscreenBlockInterval);
-        fullscreenBlockInterval = null;
-    }
-    
-    alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}\n\nФайл с текущими результатами сохранён.`);
-    
-    isTestActive = false;
-    
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    }
-    
-    document.getElementById('quizPage').classList.add('hidden');
-    document.getElementById('resultsPage').classList.add('hidden');
-    document.getElementById('startScreen').classList.remove('hidden');
-    showTeacherButton();
-    
-    currentQuestions = [];
-}
-
-// Вспомогательная функция для подсчета текущих результатов
-function calculateCurrentScore() {
-    let totalScore = 0;
-    let totalPossibleScore = 0;
-    let answeredCount = 0;
-    let correctCount = 0;
-    
-    currentQuestions.forEach((q, idx) => {
-        const points = q.points || 1;
-        totalPossibleScore += points;
-        
-        if (submitted[idx] && userAnswers[idx]) {
-            answeredCount++;
-            const answer = userAnswers[idx];
-            const correct = q.correct || '';
-            const isMulti = q.type?.includes('Multi Choice');
-            
-            let isCorrect = false;
-            if (!isMulti) {
-                let cleanedCorrect = String(correct).trim().replace(/[^A-D]/gi, '');
-                cleanedCorrect = cleanedCorrect.charAt(0).toUpperCase();
-                
-                let cleanedAnswer = String(answer).trim().replace(/[^A-D]/gi, '');
-                cleanedAnswer = cleanedAnswer.charAt(0).toUpperCase();
-                
-                isCorrect = cleanedAnswer === cleanedCorrect;
-            } else {
-                const correctArray = correct.split(',').map(s => s.trim()).sort();
-                const userArray = answer?.sort ? answer.sort() : [];
-                isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
-            }
-            
-            if (isCorrect) {
-                totalScore += points;
-                correctCount++;
-            }
-        }
-    });
-    
-    return {
-        score: totalScore,
-        maxScore: totalPossibleScore,
-        answered: answeredCount,
-        correct: correctCount,
-        total: currentQuestions.length,
-        percent: totalPossibleScore > 0 ? Math.round((totalScore / totalPossibleScore) * 100) : 0
-    };
-}
-
-// Функция для генерации отчета о нарушениях
-function generateViolationReport(reason, score, userName, date) {
-    const securityEvents = securityLogs.map(log => 
-        `<tr>
-            <td>${log.timeFormatted || new Date(log.timestamp).toLocaleTimeString('ru-RU')}</td>
-            <td>${log.event}</td>
-            <td>${log.details || ''}</td>
-        </tr>`
-    ).join('');
-    
-    return `<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Прерванный тест - Отчет о нарушениях</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            margin: 30px; 
-            background: #f5f7fa;
-            color: #1e293b;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        h1 { 
-            color: #dc2626; 
-            border-bottom: 3px solid #fee2e2; 
-            padding-bottom: 15px;
-            margin-top: 0;
-        }
-        .warning-badge {
-            background: #dc2626;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            display: inline-block;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .summary {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 20px 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .stat-card {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-        .stat-card .value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #2563eb;
-        }
-        .stat-card .label {
-            color: #64748b;
-            margin-top: 5px;
-        }
-        .violation-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 25px 0;
-            font-size: 0.95em;
-        }
-        .violation-table th {
-            background: #1e293b;
-            color: white;
-            padding: 12px;
-            text-align: left;
-        }
-        .violation-table td {
-            padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .violation-table tr:hover {
-            background: #f8fafc;
-        }
-        .reason-box {
-            background: #fee2e2;
-            border-left: 5px solid #dc2626;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            font-size: 1.1em;
-        }
-        .questions-progress {
-            margin: 30px 0;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 30px;
-            background: #e2e8f0;
-            border-radius: 15px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #2563eb, #3b82f6);
-            color: white;
-            line-height: 30px;
-            text-align: center;
-            font-size: 0.9em;
-        }
-        .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #e2e8f0;
-            text-align: center;
-            color: #64748b;
-            font-size: 0.9em;
-        }
-        @media (prefers-color-scheme: dark) {
-            body { background: #1a1e2c; color: #e2e8f0; }
-            .container { background: #2d3748; }
-            .summary { background: #1e293b; }
-            .stat-card { background: #0f172a; border-color: #334155; }
-            .stat-card .value { color: #60a5fa; }
-            .stat-card .label { color: #94a3b8; }
-            .violation-table th { background: #0f172a; }
-            .violation-table td { border-bottom-color: #334155; }
-            .violation-table tr:hover { background: #1e293b; }
-            .reason-box { background: #7f1d1d; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>⚠️ ТЕСТ ПРЕРВАН ДОСРОЧНО</h1>
-        <div class="warning-badge">Принудительное завершение из-за нарушений</div>
-        
-        <div class="reason-box">
-            <strong>Причина завершения:</strong> ${reason}
-        </div>
-        
-        <div class="summary">
-            <div class="stat-card">
-                <div class="value">${userName}</div>
-                <div class="label">Студент</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">${score.score}/${score.maxScore}</div>
-                <div class="label">Набрано баллов</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">${score.percent}%</div>
-                <div class="label">Успешность</div>
-            </div>
-            <div class="stat-card">
-                <div class="value">${score.correct}/${score.total}</div>
-                <div class="label">Правильных ответов</div>
-            </div>
-        </div>
-        
-        <div class="questions-progress">
-            <h3>📊 Прогресс выполнения</h3>
-            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                <span>Отвечено: ${score.answered} из ${score.total} вопросов</span>
-                <span>${Math.round((score.answered/score.total)*100)}%</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: ${(score.answered/score.total)*100}%;">
-                    ${score.answered}/${score.total}
-                </div>
-            </div>
-        </div>
-        
-        <h3>📋 Журнал нарушений</h3>
-        <table class="violation-table">
-            <thead>
-                <tr>
-                    <th>Время</th>
-                    <th>Событие</th>
-                    <th>Детали</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${securityEvents || '<tr><td colspan="3" style="text-align: center;">Нет записей о нарушениях</td></tr>'}
-            </tbody>
-        </table>
-        
-        <h3>📝 Детализация ответов</h3>
-        ${currentQuestions.map((q, idx) => {
-            const answer = userAnswers[idx];
-            const correct = q.correct || '';
-            const isMulti = q.type?.includes('Multi Choice');
-            const points = q.points || 1;
-            
-            let answerText = 'Не отвечен';
-            let status = 'not-answered';
-            let statusText = '⏳ Не отвечен';
-            let pointsText = `0/${points}`;
-            
-            if (submitted[idx] && answer) {
-                if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
-                else answerText = answer;
-                
-                if (!isMulti) {
-                    let cleanedCorrect = String(correct).trim().replace(/[^A-D]/gi, '');
-                    cleanedCorrect = cleanedCorrect.charAt(0).toUpperCase();
-                    let cleanedAnswer = String(answer).trim().replace(/[^A-D]/gi, '');
-                    cleanedAnswer = cleanedAnswer.charAt(0).toUpperCase();
-                    
-                    if (cleanedAnswer === cleanedCorrect) {
-                        status = 'correct';
-                        statusText = '✅ Верно';
-                        pointsText = `${points}/${points}`;
-                    } else {
-                        status = 'incorrect';
-                        statusText = '❌ Неверно';
-                        pointsText = `0/${points}`;
-                    }
-                } else {
-                    const correctArray = correct.split(',').map(s => s.trim()).sort();
-                    const userArray = answer?.sort ? answer.sort() : [];
-                    if (JSON.stringify(userArray) === JSON.stringify(correctArray.sort())) {
-                        status = 'correct';
-                        statusText = '✅ Верно';
-                        pointsText = `${points}/${points}`;
-                    } else {
-                        status = 'incorrect';
-                        statusText = '❌ Неверно';
-                        pointsText = `0/${points}`;
-                    }
-                }
-            }
-            
-            const statusColors = {
-                'correct': 'background: #f0fdf4; border-left: 5px solid #059669;',
-                'incorrect': 'background: #fef2f2; border-left: 5px solid #dc2626;',
-                'not-answered': 'background: #fef9c3; border-left: 5px solid #d97706;'
-            };
-            
-            return `
-            <div style="margin: 20px 0; padding: 20px; border-radius: 12px; ${statusColors[status]}">
-                <div style="font-weight: bold; font-size: 1.1em; margin-bottom: 10px;">Вопрос ${idx+1}</div>
-                <div style="margin-bottom: 10px;">${q.question}</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: rgba(255,255,255,0.5); padding: 10px; border-radius: 8px;">
-                    <div><strong>Ваш ответ:</strong> ${answerText}</div>
-                    <div><strong>Правильный ответ:</strong> ${correct}</div>
-                    <div><strong>Баллы:</strong> ${pointsText}</div>
-                    <div><strong>Статус:</strong> ${statusText}</div>
-                </div>
-            </div>
-            `;
-        }).join('')}
-        
-        <div class="footer">
-            📍 Тест прерван: ${date}<br>
-            🔒 Все действия зафиксированы в журнале нарушений
-        </div>
-    </div>
-</body>
-</html>`;
-}
         // ==============================================
         // ЭКСПОРТ РЕЗУЛЬТАТОВ
         // ==============================================
@@ -2669,6 +1260,7 @@ function generateViolationReport(reason, score, userName, date) {
         function exportResultsToTXT() {
             const userName = document.getElementById('displayName').textContent || 'Аноним';
             const date = new Date().toLocaleString('ru-RU');
+            const showDetailed = testData?.showResults?.showDetailedResults !== false;
             
             // Пересчитываем баллы
             let totalScore = 0;
@@ -2706,46 +1298,49 @@ function generateViolationReport(reason, score, userName, date) {
             let report = `📊 РЕЗУЛЬТАТЫ ТЕСТА\n`;
             report += `====================================\n`;
             report += `Студент: ${userName}\n`;
-            report += `Тест: ${currentTestName}\n`;
+            report += `Тест: ${testData?.testName || 'Тест'}\n`;
             report += `Дата: ${date}\n`;
             report += `====================================\n\n`;
             report += `РЕЗУЛЬТАТЫ:\n`;
             report += `Баллов: ${totalScore} из ${totalPossibleScore}\n`;
             report += `Успешность: ${percent}%\n`;
             report += `Правильных ответов: ${correctCount} из ${currentQuestions.length}\n\n`;
-            report += `ДЕТАЛИЗАЦИЯ:\n`;
-            report += `====================================\n\n`;
             
-            currentQuestions.forEach((q, idx) => {
-                const answer = userAnswers[idx];
-                const correct = q.correct || '';
-                const isMulti = q.type?.includes('Multi Choice');
-                const points = q.points || 1;
+            if (showDetailed) {
+                report += `ДЕТАЛИЗАЦИЯ:\n`;
+                report += `====================================\n\n`;
                 
-                let answerText = 'Не отвечен';
-                let status = 'НЕ ОТВЕЧЕН';
-                
-                if (submitted[idx] && answer) {
-                    if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
-                    else answerText = answer;
+                currentQuestions.forEach((q, idx) => {
+                    const answer = userAnswers[idx];
+                    const correct = q.correct || '';
+                    const isMulti = q.type?.includes('Multi Choice');
+                    const points = q.points || 1;
                     
-                    if (!isMulti) {
-                        status = answer === correct ? 'ВЕРНО' : 'НЕВЕРНО';
-                    } else {
-                        const correctArray = correct.split(',').map(s => s.trim()).sort();
-                        const userArray = answer?.sort ? answer.sort() : [];
-                        status = JSON.stringify(userArray) === JSON.stringify(correctArray.sort()) ? 'ВЕРНО' : 'НЕВЕРНО';
+                    let answerText = 'Не отвечен';
+                    let status = 'НЕ ОТВЕЧЕН';
+                    
+                    if (submitted[idx] && answer) {
+                        if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
+                        else answerText = answer;
+                        
+                        if (!isMulti) {
+                            status = answer === correct ? 'ВЕРНО' : 'НЕВЕРНО';
+                        } else {
+                            const correctArray = correct.split(',').map(s => s.trim()).sort();
+                            const userArray = answer?.sort ? answer.sort() : [];
+                            status = JSON.stringify(userArray) === JSON.stringify(correctArray.sort()) ? 'ВЕРНО' : 'НЕВЕРНО';
+                        }
                     }
-                }
-                
-                report += `Вопрос ${idx+1}: ${status}\n`;
-                report += `Текст: ${q.question}\n`;
-                report += `Ваш ответ: ${answerText}\n`;
-                report += `Правильный ответ: ${correct}\n`;
-                report += `Баллы: ${status === 'ВЕРНО' ? points : 0}/${points}\n`;
-                if (q.explanation) report += `Пояснение: ${q.explanation}\n`;
-                report += `------------------------------------\n`;
-            });
+                    
+                    report += `Вопрос ${idx+1}: ${status}\n`;
+                    report += `Текст: ${q.question}\n`;
+                    report += `Ваш ответ: ${answerText}\n`;
+                    report += `Правильный ответ: ${correct}\n`;
+                    report += `Баллы: ${status === 'ВЕРНО' ? points : 0}/${points}\n`;
+                    if (q.explanation) report += `Пояснение: ${q.explanation}\n`;
+                    report += `------------------------------------\n`;
+                });
+            }
             
             // Создаем и скачиваем файл
             const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
@@ -2762,6 +1357,7 @@ function generateViolationReport(reason, score, userName, date) {
         function exportResultsToHTML() {
             const userName = document.getElementById('displayName').textContent || 'Аноним';
             const date = new Date().toLocaleString('ru-RU');
+            const showDetailed = testData?.showResults?.showDetailedResults !== false;
             
             // Пересчитываем баллы
             let totalScore = 0;
@@ -2797,87 +1393,90 @@ function generateViolationReport(reason, score, userName, date) {
             
             // Генерируем HTML отчет
             let html = `<!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <title>Результаты теста</title>
-            <style>
-                body { font-family: Arial, sans-serif; margin: 40px; }
-                h1 { color: #2563eb; }
-                .summary { background: #f3f4f6; padding: 20px; border-radius: 10px; margin: 20px 0; }
-                .question { border: 1px solid #e5e7eb; padding: 15px; margin: 10px 0; border-radius: 8px; }
-                .correct { background: #f0fdf4; border-left: 5px solid #059669; }
-                .incorrect { background: #fef2f2; border-left: 5px solid #dc2626; }
-                .not-answered { background: #fef9c3; border-left: 5px solid #d97706; }
-                .label { font-weight: bold; color: #4b5563; }
-            </style>
-        </head>
-        <body>
-            <h1>📊 Результаты теста</h1>
-            <div class="summary">
-                <p><strong>Студент:</strong> ${userName}</p>
-                <p><strong>Тест:</strong> ${currentTestName}</p>
-                <p><strong>Дата:</strong> ${date}</p>
-                <p><strong>Баллы:</strong> ${totalScore} из ${totalPossibleScore} (${percent}%)</p>
-                <p><strong>Правильных ответов:</strong> ${correctCount} из ${currentQuestions.length}</p>
-            </div>
-            <h2>Детализация ответов</h2>`;
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты теста</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #2563eb; }
+        .summary { background: #f3f4f6; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .question { border: 1px solid #e5e7eb; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .correct { background: #f0fdf4; border-left: 5px solid #059669; }
+        .incorrect { background: #fef2f2; border-left: 5px solid #dc2626; }
+        .not-answered { background: #fef9c3; border-left: 5px solid #d97706; }
+        .label { font-weight: bold; color: #4b5563; }
+    </style>
+</head>
+<body>
+    <h1>📊 Результаты теста</h1>
+    <div class="summary">
+        <p><strong>Студент:</strong> ${userName}</p>
+        <p><strong>Тест:</strong> ${testData?.testName || 'Тест'}</p>
+        <p><strong>Дата:</strong> ${date}</p>
+        <p><strong>Баллы:</strong> ${totalScore} из ${totalPossibleScore} (${percent}%)</p>
+        <p><strong>Правильных ответов:</strong> ${correctCount} из ${currentQuestions.length}</p>
+    </div>`;
             
-            currentQuestions.forEach((q, idx) => {
-                const answer = userAnswers[idx];
-                const correct = q.correct || '';
-                const isMulti = q.type?.includes('Multi Choice');
-                const points = q.points || 1;
+            if (showDetailed) {
+                html += `<h2>Детализация ответов</h2>`;
                 
-                let answerText = 'Не отвечен';
-                let status = 'not-answered';
-                let statusText = 'Не отвечен';
-                let pointsText = `0/${points}`;
-                
-                if (submitted[idx] && answer) {
-                    if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
-                    else answerText = answer;
+                currentQuestions.forEach((q, idx) => {
+                    const answer = userAnswers[idx];
+                    const correct = q.correct || '';
+                    const isMulti = q.type?.includes('Multi Choice');
+                    const points = q.points || 1;
                     
-                    if (!isMulti) {
-                        if (answer === correct) {
-                            status = 'correct';
-                            statusText = 'Верно';
-                            pointsText = `${points}/${points}`;
+                    let answerText = 'Не отвечен';
+                    let status = 'not-answered';
+                    let statusText = 'Не отвечен';
+                    let pointsText = `0/${points}`;
+                    
+                    if (submitted[idx] && answer) {
+                        if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
+                        else answerText = answer;
+                        
+                        if (!isMulti) {
+                            if (answer === correct) {
+                                status = 'correct';
+                                statusText = 'Верно';
+                                pointsText = `${points}/${points}`;
+                            } else {
+                                status = 'incorrect';
+                                statusText = 'Неверно';
+                                pointsText = `0/${points}`;
+                            }
                         } else {
-                            status = 'incorrect';
-                            statusText = 'Неверно';
-                            pointsText = `0/${points}`;
-                        }
-                    } else {
-                        const correctArray = correct.split(',').map(s => s.trim()).sort();
-                        const userArray = answer?.sort ? answer.sort() : [];
-                        if (JSON.stringify(userArray) === JSON.stringify(correctArray.sort())) {
-                            status = 'correct';
-                            statusText = 'Верно';
-                            pointsText = `${points}/${points}`;
-                        } else {
-                            status = 'incorrect';
-                            statusText = 'Неверно';
-                            pointsText = `0/${points}`;
+                            const correctArray = correct.split(',').map(s => s.trim()).sort();
+                            const userArray = answer?.sort ? answer.sort() : [];
+                            if (JSON.stringify(userArray) === JSON.stringify(correctArray.sort())) {
+                                status = 'correct';
+                                statusText = 'Верно';
+                                pointsText = `${points}/${points}`;
+                            } else {
+                                status = 'incorrect';
+                                statusText = 'Неверно';
+                                pointsText = `0/${points}`;
+                            }
                         }
                     }
-                }
-                
-                html += `
-            <div class="question ${status}">
-                <h3>Вопрос ${idx+1}</h3>
-                <p><span class="label">Текст:</span> ${q.question}</p>
-                <p><span class="label">Ваш ответ:</span> ${answerText}</p>
-                <p><span class="label">Правильный ответ:</span> ${correct}</p>
-                <p><span class="label">Баллы:</span> ${pointsText}</p>
-                <p><span class="label">Результат:</span> <strong>${statusText}</strong></p>
-                ${q.explanation ? `<p><span class="label">Пояснение:</span> ${q.explanation}</p>` : ''}
-            </div>`;
-            });
+                    
+                    html += `
+    <div class="question ${status}">
+        <h3>Вопрос ${idx+1}</h3>
+        <p><span class="label">Текст:</span> ${q.question}</p>
+        <p><span class="label">Ваш ответ:</span> ${answerText}</p>
+        <p><span class="label">Правильный ответ:</span> ${correct}</p>
+        <p><span class="label">Баллы:</span> ${pointsText}</p>
+        <p><span class="label">Результат:</span> <strong>${statusText}</strong></p>
+        ${q.explanation ? `<p><span class="label">Пояснение:</span> ${q.explanation}</p>` : ''}
+    </div>`;
+                });
+            }
             
             html += `
-        </body>
-        </html>`;
+</body>
+</html>`;
             
             // Создаем и скачиваем файл
             const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
@@ -2891,445 +1490,89 @@ function generateViolationReport(reason, score, userName, date) {
             URL.revokeObjectURL(link.href);
         }
 
-        // ==============================================
-        // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-        // ==============================================
-
-        document.getElementById('tfPercent')?.addEventListener('input', validateTypePercentages);
-        document.getElementById('singlePercent')?.addEventListener('input', validateTypePercentages);
-        document.getElementById('multiPercent')?.addEventListener('input', validateTypePercentages);
-
-// ==============================================
-// РАСЧЕТ РЕКОМЕНДУЕМОГО КОЛИЧЕСТВА ВОПРОСОВ
-// ==============================================
-
-function calculateRecommendedQuestions() {
-    const targetPoints = parseFloat(document.getElementById('targetTotalPoints')?.value) || 100;
-    
-    // Получаем распределение по типам вопросов
-    const tfPercent = parseFloat(document.getElementById('tfPercent')?.value) || 33;
-    const singlePercent = parseFloat(document.getElementById('singlePercent')?.value) || 34;
-    const multiPercent = parseFloat(document.getElementById('multiPercent')?.value) || 33;
-    
-    // Получаем распределение по уровням
-    const level0Percent = parseFloat(document.getElementById('level0Percent')?.value) || 40;
-    const level1Percent = parseFloat(document.getElementById('level1Percent')?.value) || 35;
-    const level2Percent = parseFloat(document.getElementById('level2Percent')?.value) || 25;
-    
-    // Получаем распределение по сложности
-    const easyPercent = parseFloat(document.getElementById('easyPercent')?.value) || 40;
-    const mediumPercent = parseFloat(document.getElementById('mediumPercent')?.value) || 35;
-    const hardPercent = parseFloat(document.getElementById('hardPercent')?.value) || 25;
-    
-    // Проверяем, есть ли данные о вопросах
-    if (!questions || questions.length === 0) {
-        document.getElementById('recommendedQuestionCount').value = '—';
-        document.getElementById('recommendedPointsInfo').innerHTML = '❌ Нет данных о вопросах';
-        document.getElementById('calculationDetails').innerHTML = 'Сначала загрузите вопросы из Excel';
-        return;
-    }
-    
-    // Получаем матрицу баллов из таблицы настроек
-    const pointsMatrix = {
-        'Level-0': {
-            'Базовый': parseFloat(document.getElementById('score_L0_Basic')?.value) || 1,
-            'Средний': parseFloat(document.getElementById('score_L0_Medium')?.value) || 2,
-            'Сложный': parseFloat(document.getElementById('score_L0_Hard')?.value) || 3
-        },
-        'Level-1': {
-            'Базовый': parseFloat(document.getElementById('score_L1_Basic')?.value) || 2,
-            'Средний': parseFloat(document.getElementById('score_L1_Medium')?.value) || 3,
-            'Сложный': parseFloat(document.getElementById('score_L1_Hard')?.value) || 4
-        },
-        'Level-2': {
-            'Базовый': parseFloat(document.getElementById('score_L2_Basic')?.value) || 3,
-            'Средний': parseFloat(document.getElementById('score_L2_Medium')?.value) || 4,
-            'Сложный': parseFloat(document.getElementById('score_L2_Hard')?.value) || 5
-        }
-    };
-    
-    // Рассчитываем средний балл с учетом всех распределений
-    let totalWeightedPoints = 0;
-    
-    // Перебираем все комбинации уровень × сложность
-    for (let level of ['Level-0', 'Level-1', 'Level-2']) {
-        // Процент для текущего уровня
-        let levelPercent = 0;
-        if (level === 'Level-0') levelPercent = level0Percent;
-        else if (level === 'Level-1') levelPercent = level1Percent;
-        else levelPercent = level2Percent;
-        
-        for (let difficulty of ['Базовый', 'Средний', 'Сложный']) {
-            // Процент для текущей сложности
-            let difficultyPercent = 0;
-            if (difficulty === 'Базовый') difficultyPercent = easyPercent;
-            else if (difficulty === 'Средний') difficultyPercent = mediumPercent;
-            else difficultyPercent = hardPercent;
-            
-            // Балл для этой комбинации
-            const points = pointsMatrix[level][difficulty];
-            
-            // Вклад в общий средний балл = балл × (процент уровня) × (процент сложности) / 10000
-            const weight = (levelPercent * difficultyPercent) / 10000;
-            totalWeightedPoints += points * weight;
-            
-            console.log(`${level} / ${difficulty}: ${points} баллов × ${levelPercent}% × ${difficultyPercent}% = ${(points * weight).toFixed(3)}`);
-        }
-    }
-    
-    // Теперь учитываем распределение по типам вопросов
-    // Для каждого типа нужно знать средний балл с учетом уровня и сложности
-    const avgPointsByType = {
-        tf: calculateWeightedAverageForType('tf', pointsMatrix, level0Percent, level1Percent, level2Percent, easyPercent, mediumPercent, hardPercent),
-        single: calculateWeightedAverageForType('single', pointsMatrix, level0Percent, level1Percent, level2Percent, easyPercent, mediumPercent, hardPercent),
-        multi: calculateWeightedAverageForType('multi', pointsMatrix, level0Percent, level1Percent, level2Percent, easyPercent, mediumPercent, hardPercent)
-    };
-    
-    // Итоговый средневзвешенный балл с учетом типа
-    const weightedAvgPoint = (
-        (avgPointsByType.tf * tfPercent / 100) +
-        (avgPointsByType.single * singlePercent / 100) +
-        (avgPointsByType.multi * multiPercent / 100)
-    );
-    
-    if (weightedAvgPoint === 0) {
-        document.getElementById('recommendedQuestionCount').value = '—';
-        document.getElementById('recommendedPointsInfo').innerHTML = '❌ Ошибка расчета';
-        return;
-    }
-    
-    // Рекомендуемое количество вопросов
-    let recommendedCount = Math.round(targetPoints / weightedAvgPoint);
-    
-    // Ограничиваем доступными вопросами
-    const maxAvailable = questions.length;
-    recommendedCount = Math.min(recommendedCount, maxAvailable);
-    recommendedCount = Math.max(recommendedCount, 1); // Минимум 1 вопрос
-    
-    document.getElementById('recommendedQuestionCount').value = recommendedCount;
-    
-    // Формируем детальный отчет
-    let details = `
-        <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 5px;">
-            <div style="font-weight: bold; color: #2563eb; margin-bottom: 8px;">📊 Матрица баллов:</div>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-bottom: 10px;">
-                <div></div>
-                <div style="font-weight: bold;">Базовый</div>
-                <div style="font-weight: bold;">Средний</div>
-                <div style="font-weight: bold;">Сложный</div>
-                ${renderPointsMatrix(pointsMatrix)}
-            </div>
-            <div style="margin-top: 10px;">
-                <div>Средний балл с учетом уровня и сложности: <strong>${totalWeightedPoints.toFixed(2)}</strong></div>
-                <div>Средний балл с учетом типа вопросов: <strong>${weightedAvgPoint.toFixed(2)}</strong></div>
-            </div>
-        </div>
-    `;
-    
-    // Добавляем информацию о средних баллах по типам
-    details += `
-        <div style="margin-top: 10px; background: #f0f9ff; padding: 10px; border-radius: 6px;">
-            <div style="font-weight: bold; margin-bottom: 5px;">📈 Средние баллы по типам:</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px;">
-                <div>True/False:<br><strong>${avgPointsByType.tf.toFixed(2)}</strong></div>
-                <div>Single Choice:<br><strong>${avgPointsByType.single.toFixed(2)}</strong></div>
-                <div>Multi Choice:<br><strong>${avgPointsByType.multi.toFixed(2)}</strong></div>
-            </div>
-        </div>
-    `;
-    
-    details += `
-        <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 10px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px;">
-                <span>Целевая сумма баллов:</span> <strong>${targetPoints}</strong>
-                <span>Рекомендуется вопросов:</span> <strong>${recommendedCount}</strong>
-                <span>Ожидаемая сумма:</span> <strong>${(recommendedCount * weightedAvgPoint).toFixed(1)}</strong>
-                <span>Доступно вопросов:</span> <strong>${maxAvailable}</strong>
-            </div>
-        </div>
-    `;
-    
-    document.getElementById('calculationDetails').innerHTML = details;
-    document.getElementById('recommendedPointsInfo').innerHTML = `≈ ${(recommendedCount * weightedAvgPoint).toFixed(1)} баллов`;
-    
-    return recommendedCount;
-}
-
-function calculateWeightedAverageForType(type, pointsMatrix, level0Percent, level1Percent, level2Percent, easyPercent, mediumPercent, hardPercent) {
-    if (!questions || questions.length === 0) return 0;
-    
-    // Фильтруем вопросы по типу
-    const typeQuestions = questions.filter(q => {
-        const qType = q.type || '';
-        if (type === 'tf') {
-            return qType.includes('True/False') || (q.optA === 'Верно' && q.optB === 'Неверно');
-        } else if (type === 'multi') {
-            return qType.includes('Multi Choice');
-        } else {
-            return !qType.includes('Multi Choice') && !qType.includes('True/False');
-        }
-    });
-    
-    if (typeQuestions.length === 0) return 0;
-    
-    // Группируем вопросы по уровню и сложности
-    const groups = {};
-    let totalWeightedSum = 0;
-    
-    for (let level of ['Level-0', 'Level-1', 'Level-2']) {
-        for (let difficulty of ['Базовый', 'Средний', 'Сложный']) {
-            const questionsInGroup = typeQuestions.filter(q => 
-                (q.level || 'Level-0') === level && 
-                (q.difficulty || 'Базовый') === difficulty
-            );
-            
-            if (questionsInGroup.length > 0) {
-                // Средний балл для этой группы (из таблицы)
-                const points = pointsMatrix[level][difficulty];
-                
-                // Процент для этой группы
-                let levelPercent = 0;
-                if (level === 'Level-0') levelPercent = level0Percent;
-                else if (level === 'Level-1') levelPercent = level1Percent;
-                else levelPercent = level2Percent;
-                
-                let difficultyPercent = 0;
-                if (difficulty === 'Базовый') difficultyPercent = easyPercent;
-                else if (difficulty === 'Средний') difficultyPercent = mediumPercent;
-                else difficultyPercent = hardPercent;
-                
-                // Вклад в средний балл для этого типа
-                const weight = (levelPercent * difficultyPercent) / 10000;
-                totalWeightedSum += points * weight;
-            }
-        }
-    }
-    
-    return totalWeightedSum;
-}
-
-function renderPointsMatrix(pointsMatrix) {
-    let html = '';
-    const levels = ['Level-0', 'Level-1', 'Level-2'];
-    const difficulties = ['Базовый', 'Средний', 'Сложный'];
-    
-    levels.forEach(level => {
-        html += `<div style="font-weight: bold;">${level}</div>`;
-        difficulties.forEach(diff => {
-            html += `<div style="text-align: center;">${pointsMatrix[level][diff]}</div>`;
-        });
-    });
-    
-    return html;
-}
-
-// Обновляем функцию checkTypeAvailability для учета уровней и сложности
-function checkTypeAvailability(questionCount) {
-    if (!questions || questions.length === 0) {
-        return { enough: false, message: 'Нет загруженных вопросов' };
-    }
-    
-    const tfPercent = parseFloat(document.getElementById('tfPercent')?.value) || 33;
-    const singlePercent = parseFloat(document.getElementById('singlePercent')?.value) || 34;
-    const multiPercent = parseFloat(document.getElementById('multiPercent')?.value) || 33;
-    
-    const level0Percent = parseFloat(document.getElementById('level0Percent')?.value) || 40;
-    const level1Percent = parseFloat(document.getElementById('level1Percent')?.value) || 35;
-    const level2Percent = parseFloat(document.getElementById('level2Percent')?.value) || 25;
-    
-    const easyPercent = parseFloat(document.getElementById('easyPercent')?.value) || 40;
-    const mediumPercent = parseFloat(document.getElementById('mediumPercent')?.value) || 35;
-    const hardPercent = parseFloat(document.getElementById('hardPercent')?.value) || 25;
-    
-    // Рассчитываем потребность в вопросах по каждой категории
-    let messages = [];
-    
-    // Проверяем по типам
-    const tfNeeded = Math.round(questionCount * tfPercent / 100);
-    const singleNeeded = Math.round(questionCount * singlePercent / 100);
-    const multiNeeded = Math.round(questionCount * multiPercent / 100);
-    
-    const tfAvailable = questions.filter(q => 
-        q.type?.includes('True/False') || (q.optA === 'Верно' && q.optB === 'Неверно')
-    ).length;
-    
-    const multiAvailable = questions.filter(q => 
-        q.type?.includes('Multi Choice')
-    ).length;
-    
-    const singleAvailable = questions.length - tfAvailable - multiAvailable;
-    
-    if (tfNeeded > tfAvailable) messages.push(`True/False: нужно ${tfNeeded}, доступно ${tfAvailable}`);
-    if (singleNeeded > singleAvailable) messages.push(`Single Choice: нужно ${singleNeeded}, доступно ${singleAvailable}`);
-    if (multiNeeded > multiAvailable) messages.push(`Multi Choice: нужно ${multiNeeded}, доступно ${multiAvailable}`);
-    
-    // Проверяем по уровням
-    const level0Needed = Math.round(questionCount * level0Percent / 100);
-    const level1Needed = Math.round(questionCount * level1Percent / 100);
-    const level2Needed = Math.round(questionCount * level2Percent / 100);
-    
-    const level0Available = questions.filter(q => (q.level || 'Level-0') === 'Level-0').length;
-    const level1Available = questions.filter(q => q.level === 'Level-1').length;
-    const level2Available = questions.filter(q => q.level === 'Level-2').length;
-    
-    if (level0Needed > level0Available) messages.push(`Level-0: нужно ${level0Needed}, доступно ${level0Available}`);
-    if (level1Needed > level1Available) messages.push(`Level-1: нужно ${level1Needed}, доступно ${level1Available}`);
-    if (level2Needed > level2Available) messages.push(`Level-2: нужно ${level2Needed}, доступно ${level2Available}`);
-    
-    // Проверяем по сложности
-    const easyNeeded = Math.round(questionCount * easyPercent / 100);
-    const mediumNeeded = Math.round(questionCount * mediumPercent / 100);
-    const hardNeeded = Math.round(questionCount * hardPercent / 100);
-    
-    const easyAvailable = questions.filter(q => (q.difficulty || 'Базовый') === 'Базовый').length;
-    const mediumAvailable = questions.filter(q => q.difficulty === 'Средний').length;
-    const hardAvailable = questions.filter(q => q.difficulty === 'Сложный').length;
-    
-    if (easyNeeded > easyAvailable) messages.push(`Базовый: нужно ${easyNeeded}, доступно ${easyAvailable}`);
-    if (mediumNeeded > mediumAvailable) messages.push(`Средний: нужно ${mediumNeeded}, доступно ${mediumAvailable}`);
-    if (hardNeeded > hardAvailable) messages.push(`Сложный: нужно ${hardNeeded}, доступно ${hardAvailable}`);
-    
-    if (messages.length > 0) {
-        return { 
-            enough: false, 
-            message: '⚠️ Недостаточно вопросов в некоторых категориях:\n' + messages.join('\n')
+        // Инициализация
+        window.onload = function() {
+            loadTestFromGitHub();
         };
+            // Функция для получения параметра из URL
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
     }
-    
-    return { enough: true, message: '✅ Достаточно вопросов во всех категориях' };
-}
 
-// ==============================================
-// ИНИЦИАЛИЗАЦИЯ ОБРАБОТЧИКОВ ДЛЯ РАСЧЕТА
-// ==============================================
-
-function initCalculationListeners() {
-    // Основные поля
-    document.getElementById('targetTotalPoints')?.addEventListener('input', function() {
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    
-    // Распределение по типам
-    document.getElementById('tfPercent')?.addEventListener('input', function() {
-        validateTypePercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    document.getElementById('singlePercent')?.addEventListener('input', function() {
-        validateTypePercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    document.getElementById('multiPercent')?.addEventListener('input', function() {
-        validateTypePercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    
-    // Распределение по уровням
-    document.getElementById('level0Percent')?.addEventListener('input', function() {
-        validateLevelPercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    document.getElementById('level1Percent')?.addEventListener('input', function() {
-        validateLevelPercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    document.getElementById('level2Percent')?.addEventListener('input', function() {
-        validateLevelPercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    
-    // Распределение по сложности
-    document.getElementById('easyPercent')?.addEventListener('input', function() {
-        validateDifficultyPercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    document.getElementById('mediumPercent')?.addEventListener('input', function() {
-        validateDifficultyPercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    document.getElementById('hardPercent')?.addEventListener('input', function() {
-        validateDifficultyPercentages();
-        setTimeout(calculateRecommendedQuestions, 100);
-    });
-    
-    // Таблица баллов
-    const scoreInputs = [
-        'score_L0_Basic', 'score_L0_Medium', 'score_L0_Hard',
-        'score_L1_Basic', 'score_L1_Medium', 'score_L1_Hard',
-        'score_L2_Basic', 'score_L2_Medium', 'score_L2_Hard'
-    ];
-    
-    scoreInputs.forEach(id => {
-        document.getElementById(id)?.addEventListener('input', function() {
-            setTimeout(calculateRecommendedQuestions, 100);
-        });
-    });
-}
-
-// Валидация процентов уровней
-function validateLevelPercentages() {
-    const l0 = parseFloat(document.getElementById('level0Percent')?.value) || 0;
-    const l1 = parseFloat(document.getElementById('level1Percent')?.value) || 0;
-    const l2 = parseFloat(document.getElementById('level2Percent')?.value) || 0;
-    const sum = l0 + l1 + l2;
-    
-    // Можно добавить индикатор, но не обязательно
-    return sum;
-}
-
-// Валидация процентов сложности
-function validateDifficultyPercentages() {
-    const easy = parseFloat(document.getElementById('easyPercent')?.value) || 0;
-    const medium = parseFloat(document.getElementById('mediumPercent')?.value) || 0;
-    const hard = parseFloat(document.getElementById('hardPercent')?.value) || 0;
-    const sum = easy + medium + hard;
-    
-    return sum;
-}
-
-// Вызываем при загрузке страницы
-setTimeout(() => {
-    initCalculationListeners();
-    if (questions && questions.length > 0) {
-        calculateRecommendedQuestions();
+    // Функция для загрузки теста
+    async function loadQuiz() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const errorScreen = document.getElementById('errorScreen');
+        const startScreen = document.getElementById('startScreen');
+        
+        try {
+            // Получаем название теста из URL параметра 'test'
+            let testFile = getUrlParameter('test');
+            
+            // Если параметр не указан, используем файл по умолчанию
+            if (!testFile) {
+                testFile = 'test_телеком_опрос__2_2026-03-03.json';
+            }
+            
+            // Формируем полный путь к файлу
+            // Для GitHub Pages файлы должны быть в той же директории или поддиректориях
+            const quizUrl = `./${testFile}`;
+            
+            // Показываем URL загрузки для отладки
+            document.getElementById('loadingUrl').textContent = `Загрузка: ${quizUrl}`;
+            
+            // Загружаем JSON файл
+            const response = await fetch(quizUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Файл ${testFile} не найден (HTTP ${response.status})`);
+            }
+            
+            const quizData = await response.json();
+            
+            // Сохраняем данные теста в глобальную переменную или localStorage
+            window.quizData = quizData;
+            
+            // Отображаем информацию о тесте на стартовом экране
+            displayTestInfo(quizData);
+            
+            // Скрываем загрузку, показываем стартовый экран
+            loadingScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            
+            // Обновляем заголовки
+            document.getElementById('mainTitle').textContent = quizData.title || '📋 Тестирование';
+            document.getElementById('headerSubtitle').textContent = quizData.description || '';
+            
+        } catch (error) {
+            // Показываем ошибку
+            loadingScreen.classList.add('hidden');
+            errorScreen.classList.remove('hidden');
+            document.getElementById('errorMessage').innerHTML = `
+                <strong>Ошибка загрузки теста:</strong><br>
+                ${error.message}<br><br>
+                <small>Проверьте, что файл существует в репозитории и имя указано правильно.</small>
+            `;
+        }
     }
-}, 1000);
 
-// Также добавим вызов при загрузке данных
-const originalEncryptAndSaveData = encryptAndSaveData;
-encryptAndSaveData = function() {
-    originalEncryptAndSaveData();
-    setTimeout(() => {
-        calculateRecommendedQuestions();
-    }, 500);
-};
+    // Функция для отображения информации о тесте
+    function displayTestInfo(quizData) {
+        const testInfo = document.getElementById('testInfo');
+        // Здесь добавьте код для отображения информации о тесте
+        // в зависимости от структуры вашего JSON
+        testInfo.innerHTML = `
+            <div class="test-info-item">📊 Вопросов: ${quizData.questions?.length || 0}</div>
+            <div class="test-info-item">⏱️ Время: ${quizData.timeLimit || 'Не ограничено'}</div>
+            ${quizData.topics ? quizData.topics.map(topic => 
+                `<span class="settings-badge">📌 ${topic}</span>`
+            ).join('') : ''}
+        `;
+    }
 
-// Добавьте в начало файла, после глобальных переменных
-function validateAllPercentages() {
-    // Типы вопросов
-    const tf = parseFloat(document.getElementById('tfPercent')?.value) || 0;
-    const single = parseFloat(document.getElementById('singlePercent')?.value) || 0;
-    const multi = parseFloat(document.getElementById('multiPercent')?.value) || 0;
-    const typeSum = tf + single + multi;
-    
-    // Уровни
-    const l0 = parseFloat(document.getElementById('level0Percent')?.value) || 0;
-    const l1 = parseFloat(document.getElementById('level1Percent')?.value) || 0;
-    const l2 = parseFloat(document.getElementById('level2Percent')?.value) || 0;
-    const levelSum = l0 + l1 + l2;
-    
-    // Сложность
-    const easy = parseFloat(document.getElementById('easyPercent')?.value) || 0;
-    const medium = parseFloat(document.getElementById('mediumPercent')?.value) || 0;
-    const hard = parseFloat(document.getElementById('hardPercent')?.value) || 0;
-    const diffSum = easy + medium + hard;
-    
-    return {
-        types: typeSum,
-        levels: levelSum,
-        difficulties: diffSum
-    };
-}
-
+    // Загружаем тест при открытии страницы
+    document.addEventListener('DOMContentLoaded', loadQuiz);
     </script>
 </body>
 </html>
