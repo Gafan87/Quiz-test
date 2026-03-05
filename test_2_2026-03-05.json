@@ -1,0 +1,1542 @@
+{
+  "testName": "Телеком-опрос №2",
+  "dateGenerated": "2026-03-03T12:56:33.215Z",
+  "expires": "2026-03-03T15:56:33.214Z",
+  "maxViolations": 1,
+  "showResults": {
+    "showCorrectnessDuringTest": true,
+    "showExplanationsDuringTest": true,
+    "showDetailedResults": true
+  },
+  "basePoints": {
+    "level0": 1,
+    "level1": 2,
+    "level2": 3,
+    "levelNone": 1
+  },
+  "coefficients": {
+    "type": {
+      "tf": 50,
+      "single": 100,
+      "multi": 130
+    },
+    "difficulty": {
+      "easy": 80,
+      "medium": 100,
+      "hard": 120
+    }
+  },
+  "questions": [
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Multi Choice",
+      "question": "Какие частотные диапазоны (Band) используются для 5G?",
+      "optA": "Low-band (ниже 1 ГГц)",
+      "optB": "Ultra-low (Гц)",
+      "optC": "mmWave (высокие частоты > 24 ГГц)",
+      "optD": "Mid-band (1-6 ГГц, C-Band)",
+      "correct": "A, C, D",
+      "explanation": "5G использует все три слоя спектра.",
+      "basePoints": 3,
+      "points": 3,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "question": " Какие меры повышают надёжность транспортной сети против обрывов кабеля? ",
+      "optA": " Прокладка кабелей в разных коллекторах ",
+      "optB": " Использование кольцевой топологии ",
+      "optC": " Резервирование каналов через Microwave ",
+      "optD": " Увеличение мощности передатчиков ",
+      "correct": " A, B, C ",
+      "explanation": " Разные пути и кольца защищают от физического обрыва. Microwave — альтернативный транспорт. Мощность не защитит от обрыва. ",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Core Protocols & Signaling",
+      "type": "Multi Choice",
+      "question": "Какие протоколы относятся к внутренним шлюзовым протоколам (IGP)?",
+      "optA": "OSPF (Open Shortest Path First)",
+      "optB": "IS-IS (Intermediate System to Intermediate System)",
+      "optC": "RIP (Routing Information Protocol)",
+      "optD": "BGP (Border Gateway Protocol)",
+      "correct": "A, B, C",
+      "explanation": "BGP — это внешний протокол (EGP).",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "IMS & Voice Architecture",
+      "type": "Multi Choice",
+      "question": "Какие технологии позволяют передавать голос в сетях LTE?",
+      "optA": "VoLTE (Voice over LTE)",
+      "optB": "CSFB (Circuit Switched Fallback)",
+      "optC": "VoWiFi (Voice over WiFi)",
+      "optD": "SRVCC (Single Radio Voice Call Continuity)",
+      "correct": "A, B, C, D",
+      "explanation": "Все четыре технологии описаны в глоссарии Level-1 (IMS & Voice Architecture).",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Высокий",
+      "topic": "Mobile Core Network",
+      "type": "Multi Choice",
+      "question": " Какие преимущества даёт архитектурное разделение Control Plane и User Plane (CUPS)? ",
+      "optA": " Возможность размещения User Plane ближе к пользователю (Edge) ",
+      "optB": " Независимое масштабирование управления и передачи данных ",
+      "optC": " Упрощение физической прокладки кабелей ",
+      "optD": " Снижение задержки для локального трафика ",
+      "correct": " A, B, D ",
+      "explanation": " CUPS позволяет гибкость архитектуры. Физическая прокладка кабелей от этого не упрощается. ",
+      "basePoints": 2,
+      "points": 2.4,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Security & Compliance",
+      "type": "Multi Choice",
+      "question": "Какие действия может выполнять Firewall с трафиком?",
+      "optA": "Усилить сигнал (Amplify)",
+      "optB": "Запретить (Deny/Block)",
+      "optC": "Залогировать (Log)",
+      "optD": "Разрешить (Allow/Permit)",
+      "correct": "B, C, D",
+      "explanation": "Усиление сигнала — задача репитера/усилителя.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "Wireless Network (RAN)",
+      "type": "Multi Choice",
+      "question": " Какие факторы критичны при планировании размещения базовой станции (Site)? ",
+      "optA": " Рельеф местности и здания ",
+      "optB": " Доступность электропитания и транспорта ",
+      "optC": " Наличие оптоволокна для Backhaul ",
+      "optD": " Цвет корпуса оборудования ",
+      "correct": " A, B, C ",
+      "explanation": " Физические препятствия, логистика и транспортная доступность критичны. Цвет не влияет на радиоволны. ",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Broadcast domain — это область сети, где распространяется широковещательный трафик. Чем он обычно ограничивается?",
+      "optA": "Router (маршрутизатор L3) — не пропускает broadcast между разными сетями",
+      "optB": "Switch (коммутатор L2) — пересылает broadcast внутри одного широковещательного домена",
+      "optC": "Antenna (антенна) — определяет зону радиопокрытия базовой станции",
+      "optD": "DNS-сервер — преобразует доменные имена в IP-адреса для маршрутизации",
+      "correct": "A",
+      "explanation": "Маршрутизатор (L3) не пересылает broadcast-пакеты между сетями, ограничивая тем самым broadcast domain.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "OSS/BSS & Operations",
+      "type": "Single Choice",
+      "question": " В NOC поступила авария: сбой интернета в районе. Первое действие инженера? ",
+      "optA": " Перезагрузить все станции ",
+      "optB": " Звонить абонентам ",
+      "optC": " Отключить район ",
+      "optD": " Локализовать сбой: Access, Transport или Core? ",
+      "correct": "D",
+      "explanation": " Нужно понять домен сбоя. Если транспорт упал — перезагрузка базовых станций не поможет. ",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "question": " В мобильной сети направление Downlink (DL) — это передача данных от базовой станции к абонентскому устройству, а Uplink (UL) — от устройства к базовой станции. ",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": " A ",
+      "explanation": " Стандартное определение.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Высокий",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "question": " В чем принципиальное различие между Default EPS Bearer и Dedicated EPS Bearer в сети LTE? ",
+      "optA": " Default Bearer всегда имеет гарантированную скорость (GBR), а Dedicated — нет ",
+      "optB": " Default Bearer создается при регистрации и существует, пока абонент в сети, а Dedicated создается дополнительно для специфических сервисов ",
+      "optC": " Default Bearer используется только для SMS, а Dedicated — для всего остального ",
+      "optD": " Dedicated Bearer всегда шифруется, а Default — нет ",
+      "correct": " B ",
+      "explanation": " Default Bearer — это базовое соединение (обычно non-GBR). Dedicated Bearer создается для услуг с особыми требованиями к QoS.",
+      "basePoints": 2,
+      "points": 2.4,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Single Choice",
+      "question": "xDSL (Digital Subscriber Line) — это семейство технологий, которые…",
+      "optA": "Прокладывают оптоволокно непосредственно до квартиры абонента (FTTH)",
+      "optB": "Определяют радиоинтерфейс и частотные диапазоны для сетей 5G NR",
+      "optC": "Используют протоколы динамической маршрутизации (OSPF, BGP) в ядре",
+      "optD": "Обеспечивают широкополосный доступ по медным телефонным линиям (ADSL, VDSL)",
+      "correct": "D",
+      "explanation": "xDSL использует существующую медную инфраструктуру (телефонные пары) для широкополосного доступа.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "question": "MIMO (Multiple Input Multiple Output) использует несколько антенн для увеличения скорости передачи.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Верно, это технология пространственного мультиплексирования для повышения пропускной способности.",
+      "basePoints": 2,
+      "points": 1.6,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Mobile Core Network",
+      "type": "Multi Choice",
+      "question": "Какие утверждения о плоскостях в ядре сети верны?",
+      "optA": "Control Plane отвечает за сигнализацию",
+      "optB": "User Plane передаёт пользовательские данные",
+      "optC": "Обе плоскости всегда физически разделены",
+      "optD": "Control Plane управляет установкой соединений",
+      "correct": "A, B, D",
+      "explanation": "Разделение может быть логическим, не обязательно физическим.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "True/False",
+      "question": "Интранет — это внутренняя частная сеть организации.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Да, на базе интернет-технологий.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": "Какие типы DNS-записей существуют?",
+      "optA": "A (IPv4 address)",
+      "optB": "AAAA (IPv6 address)",
+      "optC": "MX (Mail Exchange)",
+      "optD": "PTR (Pointer)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленные типы записей есть в глоссарии Level-1.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IP Network Architecture",
+      "type": "Multi Choice",
+      "question": "Какие преимущества даёт Segment Routing (SR) по сравнению с традиционным MPLS?",
+      "optA": "Упрощение управления (no LDP/RSVP)",
+      "optB": "Обязательное использование IPv6",
+      "optC": "Интеграция с SDN",
+      "optD": "Программируемость путей",
+      "correct": "A, C, D",
+      "explanation": "SR может работать с MPLS и IPv6, не обязательно IPv6.",
+      "basePoints": 3,
+      "points": 3,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Какая логическая связка корректна: «URL → … → IP-адрес»?",
+      "optA": "URL → MTU (Maximum Transmission Unit) → IP-адрес",
+      "optB": "URL → DNS (Domain Name System) → IP-адрес",
+      "optC": "URL → VLAN (Virtual Local Area Network) → IP-адрес",
+      "optD": "URL → LTE (Long Term Evolution) → IP-адрес",
+      "correct": "B",
+      "explanation": "URL содержит доменное имя; DNS преобразует доменное имя в IP-адрес для маршрутизации.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "Single Choice",
+      "question": "Incident (инцидент) в операционном контексте телеком-сети — это…",
+      "optA": "Тарифный план с определенным набором включенных услуг и условиями использования",
+      "optB": "Событие, приводящее к нарушению работы сервиса или отклонению от нормального состояния",
+      "optC": "Тип частного IP-адреса для использования в локальных сетях (192.168.x.x)",
+      "optD": "Метод криптографического шифрования данных для защиты конфиденциальности",
+      "correct": "B",
+      "explanation": "Инцидент — нарушение/сбой в работе сети/сервиса, требующий диагностики и восстановления.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Network domains overview",
+      "type": "Multi Choice",
+      "question": "Какие технологии используются в сети доступа?",
+      "optA": "MPLS",
+      "optB": "PON",
+      "optC": "Wi-Fi",
+      "optD": "xDSL",
+      "correct": "B, C, D",
+      "explanation": "MPLS – технология транспортной сети/ядра, не доступа.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Что такое сеть (Network) в контексте телекоммуникаций?",
+      "optA": "Совокупность серверов в одном здании",
+      "optB": "Программное обеспечение для связи",
+      "optC": "Совокупность соединённых узлов для обмена данными",
+      "optD": "Тип кабеля",
+      "correct": "C",
+      "explanation": "Сеть — система устройств и каналов для передачи данных.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "OSS/BSS & Operations",
+      "type": "Multi Choice",
+      "question": "Какие системы относятся к OSS (Operations Support Systems)?",
+      "optA": "Fault Management (FM)",
+      "optB": "Performance Management (PM)",
+      "optC": "Inventory Management",
+      "optD": "Sales Portal",
+      "correct": "A, B, C",
+      "explanation": "Sales Portal — это BSS.",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": " Какие функции выполняются на Канальном уровне (L2) модели OSI? ",
+      "optA": " Физическая адресация (MAC-адреса) ",
+      "optB": " Обнаружение ошибок в кадре (FCS) ",
+      "optC": " Управление доступом к среде (MAC) ",
+      "optD": " Логическая маршрутизация между сетями (IP) ",
+      "correct": " A, B, C ",
+      "explanation": " Маршрутизация (IP) — функция Сетевого уровня (L3). L2 работает в пределах одного сегмента. ",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": "Какие типы ресурсных записей DNS существуют?",
+      "optA": "A (IPv4)",
+      "optB": "AAAA (IPv6)",
+      "optC": "MX (mail exchange)",
+      "optD": "CNAME (каноническое имя)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленные – стандартные типы записей DNS.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "True/False",
+      "question": "Спутниковый интернет (Satellite) обычно имеет меньшую задержку, чем оптоволокно.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "Спутниковый сигнал (особенно с геостационарной орбиты) имеет огромную задержку (сотни мс) из-за расстояния.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "question": "Какие модели обслуживания (service models) облачных вычислений существуют?",
+      "optA": "IaaS (Infrastructure as a Service)",
+      "optB": "CaaS (Container as a Service)",
+      "optC": "SaaS (Software as a Service)",
+      "optD": "PaaS (Platform as a Service)",
+      "correct": "A, C, D",
+      "explanation": "CaaS — тоже модель, но в глоссарии Level-1 упомянуты IaaS, PaaS, SaaS.",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "OSS/BSS & Operations",
+      "type": "Multi Choice",
+      "question": "Какие системы относятся к BSS (Business Support Systems)?",
+      "optA": "CRM",
+      "optB": "Billing",
+      "optC": "Product Catalog",
+      "optD": "NMS (Network Monitoring)",
+      "correct": "A, B, C",
+      "explanation": "NMS — это OSS.",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "question": "Какие функциональные блоки входят в архитектуру MANO (Management and Orchestration) по ETSI NFV?",
+      "optA": "NFVO (NFV Orchestrator)",
+      "optB": "SDN Controller",
+      "optC": "VIM (Virtualized Infrastructure Manager)",
+      "optD": "VNFM (VNF Manager)",
+      "correct": "A, C, D",
+      "explanation": "SDN Controller не является частью MANO, хотя может взаимодействовать.",
+      "basePoints": 3,
+      "points": 3,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Network Metrics & KPIs",
+      "type": "Multi Choice",
+      "question": "Какие параметры используются для определения качества обслуживания (QoS) в сетях LTE?",
+      "optA": "QCI (QoS Class Identifier)",
+      "optB": "ARP (Allocation and Retention Priority)",
+      "optC": "GBR (Guaranteed Bit Rate)",
+      "optD": "CQI (Channel Quality Indicator)",
+      "correct": "A, B, C",
+      "explanation": "CQI — показатель качества радиоканала, не QoS в Core.",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": "Какие механизмы используются для управления качеством обслуживания?",
+      "optA": "Увеличение полосы пропускания",
+      "optB": "Формирование трафика (traffic shaping)",
+      "optC": "Полицейский контроль (policing)",
+      "optD": "Приоритезация трафика",
+      "correct": "B, C, D",
+      "explanation": "QoS управляет приоритетами и ограничениями, но не увеличивает физическую полосу.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Transport network",
+      "type": "Single Choice",
+      "question": "Какая технология позволяет передавать множество оптических каналов по одному волокну на разных длинах волн?",
+      "optA": "WDM (DWDM)",
+      "optB": "TDM",
+      "optC": "MPLS",
+      "optD": "OTN",
+      "correct": "A",
+      "explanation": "DWDM — плотное волновое мультиплексирование.",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Высокий",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "question": " Абонент подключил услугу \"Безлимитный TikTok\". Как PCRF узнает, что трафик относится именно к TikTok, чтобы не тарифицировать его? ",
+      "optA": " PCRF смотрит на IP-адрес назначения ",
+      "optB": " TikTok отправляет специальные сигналы в сеть ",
+      "optC": " PCRF верит телефону на слово ",
+      "optD": " PCRF анализирует содержимое пакетов (DPI - Deep Packet Inspection) и маркирует трафик ",
+      "correct": "D",
+      "explanation": " PCRF (или PCEF/PGW) использует DPI для распознавания приложений по сигнатурам трафика.",
+      "basePoints": 2,
+      "points": 2.4,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "question": " Телефон абонента всегда передаёт сигнал на той же частоте, на которой принимает от базовой станции. ",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": " B ",
+      "explanation": " В FDD-диапазонах (Frequency Division Duplex) приём и передача идут на разных частотах. В TDD-диапазонах — на одной, но в разное время.",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "question": "Какие утверждения о DWDM верны?",
+      "optA": "Использует разные длины волн в одном волокне",
+      "optB": "Позволяет передавать до сотен каналов",
+      "optC": "Является технологией коммутации",
+      "optD": "Требует оптических усилителей",
+      "correct": "A, B, D",
+      "explanation": "DWDM – технология уплотнения, не коммутации.",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "True/False",
+      "question": "DNS (Domain Name System) преобразует IP-адреса в MAC-адреса.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "DNS преобразует доменные имена (URL) в IP-адреса. IP в MAC преобразует протокол ARP.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "question": "В режиме TDD (Time Division Duplex) прием и передача идут на одной частоте, но в разное время.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Да, TDD разделяет Uplink и Downlink по времени, в отличие от FDD (по частоте).",
+      "basePoints": 3,
+      "points": 3,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "question": " Какие факторы ограничивают максимальную скорость xDSL-соединения? ",
+      "optA": " Длина медной линии до абонента ",
+      "optB": " Качество скрутки пар и наличие помех ",
+      "optC": " Тип используемого протокола маршрутизации ",
+      "optD": " Диаметр жил кабеля ",
+      "correct": "A, B, D",
+      "explanation": " Физические параметры медной линии критичны для xDSL. Протоколы маршрутизации работают на L3 и не влияют на физическую скорость линии. ",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Network domains overview",
+      "type": "Multi Choice",
+      "question": " Какие преимущества дает размещение вычислительных ресурсов на периферии сети (Edge)? ",
+      "optA": " Снижение задержки (Latency) для пользователя ",
+      "optB": " Разгрузка магистральных каналов транспорта ",
+      "optC": " Повышение отказоустойчивости за счет распределения ",
+      "optD": " Централизация всех данных в одном ЦОД ",
+      "correct": " A, B, C ",
+      "explanation": " Edge децентрализует вычисления. Централизация — это противоположный подход (Cloud Core). ",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IMS & Voice Architecture",
+      "type": "Multi Choice",
+      "question": "Какие сообщения SIP относятся к типу Request (Запрос)?",
+      "optA": "INVITE",
+      "optB": "200 OK",
+      "optC": "ACK",
+      "optD": "BYE",
+      "correct": "A, C, D",
+      "explanation": "200 OK — это Response (Ответ), остальные — запросы.",
+      "basePoints": 3,
+      "points": 3,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "True/False",
+      "question": "GPON использует пассивные оптические сплиттеры, которым не требуется электропитание.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Да, сеть распределения в PON полностью пассивна (стекло и призмы), активное оборудование только на концах.",
+      "basePoints": 2,
+      "points": 1.6,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Wireless Network (RAN)",
+      "type": "Single Choice",
+      "question": " Сеть инициирует хэндовер абонента на соседнюю соту, хотя сигнал текущей ещё достаточен. Какая причина наиболее вероятна? ",
+      "optA": " Смена тарифного плана абонента ",
+      "optB": " Обновление программного обеспечения БС ",
+      "optC": " Балансировка нагрузки (Load Balancing) между сотами ",
+      "optD": " Изменение IMEI устройства ",
+      "correct": "C",
+      "explanation": " Load Balancing — одна из причин HO: сеть перераспределяет абонентов между сотами для оптимизации использования ресурсов. ",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "question": " Абонент не может выйти в интернет, хотя индикатор сети показывает 4G. Оказалось, что в настройках устройства указан неверный APN. Почему? ",
+      "optA": " APN определяет, к какому шлюзу (PGW) подключаться и какой IP-адрес получить ",
+      "optB": " APN отвечает за частоту, на которой работает устройство ",
+      "optC": " APN содержит пароль для доступа к сети ",
+      "optD": " APN — это имя точки доступа Wi-Fi ",
+      "correct": " A ",
+      "explanation": " APN указывает, какой шлюз (PGW) и какой контекст (например, интернет или IMS) использовать.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Что измеряет latency?",
+      "optA": "Скорость передачи данных",
+      "optB": "Количество потерянных пакетов",
+      "optC": "Время прохождения сигнала",
+      "optD": "Колебания задержки",
+      "correct": "C",
+      "explanation": "Latency — задержка.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "question": " Какие механизмы защиты используются в транспортной сети для обеспечения доступности? ",
+      "optA": " Резервирование каналов (1+1, 1:1) ",
+      "optB": " Кольцевая топология с автовосстановлением ",
+      "optC": " Отключение резервных каналов для экономии ",
+      "optD": " Дублирование оборудования (N+1) ",
+      "correct": "A, B, D",
+      "explanation": " Резервирование и кольца обеспечивают отказоустойчивость. Отключение резервов снижает доступность. ",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Wireless Network (RAN)",
+      "type": "Multi Choice",
+      "question": "Какие события могут инициировать хэндовер?",
+      "optA": "Ухудшение качества сигнала",
+      "optB": "Перегрузка соты",
+      "optC": "Смена тарифного плана",
+      "optD": "Перемещение абонента",
+      "correct": "A, B, D",
+      "explanation": "Смена тарифа не вызывает хэндовер.",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Какой недостаток присущ коммутации каналов?",
+      "optA": "Неэффективное использование ресурсов при паузах",
+      "optB": "Низкая надёжность",
+      "optC": "Большие задержки",
+      "optD": "Сложность адресации",
+      "correct": "A",
+      "explanation": "Канал занят даже в паузах разговора.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "question": " Какие компоненты сети PON требуют обязательного электропитания для работы? ",
+      "optA": " OLT (Optical Line Terminal) ",
+      "optB": " Оптический сплиттер (Splitter) ",
+      "optC": " ONT (Optical Network Terminal) ",
+      "optD": " Оптическое волокно (Fiber) ",
+      "correct": " A, C ",
+      "explanation": " OLT (на стороне оператора) и ONT (у абонента) — активное оборудование. Сплиттер и волокно — пассивные элементы. ",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Transport network",
+      "type": "True/False",
+      "question": " Радиоканал (Microwave) является предпочтительным решением для транспорта в плотном городе по сравнению с оптикой, если есть прямая видимость. ",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": " B ",
+      "explanation": " Неверно. В плотном городе сложно обеспечить стабильную прямую видимость, оптика надёжнее. MW используют там, где копать дорого/нельзя. ",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Industry & business",
+      "type": "Single Choice",
+      "question": "В чем принципиальное отличие MNO (Mobile Network Operator) от MVNO (Mobile Virtual Network Operator)?",
+      "optA": "MVNO владеет радиочастотным спектром и инфраструктурой, а MNO арендует сеть",
+      "optB": "MVNO работает только в фиксированных сетях, а MNO — только в мобильных",
+      "optC": "MNO не имеет собственных абонентов и продает услуги только через MVNO",
+      "optD": "MNO владеет физической инфраструктурой и спектром, MVNO арендует сеть MNO",
+      "correct": "D",
+      "explanation": "MNO строит/владеет сетью и спектром; MVNO использует инфраструктуру MNO по оптовым договорам и продает под своим брендом.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IMS & Voice Architecture",
+      "type": "Multi Choice",
+      "question": "Какие коды ответов SIP означают ошибку клиента (Client Error)?",
+      "optA": "404 Not Found",
+      "optB": "486 Busy Here",
+      "optC": "500 Server Error",
+      "optD": "180 Ringing",
+      "correct": "A, B",
+      "explanation": "Коды 4xx — ошибки клиента. 5xx — ошибки сервера. 1xx — информационные.",
+      "basePoints": 3,
+      "points": 3,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "Multi Choice",
+      "question": "Какие понятия связаны с роумингом?",
+      "optA": "APN (точка доступа)",
+      "optB": "IMSI (международный идентификатор)",
+      "optC": "HLR/HSS (домашний регистр)",
+      "optD": "MSISDN (номер абонента)",
+      "correct": "B, C, D",
+      "explanation": "APN используется для подключения к сети, но не специфичен для роуминга.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": "Какие устройства работают преимущественно на Сетевом уровне (L3)?",
+      "optA": "Маршрутизатор (Router)",
+      "optB": "Коммутатор L3 (Layer 3 Switch)",
+      "optC": "Обычный Коммутатор (L2 Switch)",
+      "optD": "Хаб (Hub)",
+      "correct": "A, B",
+      "explanation": "Router и L3 Switch принимают решения по IP. L2 Switch — по MAC. Hub — L1.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": "Какие типы записей DNS существуют?",
+      "optA": "A (IPv4 адрес)",
+      "optB": "AAAA (IPv6 адрес)",
+      "optC": "MX (почтовый сервер)",
+      "optD": "CNAME (псевдоним)",
+      "correct": "A, B, C, D",
+      "explanation": "Стандартные записи DNS.",
+      "basePoints": 3,
+      "points": 2.4,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "Multi Choice",
+      "question": "Какие функции выполняет Биллинг (Billing System)?",
+      "optA": "Маршрутизация пакетов",
+      "optB": "Выставление счетов (Invoicing)",
+      "optC": "Управление балансом абонента",
+      "optD": "Тарификация вызовов/сессий",
+      "correct": "B, C, D",
+      "explanation": "Маршрутизация — функция сети, не биллинга.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Multi Choice",
+      "question": "Какие сервисы чувствительны к Jitter (дрожанию)?",
+      "optA": "VoIP (Голос)",
+      "optB": "Video Conferencing",
+      "optC": "Email",
+      "optD": "File Download",
+      "correct": "A, B",
+      "explanation": "Для почты и файлов джиттер не критичен, важна целостность.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Mobile Core Network",
+      "type": "True/False",
+      "question": "EPC (Evolved Packet Core) — это ядро сети 3G (UMTS).",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "EPC — это пакетное ядро сети 4G (LTE). В 3G ядро называлось иначе (PS Core / GGSN+SGSN).",
+      "basePoints": 2,
+      "points": 1.6,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "IMS & Voice Architecture",
+      "type": "True/False",
+      "question": "IMS (IP Multimedia Subsystem) необходима только для передачи данных, но не для голоса.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "IMS как раз создана для управления мультимедийными сессиями, в первую очередь для VoLTE (голоса) и видеозвонков.",
+      "basePoints": 2,
+      "points": 1.6,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "OSS/BSS & Operations",
+      "type": "True/False",
+      "question": "KPI (Key Performance Indicator) — это субъективная оценка пользователем качества услуги.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "Субъективная оценка — это QoE. KPI — это объективные измеримые технические показатели.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Какой тип DNS-записи соответствует IPv6-адресу?",
+      "optA": "AAAA",
+      "optB": "A",
+      "optC": "MX",
+      "optD": "CNAME",
+      "correct": "A",
+      "explanation": "AAAA — для IPv6.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Broadcast (широковещательная рассылка) означает, что пакет/кадр…",
+      "optA": "Передается одному конкретному получателю с уникальным IP-адресом",
+      "optB": "Передается группе подписчиков через специальный multicast-адрес",
+      "optC": "Передается всем устройствам в пределах локального широковещательного домена",
+      "optD": "Передается только через зашифрованный VPN-туннель для защиты данных",
+      "correct": "C",
+      "explanation": "Broadcast — рассылка всем устройствам в пределах broadcast domain (ограничивается маршрутизатором L3).",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Transport network",
+      "type": "True/False",
+      "question": " Технология DWDM позволяет увеличить пропускную способность одного оптического волокна, передавая несколько сигналов на разных длинах волн, но требует установки оптических усилителей на длинных пролётах. ",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": " A ",
+      "explanation": " Это верно: DWDM уплотняет каналы, усилители (EDFA) компенсируют затухание.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Basic Foundation",
+      "type": "True/False",
+      "question": "Шлюз (Gateway) может выполнять преобразование протоколов между разными сетями.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Верно, шлюз работает на разных уровнях.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Высокий",
+      "topic": "Mobile Core Network",
+      "type": "True/False",
+      "question": " PCRF (Policy and Charging Rules Function) может динамически изменять QoS для абонента в реальном времени, например, повысить приоритет, если абонент подключил опцию «Высокая скорость» в личном кабинете. ",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": " A ",
+      "explanation": " Это одна из ключевых функций PCRF: управление политиками в реальном времени.",
+      "basePoints": 2,
+      "points": 2.4,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "question": " Одной из главных проблем массового развертывания Small cells является организация их обратного транспорта (backhaul), так как для каждой такой соты требуется отдельный широкополосный канал. ",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": " A ",
+      "explanation": " Обеспечить оптику или радиорелейку к каждой маленькой соте — очень сложная и дорогая задача.",
+      "basePoints": 1,
+      "points": 1.2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "",
+      "difficulty": "Средний",
+      "topic": "Security & Compliance",
+      "type": "Multi Choice",
+      "question": "Что такое Zero Trust Security?",
+      "optA": "Концепция «Никому не доверяй, всегда проверяй»",
+      "optB": "Отсутствие паролей",
+      "optC": "Аутентификация каждого запроса",
+      "optD": "Микросегментация сети",
+      "correct": "A, C, D",
+      "explanation": "Пароли (или ключи) все равно нужны для проверки.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Network domains overview",
+      "type": "Single Choice",
+      "question": "PoP (Point of Presence) в телеком-сети — это…",
+      "optA": "Протокол маршрутизации для динамического обмена информацией о сетях",
+      "optB": "Физическая точка/площадка размещения оборудования оператора для подключения и стыковки",
+      "optC": "Метрика качества обслуживания, измеряющая задержку и стабильность канала",
+      "optD": "Тип широковещательной рассылки данных всем устройствам в локальном сегменте",
+      "correct": "B",
+      "explanation": "PoP — место присутствия оператора: узел/площадка, где размещено сетевое оборудование для подключений/стыковок.",
+      "basePoints": 1,
+      "points": 0.8,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Network Architecture Concepts",
+      "type": "Multi Choice",
+      "question": "Какие уровни включает трёхуровневая модель иерархической сети (Three-tier architecture)?",
+      "optA": "Ядро (Core)",
+      "optB": "Распределение (Distribution)",
+      "optC": "Доступ (Access)",
+      "optD": "Агрегация (Aggregation)",
+      "correct": "A, B, C",
+      "explanation": "Трёхуровневая модель: Core, Distribution, Access. Aggregation — синоним Distribution, но в классической модели три уровня.",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "question": "Что такое Docker контейнер?",
+      "optA": "Изолированная среда для запуска приложения",
+      "optB": "Физический сервер",
+      "optC": "Использует общее ядро ОС хоста",
+      "optD": "Легковеснее виртуальной машины",
+      "correct": "A, C, D",
+      "explanation": "Контейнер — это программная абстракция.",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "question": " Какие факторы необходимо учитывать при проектировании backhaul для базовой станции 5G? ",
+      "optA": " Высокая пропускная способность (гигабиты в секунду) ",
+      "optB": " Низкая задержка (latency) ",
+      "optC": " Поддержка синхронизации времени (PTP) ",
+      "optD": " Наличие аналогового телефонного порта ",
+      "correct": " A, B, C ",
+      "explanation": " Backhaul для 5G предъявляет высокие требования к скорости, задержке и синхронизации.",
+      "basePoints": 2,
+      "points": 2,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "",
+      "difficulty": "Средний",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "question": "Что характерно для технологии DOCSIS (кабельный интернет)?",
+      "optA": "Использование коаксиального кабеля",
+      "optB": "Использование витой пары",
+      "optC": "Общая среда передачи для соседей",
+      "optD": "Асимметричная скорость (Download > Upload)",
+      "correct": "A, C, D",
+      "explanation": "DOCSIS — это ТВ-кабель (коаксиал), среда общая (shared medium).",
+      "basePoints": 1,
+      "points": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    }
+  ],
+  "distribution": {
+    "targets": {
+      "Level-0": {
+        "Базовый": {
+          "tf": 2.52,
+          "single": 4.409999999999999,
+          "multi": 5.67
+        },
+        "Средний": {
+          "tf": 4.2,
+          "single": 7.35,
+          "multi": 9.450000000000001
+        },
+        "Сложный": {
+          "tf": 1.6800000000000002,
+          "single": 2.94,
+          "multi": 3.7800000000000002
+        }
+      },
+      "Level-1": {
+        "Базовый": {
+          "tf": 1.05,
+          "single": 1.8375,
+          "multi": 2.3625000000000003
+        },
+        "Средний": {
+          "tf": 1.75,
+          "single": 3.0625,
+          "multi": 3.9375
+        },
+        "Сложный": {
+          "tf": 0.7000000000000001,
+          "single": 1.2249999999999999,
+          "multi": 1.575
+        }
+      },
+      "Level-2": {
+        "Базовый": {
+          "tf": 0.42000000000000004,
+          "single": 0.735,
+          "multi": 0.9450000000000001
+        },
+        "Средний": {
+          "tf": 0.7000000000000001,
+          "single": 1.2249999999999999,
+          "multi": 1.575
+        },
+        "Сложный": {
+          "tf": 0.28,
+          "single": 0.49,
+          "multi": 0.6300000000000001
+        }
+      },
+      "None": {
+        "Базовый": {
+          "tf": 0.21000000000000002,
+          "single": 0.3675,
+          "multi": 0.47250000000000003
+        },
+        "Средний": {
+          "tf": 0.35000000000000003,
+          "single": 0.6124999999999999,
+          "multi": 0.7875
+        },
+        "Сложный": {
+          "tf": 0.14,
+          "single": 0.245,
+          "multi": 0.31500000000000006
+        }
+      }
+    },
+    "finalCounts": {
+      "Level-0": {
+        "Базовый": {
+          "tf": 3,
+          "single": 4,
+          "multi": 6
+        },
+        "Средний": {
+          "tf": 4,
+          "single": 7,
+          "multi": 9
+        },
+        "Сложный": {
+          "tf": 2,
+          "single": 3,
+          "multi": 4
+        }
+      },
+      "Level-1": {
+        "Базовый": {
+          "tf": 1,
+          "single": 2,
+          "multi": 2
+        },
+        "Средний": {
+          "tf": 2,
+          "single": 3,
+          "multi": 4
+        },
+        "Сложный": {
+          "tf": 1,
+          "single": 1,
+          "multi": 2
+        }
+      },
+      "Level-2": {
+        "Базовый": {
+          "tf": 0,
+          "single": 1,
+          "multi": 1
+        },
+        "Средний": {
+          "tf": 1,
+          "single": 1,
+          "multi": 2
+        },
+        "Сложный": {
+          "tf": 0,
+          "single": 1,
+          "multi": 1
+        }
+      },
+      "None": {
+        "Базовый": {
+          "tf": 0,
+          "single": 0,
+          "multi": 0
+        },
+        "Средний": {
+          "tf": 0,
+          "single": 1,
+          "multi": 1
+        },
+        "Сложный": {
+          "tf": 0,
+          "single": 0,
+          "multi": 0
+        }
+      }
+    },
+    "actual": {
+      "byLevel": {
+        "Level-0": 43,
+        "Level-1": 16,
+        "Level-2": 7,
+        "None": 4
+      },
+      "byDifficulty": {
+        "Базовый": 26,
+        "Средний": 31,
+        "Сложный": 3,
+        "Высокий": 10
+      },
+      "byType": {
+        "tf": 16,
+        "single": 17,
+        "multi": 37
+      }
+    }
+  },
+  "stats": {
+    "total": 70,
+    "byType": {
+      "tf": 16,
+      "single": 17,
+      "multi": 37
+    },
+    "byLevel": {
+      "Level-0": 43,
+      "Level-1": 16,
+      "Level-2": 7,
+      "None": 4
+    },
+    "byDifficulty": {
+      "Базовый": 26,
+      "Средний": 31,
+      "Сложный": 3
+    },
+    "totalPoints": 96.99999999999999
+  }
+}
