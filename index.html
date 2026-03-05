@@ -900,28 +900,181 @@
 
         function forceEndTest(reason) {
             if (!isTestActive || testForcedEnd) return;
-            
+
+            // Сохраняем результаты перед завершением
+            generateResultsOnForceEnd(reason);
+
             testForcedEnd = true;
-            
+
             const overlay = document.getElementById('fullscreen-overlay');
             if (overlay) overlay.remove();
-            
+
             if (fullscreenBlockInterval) {
                 clearInterval(fullscreenBlockInterval);
             }
-            
+
             alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
-            
+
             isTestActive = false;
-            
+
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             }
-            
+
             document.getElementById('quizPage').classList.add('hidden');
             document.getElementById('resultsPage').classList.add('hidden');
             document.getElementById('startScreen').classList.remove('hidden');
         }
+
+        // Новая функция для генерации отчёта при принудительном завершении
+        function generateResultsOnForceEnd(reason) {
+            const userName = document.getElementById('displayName').textContent || 'Аноним';
+            const date = new Date().toLocaleString('ru-RU');
+            const showDetailed = testData?.showResults?.showDetailedResults !== false;
+
+            // Пересчитываем баллы
+            let totalScore = 0;
+            let totalPossibleScore = 0;
+            let correctCount = 0;
+
+            currentQuestions.forEach((q, idx) => {
+                const points = q.points || 1;
+                totalPossibleScore += points;
+
+                if (submitted[idx] && userAnswers[idx]) {
+                    const answer = userAnswers[idx];
+                    const correct = q.correct || '';
+                    const isMulti = q.type?.includes('Multi Choice');
+
+                    let isCorrect = false;
+                    if (!isMulti) {
+                        isCorrect = answer === correct;
+                    } else {
+                        const correctArray = correct.split(',').map(s => s.trim()).sort();
+                        const userArray = answer?.sort ? answer.sort() : [];
+                        isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+                    }
+
+                    if (isCorrect) {
+                        totalScore += points;
+                        correctCount++;
+                    }
+                }
+            });
+
+            const percent = totalPossibleScore > 0 ? Math.round((totalScore / totalPossibleScore) * 100) : 0;
+
+            // Генерируем HTML отчёт
+            let html = `<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Результаты теста (принудительное завершение)</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 40px; }
+                    h1 { color: #dc2626; }
+                    .summary { background: #f3f4f6; padding: 20px; border-radius: 10px; margin: 20px 0; }
+                    .question { border: 1px solid #e5e7eb; padding: 15px; margin: 10px 0; border-radius: 8px; }
+                    .correct { background: #f0fdf4; border-left: 5px solid #059669; }
+                    .incorrect { background: #fef2f2; border-left: 5px solid #dc2626; }
+                    .not-answered { background: #fef9c3; border-left: 5px solid #d97706; }
+                    .label { font-weight: bold; color: #4b5563; }
+                    .violation { color: #dc2626; font-weight: bold; }
+                </style>
+            </head>
+            <body>
+                <h1>⚠️ Тест принудительно завершён</h1>
+                <div class="summary">
+                    <p><strong>Причина:</strong> <span class="violation">${reason}</span></p>
+                    <p><strong>Студент:</strong> ${userName}</p>
+                    <p><strong>Тест:</strong> ${testData?.testName || 'Тест'}</p>
+                    <p><strong>Дата завершения:</strong> ${date}</p>
+                    <p><strong>Нарушений зафиксировано:</strong> ${violationCount} из ${maxViolations}</p>
+                    <p><strong>Баллы:</strong> ${totalScore} из ${totalPossibleScore} (${percent}%)</p>
+                    <p><strong>Правильных ответов:</strong> ${correctCount} из ${currentQuestions.length}</p>
+                </div>`;
+
+                        if (showDetailed) {
+                            html += `<h2>Детализация ответов</h2>`;
+
+                            currentQuestions.forEach((q, idx) => {
+                                const answer = userAnswers[idx];
+                                const correct = q.correct || '';
+                                const isMulti = q.type?.includes('Multi Choice');
+                                const points = q.points || 1;
+
+                                let answerText = 'Не отвечен';
+                                let status = 'not-answered';
+                                let statusText = 'Не отвечен';
+                                let pointsText = `0/${points}`;
+
+                                if (submitted[idx] && answer) {
+                                    if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
+                                    else answerText = answer;
+
+                                    if (!isMulti) {
+                                        if (answer === correct) {
+                                            status = 'correct';
+                                            statusText = 'Верно';
+                                            pointsText = `${points}/${points}`;
+                                        } else {
+                                            status = 'incorrect';
+                                            statusText = 'Неверно';
+                                            pointsText = `0/${points}`;
+                                        }
+                                    } else {
+                                        const correctArray = correct.split(',').map(s => s.trim()).sort();
+                                        const userArray = answer?.sort ? answer.sort() : [];
+                                        if (JSON.stringify(userArray) === JSON.stringify(correctArray.sort())) {
+                                            status = 'correct';
+                                            statusText = 'Верно';
+                                            pointsText = `${points}/${points}`;
+                                        } else {
+                                            status = 'incorrect';
+                                            statusText = 'Неверно';
+                                            pointsText = `0/${points}`;
+                                        }
+                                    }
+                                }
+
+                                html += `
+                <div class="question ${status}">
+                    <h3>Вопрос ${idx+1}</h3>
+                    <p><span class="label">Текст:</span> ${q.question}</p>
+                    <p><span class="label">Ваш ответ:</span> ${answerText}</p>
+                    <p><span class="label">Правильный ответ:</span> ${correct}</p>
+                    <p><span class="label">Баллы:</span> ${pointsText}</p>
+                    <p><span class="label">Результат:</span> <strong>${statusText}</strong></p>
+                    ${q.explanation ? `<p><span class="label">Пояснение:</span> ${q.explanation}</p>` : ''}
+                </div>`;
+                            });
+                        }
+
+                        // Добавляем лог нарушений, если они есть
+                        if (securityLogs.length > 0) {
+                            html += `<h2>Лог нарушений</h2><ul>`;
+                            securityLogs.forEach(log => {
+                                html += `<li><strong>${log.timestamp}:</strong> ${log.event} — ${log.details}</li>`;
+                            });
+                            html += `</ul>`;
+                        }
+
+                        html += `
+            </body>
+            </html>`;
+
+            // Создаём и скачиваем файл
+            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+
+            const dateStr = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+            link.download = `принудительное_завершение_${userName}_${dateStr}.html`;
+
+            link.click();
+            URL.revokeObjectURL(link.href);
+        }
+
 
         // ==============================================
         // ЛОГИКА ТЕСТИРОВАНИЯ
