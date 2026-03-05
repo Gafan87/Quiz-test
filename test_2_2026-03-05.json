@@ -1,11 +1,11 @@
 {
   "testName": "Телеком-опрос №2",
   "dateGenerated": "2026-03-03T12:56:33.215Z",
-  "expires": "2026-03-03T15:56:33.214Z",
-  "maxViolations": 1,
+  "expires": "2026-03-05T11:56:33.214Z",
+  "maxViolations": 4,
   "showResults": {
-    "showCorrectnessDuringTest": true,
-    "showExplanationsDuringTest": true,
+    "showCorrectnessDuringTest": false,
+    "showExplanationsDuringTest": false,
     "showDetailedResults": true
   },
   "basePoints": {
