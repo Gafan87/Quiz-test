@@ -150,75 +150,8 @@
             background: #1e40af;
         }
 
-        .btn-danger {
-            background: #dc2626;
-            color: white;
-            border: 2px solid #dc2626;
-        }
-
-        .btn-danger:hover {
-            background: #b91c1c;
-            border-color: #b91c1c;
-        }
-
         .hidden {
             display: none;
-        }
-
-        /* Модальное окно для пароля */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 20000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .modal-content h3 {
-            color: #dc2626;
-            margin-bottom: 15px;
-        }
-
-        .modal-content input {
-            width: 100%;
-            padding: 12px;
-            margin: 20px 0;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1.1em;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .modal-content {
-                background: #1e293b;
-                color: #e2e8f0;
-            }
-            
-            .modal-content input {
-                background: #2d3748;
-                color: #e2e8f0;
-                border-color: #475569;
-            }
         }
 
         /* Страница опроса */
@@ -534,7 +467,7 @@
             <!-- Экран загрузки -->
             <div id="loadingScreen" class="loading-screen">
                 <div class="loading-spinner"></div>
-                <p>Загрузка теста...</p>
+                <p>Загрузка теста с GitHub...</p>
                 <p id="loadingUrl" style="font-size: 0.9em; color: #64748b; margin-top: 20px;"></p>
             </div>
 
@@ -601,9 +534,6 @@
         // ==============================================
         // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
         // ==============================================
-        // ПАРОЛЬ ДЛЯ ПРОДОЛЖЕНИЯ ТЕСТА ПРИ НАРУШЕНИИ
-        const RESUME_PASSWORD = "ZZAAQQ"; // Здесь можно указать свой пароль
-        
         let testData = null;
         let questions = [];
         let currentQuestions = [];
@@ -620,10 +550,9 @@
         let testForcedEnd = false;
         let violationCount = 0;
         let fullscreenBlockInterval = null;
-        let pendingViolationReason = null;
 
         // ==============================================
-        // ЗАГРУЗКА ТЕСТА
+        // ЗАГРУЗКА ТЕСТА С GITHUB
         // ==============================================
 
         function getTestFileName() {
@@ -768,353 +697,164 @@
             document.getElementById('quizTestName').textContent = `📋 ${testData.testName || 'Тест'}`;
         }
 
-        // ==============================================
-        // ЗАЩИТА
-        // ==============================================
+// ==============================================
+// ЗАЩИТА
+// ==============================================
 
-        function logSecurityEvent(eventType, details = '') {
-            securityLogs.push({
-                timestamp: new Date().toISOString(),
-                event: eventType,
-                details: details
-            });
-            if (securityLogs.length > 100) securityLogs.shift();
-        }
+function logSecurityEvent(eventType, details = '') {
+    securityLogs.push({
+        timestamp: new Date().toISOString(),
+        event: eventType,
+        details: details
+    });
+    if (securityLogs.length > 100) securityLogs.shift();
+}
 
-        function showPasswordModal(reason) {
-            return new Promise((resolve) => {
-                // Создаем модальное окно
-                const modal = document.createElement('div');
-                modal.className = 'modal-overlay';
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <h3>⚠️ Нарушение правил!</h3>
-                        <p>${reason}</p>
-                        <p>Нарушение #${violationCount} из ${maxViolations}</p>
-                        <p>Введите пароль для продолжения теста:</p>
-                        <input type="password" id="resumePassword" placeholder="Пароль">
-                        <div class="modal-buttons">
-                            <button class="btn btn-success" onclick="submitPassword(true)">Продолжить</button>
-                            <button class="btn btn-danger" onclick="submitPassword(false)">Завершить тест</button>
-                        </div>
-                    </div>
-                `;
-                
-                // Добавляем функции обработки
-                window.submitPassword = (continueTest) => {
-                    if (continueTest) {
-                        const password = document.getElementById('resumePassword').value;
-                        if (password === RESUME_PASSWORD) {
-                            document.body.removeChild(modal);
-                            delete window.submitPassword;
-                            resolve(true);
-                        } else {
-                            alert('❌ Неверный пароль!');
-                        }
-                    } else {
-                        document.body.removeChild(modal);
-                        delete window.submitPassword;
-                        resolve(false);
-                    }
-                };
-                
-                document.body.appendChild(modal);
-            });
-        }
-
-        async function checkViolations(reason) {
-            if (!isTestActive || testForcedEnd) return false;
-            
-            violationCount++;
-            logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
-            
-            if (violationCount > maxViolations) {
-                await forceEndTestWithPrompt(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-                return true;
+function showPasswordModal(reason) {
+    return new Promise((resolve) => {
+        // Создаем модальное окно
+        const modal = document.createElement('div');
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content">
+                <h3>⚠️ Превышение лимита нарушений!</h3>
+                <p>${reason}</p>
+                <p>Количество нарушений: ${violationCount} из ${maxViolations}</p>
+                <p>Введите пароль для продолжения теста:</p>
+                <input type="password" id="resumePassword" placeholder="Пароль">
+                <div class="modal-buttons">
+                    <button class="btn btn-success" onclick="submitPassword(true)">Продолжить</button>
+                    <button class="btn btn-danger" onclick="submitPassword(false)">Завершить тест</button>
+                </div>
+            </div>
+        `;
+        
+        // Добавляем функции обработки
+        window.submitPassword = (continueTest) => {
+            if (continueTest) {
+                const password = document.getElementById('resumePassword').value;
+                if (password === RESUME_PASSWORD) {
+                    document.body.removeChild(modal);
+                    delete window.submitPassword;
+                    resolve(true);
+                } else {
+                    alert('❌ Неверный пароль!');
+                }
             } else {
-                // Показываем предупреждение с возможностью ввода пароля
-                const shouldContinue = await showPasswordModal(reason);
-                if (!shouldContinue) {
-                    await forceEndTestWithPrompt('Отказ от продолжения теста');
-                    return true;
-                }
+                document.body.removeChild(modal);
+                delete window.submitPassword;
+                resolve(false);
             }
+        };
+        
+        document.body.appendChild(modal);
+    });
+}
+
+async function checkViolations(reason) {
+    if (!isTestActive || testForcedEnd) return false;
+    
+    violationCount++;
+    logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
+    
+    // Только предупреждаем о нарушении, но не запрашиваем пароль
+    if (violationCount <= maxViolations) {
+        alert(`⚠️ НАРУШЕНИЕ #${violationCount} ИЗ ${maxViolations}!\n\n${reason}\n\nПри следующем нарушении тест будет завершен.`);
+        return false;
+    } 
+    // При превышении лимита запрашиваем пароль
+    else {
+        const shouldContinue = await showPasswordModal(reason);
+        if (shouldContinue) {
+            // Если пароль введен верно - сбрасываем счетчик нарушений и продолжаем
+            violationCount = 0;
+            logSecurityEvent('password_accepted', 'Тест продолжен по паролю');
             return false;
+        } else {
+            // Если отказались вводить пароль - завершаем тест
+            await forceEndTestWithPrompt('Отказ от продолжения теста после превышения лимита нарушений');
+            return true;
         }
+    }
+}
 
-        async function forceEndTestWithPrompt(reason) {
-            if (!isTestActive || testForcedEnd) return;
-            
-            testForcedEnd = true;
-            
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (overlay) overlay.remove();
-            
-            if (fullscreenBlockInterval) {
-                clearInterval(fullscreenBlockInterval);
-            }
-            
-            // Сначала деактивируем защиту
-            deactivateLockdown();
-            
-            // Показываем сообщение о завершении
-            alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
-            
-            // Переходим к показу результатов
-            showForcedResults();
+async function forceEndTestWithPrompt(reason) {
+    if (!isTestActive || testForcedEnd) return;
+    
+    testForcedEnd = true;
+    
+    const overlay = document.getElementById('fullscreen-overlay');
+    if (overlay) overlay.remove();
+    
+    if (fullscreenBlockInterval) {
+        clearInterval(fullscreenBlockInterval);
+    }
+    
+    // Сначала деактивируем защиту
+    deactivateLockdown();
+    
+    // Показываем сообщение о завершении
+    alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
+    
+    // Переходим к показу результатов
+    showForcedResults();
+}
+
+// Обновляем обработчики событий
+document.addEventListener('visibilitychange', function() {
+    if (!isTestActive || testForcedEnd) return;
+    
+    if (document.hidden) {
+        logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
+        checkViolations('Переключение на другую вкладку');
+    }
+});
+
+document.addEventListener('fullscreenchange', function() {
+    if (!isTestActive || testForcedEnd) return;
+    
+    if (!document.fullscreenElement && fullscreenEnabled) {
+        logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
+        checkViolations('Выход из полноэкранного режима');
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (!isTestActive || testForcedEnd) return;
+    
+    const blockedKeys = [
+        { cond: e.altKey && e.key === 'Tab', name: 'Alt+Tab' },
+        { cond: e.key === 'Meta' || e.key === 'OS', name: 'Windows key' },
+        { cond: e.ctrlKey && e.key === 'w', name: 'Ctrl+W' },
+        { cond: (e.ctrlKey && e.key === 'r') || e.key === 'F5', name: 'Refresh' },
+        { cond: e.ctrlKey && e.shiftKey && e.key === 'I', name: 'DevTools' },
+        { cond: e.key === 'F12', name: 'F12' }
+    ];
+    
+    for (let item of blockedKeys) {
+        if (item.cond) {
+            e.preventDefault();
+            checkViolations(`Использование ${item.name}`);
+            return;
         }
+    }
+});
 
-        function showForcedResults() {
-            // Вычисляем текущие результаты
-            calculateCurrentResults();
-            
-            // Скрываем страницу опроса
-            document.getElementById('quizPage').classList.add('hidden');
-            
-            // Показываем страницу результатов
-            document.getElementById('resultsPage').classList.remove('hidden');
+document.addEventListener('contextmenu', function(e) {
+    if (isTestActive && !testForcedEnd) {
+        e.preventDefault();
+        checkViolations('Контекстное меню');
+    }
+});
+
+['copy', 'paste', 'cut'].forEach(event => {
+    document.addEventListener(event, function(e) {
+        if (isTestActive && !testForcedEnd) {
+            e.preventDefault();
+            checkViolations(event);
         }
-
-        function calculateCurrentResults() {
-            score = 0;
-            let totalPossibleScore = 0;
-            let questionScores = [];
-
-            currentQuestions.forEach((q, idx) => {
-                const questionPoints = q.points || 1;
-                totalPossibleScore += questionPoints;
-
-                if (!submitted[idx]) {
-                    questionScores[idx] = { points: 0, maxPoints: questionPoints };
-                    return;
-                }
-
-                const answer = userAnswers[idx];
-                const correct = q.correct || '';
-                const isMulti = q.type?.includes('Multi Choice');
-
-                let isCorrect = false;
-                if (!isMulti) {
-                    isCorrect = answer === correct;
-                } else {
-                    const correctArray = correct.split(',').map(s => s.trim()).sort();
-                    const userArray = answer?.sort ? answer.sort() : [];
-                    isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
-                }
-
-                if (isCorrect) {
-                    score += questionPoints;
-                    questionScores[idx] = { points: questionPoints, maxPoints: questionPoints };
-                } else {
-                    questionScores[idx] = { points: 0, maxPoints: questionPoints };
-                }
-            });
-
-            const percent = Math.round((score / totalPossibleScore) * 100);
-            const showDetailed = testData?.showResults?.showDetailedResults !== false;
-            
-            // Формируем HTML для результатов
-            let answersHtml = '';
-            if (showDetailed) {
-                currentQuestions.forEach((q, idx) => {
-                    const answer = userAnswers[idx];
-                    const correct = q.correct || '';
-                    const isMulti = q.type?.includes('Multi Choice');
-                    const questionScore = questionScores[idx];
-
-                    let answerText = 'Не отвечен';
-                    if (answer) {
-                        if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
-                        else answerText = answer;
-                    }
-
-                    let resultClass = '', resultText = '', scoreText = '';
-
-                    if (!submitted[idx]) {
-                        resultClass = 'result-not-submitted';
-                        resultText = '⏳ Не отвечен';
-                        scoreText = `0/${questionScore.maxPoints}`;
-                    } else {
-                        const isCorrect = questionScore.points > 0;
-                        resultClass = isCorrect ? 'result-correct' : 'result-incorrect';
-                        resultText = isCorrect ? '✅ Верно' : '❌ Неверно';
-                        scoreText = `${questionScore.points}/${questionScore.maxPoints}`;
-                    }
-
-                    answersHtml += `
-                        <div class="answer-detail-card">
-                            <div class="answer-detail-question">${idx+1}. ${q.question}</div>
-                            <div class="answer-detail-row">
-                                <span class="answer-label">Ваш ответ:</span>
-                                <span class="answer-value">${answerText}</span>
-                            </div>
-                            <div class="answer-detail-row">
-                                <span class="answer-label">Правильный ответ:</span>
-                                <span class="answer-value">${correct}</span>
-                            </div>
-                            <div class="answer-detail-row">
-                                <span class="answer-label">Баллы:</span>
-                                <span class="answer-value">${scoreText}</span>
-                            </div>
-                            <div class="answer-detail-result ${resultClass}">${resultText}</div>
-                        </div>
-                    `;
-                });
-            }
-
-            document.getElementById('resultsContent').innerHTML = `
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <span style="background: #dc2626; color: white; padding: 10px 20px; border-radius: 30px; font-weight: 600;">
-                        ⚠️ Тест прерван досрочно
-                    </span>
-                </div>
-                <div class="results-summary">
-                    <div class="result-card">
-                        <div class="value">${score}</div>
-                        <div class="label">Набрано баллов</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="value">${totalPossibleScore}</div>
-                        <div class="label">Максимум баллов</div>
-                    </div>
-                    <div class="result-card">
-                        <div class="value">${percent}%</div>
-                        <div class="label">Успешность</div>
-                    </div>
-                </div>
-                <div style="text-align: center; margin: 20px 0;">
-                    <strong>Студент:</strong> ${document.getElementById('displayName').textContent}<br>
-                    <strong>Правильных ответов:</strong> ${currentQuestions.filter((_, idx) => questionScores[idx]?.points > 0).length} из ${currentQuestions.length}
-                </div>
-                
-                ${showDetailed ? `<h3>📋 Детализация ответов</h3>${answersHtml}` : ''}
-                
-                <!-- Кнопки экспорта результатов -->
-                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
-                    <button class="btn btn-primary" onclick="exportResultsToTXT()" style="margin-right: 10px;">
-                        📥 Сохранить результаты (TXT)
-                    </button>
-                    <button class="btn btn-success" onclick="exportResultsToHTML()">
-                        📥 Сохранить результаты (HTML)
-                    </button>
-                </div>
-            `;
-        }
-
-        document.addEventListener('visibilitychange', function() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (document.hidden) {
-                logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
-                checkViolations('Переключение на другую вкладку');
-            }
-        });
-
-        document.addEventListener('fullscreenchange', function() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (!document.fullscreenElement && fullscreenEnabled) {
-                logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
-                checkViolations('Выход из полноэкранного режима');
-            }
-        });
-
-        function checkFullscreenLoop() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (fullscreenBlockInterval) {
-                clearInterval(fullscreenBlockInterval);
-            }
-            
-            alert('⚠️ ВЫ ВЫШЛИ ИЗ ПОЛНОЭКРАННОГО РЕЖИМА!\n\nТест приостановлен до возврата.\nНажмите F11 для продолжения.');
-            
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (!overlay) {
-                const div = document.createElement('div');
-                div.id = 'fullscreen-overlay';
-                div.innerHTML = `
-                    <div style="margin-bottom: 30px;">⚠️ ПОЛНОЭКРАННЫЙ РЕЖИМ ОТКЛЮЧЁН</div>
-                    <div style="margin-bottom: 20px;">Тест продолжается только в полноэкранном режиме</div>
-                    <div style="margin-bottom: 30px;">Нажмите F11 для возврата</div>
-                    <button onclick="retryFullscreen()" style="
-                        padding: 15px 40px;
-                        font-size: 20px;
-                        background: #2563eb;
-                        color: white;
-                        border: none;
-                        border-radius: 10px;
-                        cursor: pointer;
-                    ">🔄 ВЕРНУТЬСЯ В ПОЛНОЭКРАННЫЙ РЕЖИМ</button>
-                `;
-                document.body.appendChild(div);
-            }
-            
-            fullscreenBlockInterval = setInterval(() => {
-                if (!isTestActive || testForcedEnd) {
-                    clearInterval(fullscreenBlockInterval);
-                    const overlay = document.getElementById('fullscreen-overlay');
-                    if (overlay) overlay.remove();
-                    return;
-                }
-                
-                if (document.fullscreenElement) {
-                    const overlay = document.getElementById('fullscreen-overlay');
-                    if (overlay) overlay.remove();
-                    
-                    clearInterval(fullscreenBlockInterval);
-                    
-                    logSecurityEvent('fullscreen_restored', 'Режим восстановлен');
-                    checkViolations('Восстановление полноэкранного режима');
-                }
-            }, 500);
-        }
-
-        function retryFullscreen() {
-            const elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen().then(() => {
-                    const overlay = document.getElementById('fullscreen-overlay');
-                    if (overlay) overlay.remove();
-                });
-            }
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (!isTestActive || testForcedEnd) return;
-            
-            const blockedKeys = [
-                { cond: e.altKey && e.key === 'Tab', name: 'Alt+Tab' },
-                { cond: e.key === 'Meta' || e.key === 'OS', name: 'Windows key' },
-                { cond: e.ctrlKey && e.key === 'w', name: 'Ctrl+W' },
-                { cond: (e.ctrlKey && e.key === 'r') || e.key === 'F5', name: 'Refresh' },
-                { cond: e.ctrlKey && e.shiftKey && e.key === 'I', name: 'DevTools' },
-                { cond: e.key === 'F12', name: 'F12' }
-            ];
-            
-            for (let item of blockedKeys) {
-                if (item.cond) {
-                    e.preventDefault();
-                    checkViolations(`Использование ${item.name}`);
-                    return;
-                }
-            }
-        });
-
-        document.addEventListener('contextmenu', function(e) {
-            if (isTestActive && !testForcedEnd) {
-                e.preventDefault();
-                checkViolations('Контекстное меню');
-            }
-        });
-
-        ['copy', 'paste', 'cut'].forEach(event => {
-            document.addEventListener(event, function(e) {
-                if (isTestActive && !testForcedEnd) {
-                    e.preventDefault();
-                    checkViolations(event);
-                }
-            });
-        });
+    });
+});
 
         function activateLockdown() {
             return new Promise((resolve) => {
@@ -1161,6 +901,31 @@
             if (fullscreenEnabled && document.exitFullscreen) {
                 document.exitFullscreen();
             }
+        }
+
+        function forceEndTest(reason) {
+            if (!isTestActive || testForcedEnd) return;
+            
+            testForcedEnd = true;
+            
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (overlay) overlay.remove();
+            
+            if (fullscreenBlockInterval) {
+                clearInterval(fullscreenBlockInterval);
+            }
+            
+            alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
+            
+            isTestActive = false;
+            
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            
+            document.getElementById('quizPage').classList.add('hidden');
+            document.getElementById('resultsPage').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
         }
 
         // ==============================================
@@ -1540,9 +1305,6 @@
             report += `Студент: ${userName}\n`;
             report += `Тест: ${testData?.testName || 'Тест'}\n`;
             report += `Дата: ${date}\n`;
-            if (testForcedEnd) {
-                report += `Статус: ПРЕРВАН ДОСРОЧНО\n`;
-            }
             report += `====================================\n\n`;
             report += `РЕЗУЛЬТАТЫ:\n`;
             report += `Баллов: ${totalScore} из ${totalPossibleScore}\n`;
@@ -1644,7 +1406,6 @@
         body { font-family: Arial, sans-serif; margin: 40px; }
         h1 { color: #2563eb; }
         .summary { background: #f3f4f6; padding: 20px; border-radius: 10px; margin: 20px 0; }
-        .interrupted { background: #fee2e2; color: #991b1b; padding: 10px; border-radius: 5px; margin: 10px 0; }
         .question { border: 1px solid #e5e7eb; padding: 15px; margin: 10px 0; border-radius: 8px; }
         .correct { background: #f0fdf4; border-left: 5px solid #059669; }
         .incorrect { background: #fef2f2; border-left: 5px solid #dc2626; }
@@ -1658,7 +1419,6 @@
         <p><strong>Студент:</strong> ${userName}</p>
         <p><strong>Тест:</strong> ${testData?.testName || 'Тест'}</p>
         <p><strong>Дата:</strong> ${date}</p>
-        ${testForcedEnd ? '<div class="interrupted">⚠️ Тест был прерван досрочно</div>' : ''}
         <p><strong>Баллы:</strong> ${totalScore} из ${totalPossibleScore} (${percent}%)</p>
         <p><strong>Правильных ответов:</strong> ${correctCount} из ${currentQuestions.length}</p>
     </div>`;
@@ -1739,6 +1499,85 @@
         window.onload = function() {
             loadTestFromGitHub();
         };
+            // Функция для получения параметра из URL
+    function getUrlParameter(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    // Функция для загрузки теста
+    async function loadQuiz() {
+        const loadingScreen = document.getElementById('loadingScreen');
+        const errorScreen = document.getElementById('errorScreen');
+        const startScreen = document.getElementById('startScreen');
+        
+        try {
+            // Получаем название теста из URL параметра 'test'
+            let testFile = getUrlParameter('test');
+            
+            // Если параметр не указан, используем файл по умолчанию
+            if (!testFile) {
+                testFile = 'test_телеком_опрос__2_2026-03-03.json';
+            }
+            
+            // Формируем полный путь к файлу
+            // Для GitHub Pages файлы должны быть в той же директории или поддиректориях
+            const quizUrl = `./${testFile}`;
+            
+            // Показываем URL загрузки для отладки
+            document.getElementById('loadingUrl').textContent = `Загрузка: ${quizUrl}`;
+            
+            // Загружаем JSON файл
+            const response = await fetch(quizUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Файл ${testFile} не найден (HTTP ${response.status})`);
+            }
+            
+            const quizData = await response.json();
+            
+            // Сохраняем данные теста в глобальную переменную или localStorage
+            window.quizData = quizData;
+            
+            // Отображаем информацию о тесте на стартовом экране
+            displayTestInfo(quizData);
+            
+            // Скрываем загрузку, показываем стартовый экран
+            loadingScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            
+            // Обновляем заголовки
+            document.getElementById('mainTitle').textContent = quizData.title || '📋 Тестирование';
+            document.getElementById('headerSubtitle').textContent = quizData.description || '';
+            
+        } catch (error) {
+            // Показываем ошибку
+            loadingScreen.classList.add('hidden');
+            errorScreen.classList.remove('hidden');
+            document.getElementById('errorMessage').innerHTML = `
+                <strong>Ошибка загрузки теста:</strong><br>
+                ${error.message}<br><br>
+                <small>Проверьте, что файл существует в репозитории и имя указано правильно.</small>
+            `;
+        }
+    }
+
+    // Функция для отображения информации о тесте
+    function displayTestInfo(quizData) {
+        const testInfo = document.getElementById('testInfo');
+        // Здесь добавьте код для отображения информации о тесте
+        // в зависимости от структуры вашего JSON
+        testInfo.innerHTML = `
+            <div class="test-info-item">📊 Вопросов: ${quizData.questions?.length || 0}</div>
+            <div class="test-info-item">⏱️ Время: ${quizData.timeLimit || 'Не ограничено'}</div>
+            ${quizData.topics ? quizData.topics.map(topic => 
+                `<span class="settings-badge">📌 ${topic}</span>`
+            ).join('') : ''}
+        `;
+    }
+
+    // Загружаем тест при открытии страницы
+    document.addEventListener('DOMContentLoaded', loadQuiz);
     </script>
 </body>
 </html>
