@@ -4,8 +4,8 @@
   "expires": "2026-03-09T10:44:10.924Z",
   "maxViolations": 1,
   "showResults": {
-    "showCorrectnessDuringTest": true,
-    "showExplanationsDuringTest": true,
+    "showCorrectnessDuringTest": false,
+    "showExplanationsDuringTest": false,
     "showDetailedResults": true
   },
   "basePoints": {
