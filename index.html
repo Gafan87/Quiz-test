@@ -697,164 +697,159 @@
             document.getElementById('quizTestName').textContent = `📋 ${testData.testName || 'Тест'}`;
         }
 
-// ==============================================
-// ЗАЩИТА
-// ==============================================
+        // ==============================================
+        // ЗАЩИТА
+        // ==============================================
 
-function logSecurityEvent(eventType, details = '') {
-    securityLogs.push({
-        timestamp: new Date().toISOString(),
-        event: eventType,
-        details: details
-    });
-    if (securityLogs.length > 100) securityLogs.shift();
-}
+        function logSecurityEvent(eventType, details = '') {
+            securityLogs.push({
+                timestamp: new Date().toISOString(),
+                event: eventType,
+                details: details
+            });
+            if (securityLogs.length > 100) securityLogs.shift();
+        }
 
-function showPasswordModal(reason) {
-    return new Promise((resolve) => {
-        // Создаем модальное окно
-        const modal = document.createElement('div');
-        modal.className = 'modal-overlay';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <h3>⚠️ Превышение лимита нарушений!</h3>
-                <p>${reason}</p>
-                <p>Количество нарушений: ${violationCount} из ${maxViolations}</p>
-                <p>Введите пароль для продолжения теста:</p>
-                <input type="password" id="resumePassword" placeholder="Пароль">
-                <div class="modal-buttons">
-                    <button class="btn btn-success" onclick="submitPassword(true)">Продолжить</button>
-                    <button class="btn btn-danger" onclick="submitPassword(false)">Завершить тест</button>
-                </div>
-            </div>
-        `;
-        
-        // Добавляем функции обработки
-        window.submitPassword = (continueTest) => {
-            if (continueTest) {
-                const password = document.getElementById('resumePassword').value;
-                if (password === RESUME_PASSWORD) {
-                    document.body.removeChild(modal);
-                    delete window.submitPassword;
-                    resolve(true);
-                } else {
-                    alert('❌ Неверный пароль!');
-                }
-            } else {
-                document.body.removeChild(modal);
-                delete window.submitPassword;
-                resolve(false);
+        function checkViolations(reason) {
+            if (!isTestActive || testForcedEnd) return false;
+            
+            violationCount++;
+            logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
+            
+            if (violationCount > maxViolations) {
+                forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+                return true;
             }
-        };
-        
-        document.body.appendChild(modal);
-    });
-}
-
-async function checkViolations(reason) {
-    if (!isTestActive || testForcedEnd) return false;
-    
-    violationCount++;
-    logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
-    
-    // Только предупреждаем о нарушении, но не запрашиваем пароль
-    if (violationCount <= maxViolations) {
-        alert(`⚠️ НАРУШЕНИЕ #${violationCount} ИЗ ${maxViolations}!\n\n${reason}\n\nПри следующем нарушении тест будет завершен.`);
-        return false;
-    } 
-    // При превышении лимита запрашиваем пароль
-    else {
-        const shouldContinue = await showPasswordModal(reason);
-        if (shouldContinue) {
-            // Если пароль введен верно - сбрасываем счетчик нарушений и продолжаем
-            violationCount = 0;
-            logSecurityEvent('password_accepted', 'Тест продолжен по паролю');
             return false;
-        } else {
-            // Если отказались вводить пароль - завершаем тест
-            await forceEndTestWithPrompt('Отказ от продолжения теста после превышения лимита нарушений');
-            return true;
         }
-    }
-}
 
-async function forceEndTestWithPrompt(reason) {
-    if (!isTestActive || testForcedEnd) return;
-    
-    testForcedEnd = true;
-    
-    const overlay = document.getElementById('fullscreen-overlay');
-    if (overlay) overlay.remove();
-    
-    if (fullscreenBlockInterval) {
-        clearInterval(fullscreenBlockInterval);
-    }
-    
-    // Сначала деактивируем защиту
-    deactivateLockdown();
-    
-    // Показываем сообщение о завершении
-    alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
-    
-    // Переходим к показу результатов
-    showForcedResults();
-}
+        document.addEventListener('visibilitychange', function() {
+            if (!isTestActive || testForcedEnd) return;
+            
+            if (document.hidden) {
+                logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
+                violationCount++;
+                
+                if (violationCount > maxViolations) {
+                    forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+                } else {
+                    alert(`⚠️ ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ЗАПРЕЩЕНО!\n\nНарушение #${violationCount}`);
+                }
+            }
+        });
 
-// Обновляем обработчики событий
-document.addEventListener('visibilitychange', function() {
-    if (!isTestActive || testForcedEnd) return;
-    
-    if (document.hidden) {
-        logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
-        checkViolations('Переключение на другую вкладку');
-    }
-});
+        document.addEventListener('fullscreenchange', function() {
+            if (!isTestActive || testForcedEnd) return;
+            
+            if (!document.fullscreenElement && fullscreenEnabled) {
+                logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
+                checkFullscreenLoop();
+            }
+        });
 
-document.addEventListener('fullscreenchange', function() {
-    if (!isTestActive || testForcedEnd) return;
-    
-    if (!document.fullscreenElement && fullscreenEnabled) {
-        logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
-        checkViolations('Выход из полноэкранного режима');
-    }
-});
-
-document.addEventListener('keydown', function(e) {
-    if (!isTestActive || testForcedEnd) return;
-    
-    const blockedKeys = [
-        { cond: e.altKey && e.key === 'Tab', name: 'Alt+Tab' },
-        { cond: e.key === 'Meta' || e.key === 'OS', name: 'Windows key' },
-        { cond: e.ctrlKey && e.key === 'w', name: 'Ctrl+W' },
-        { cond: (e.ctrlKey && e.key === 'r') || e.key === 'F5', name: 'Refresh' },
-        { cond: e.ctrlKey && e.shiftKey && e.key === 'I', name: 'DevTools' },
-        { cond: e.key === 'F12', name: 'F12' }
-    ];
-    
-    for (let item of blockedKeys) {
-        if (item.cond) {
-            e.preventDefault();
-            checkViolations(`Использование ${item.name}`);
-            return;
+        function checkFullscreenLoop() {
+            if (!isTestActive || testForcedEnd) return;
+            
+            if (fullscreenBlockInterval) {
+                clearInterval(fullscreenBlockInterval);
+            }
+            
+            alert('⚠️ ВЫ ВЫШЛИ ИЗ ПОЛНОЭКРАННОГО РЕЖИМА!\n\nТест приостановлен до возврата.\nНажмите F11 для продолжения.');
+            
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (!overlay) {
+                const div = document.createElement('div');
+                div.id = 'fullscreen-overlay';
+                div.innerHTML = `
+                    <div style="margin-bottom: 30px;">⚠️ ПОЛНОЭКРАННЫЙ РЕЖИМ ОТКЛЮЧЁН</div>
+                    <div style="margin-bottom: 20px;">Тест продолжается только в полноэкранном режиме</div>
+                    <div style="margin-bottom: 30px;">Нажмите F11 для возврата</div>
+                    <button onclick="retryFullscreen()" style="
+                        padding: 15px 40px;
+                        font-size: 20px;
+                        background: #2563eb;
+                        color: white;
+                        border: none;
+                        border-radius: 10px;
+                        cursor: pointer;
+                    ">🔄 ВЕРНУТЬСЯ В ПОЛНОЭКРАННЫЙ РЕЖИМ</button>
+                `;
+                document.body.appendChild(div);
+            }
+            
+            fullscreenBlockInterval = setInterval(() => {
+                if (!isTestActive || testForcedEnd) {
+                    clearInterval(fullscreenBlockInterval);
+                    const overlay = document.getElementById('fullscreen-overlay');
+                    if (overlay) overlay.remove();
+                    return;
+                }
+                
+                if (document.fullscreenElement) {
+                    const overlay = document.getElementById('fullscreen-overlay');
+                    if (overlay) overlay.remove();
+                    
+                    clearInterval(fullscreenBlockInterval);
+                    
+                    logSecurityEvent('fullscreen_restored', 'Режим восстановлен');
+                    violationCount++;
+                    
+                    if (violationCount > maxViolations) {
+                        forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+                    }
+                }
+            }, 500);
         }
-    }
-});
 
-document.addEventListener('contextmenu', function(e) {
-    if (isTestActive && !testForcedEnd) {
-        e.preventDefault();
-        checkViolations('Контекстное меню');
-    }
-});
-
-['copy', 'paste', 'cut'].forEach(event => {
-    document.addEventListener(event, function(e) {
-        if (isTestActive && !testForcedEnd) {
-            e.preventDefault();
-            checkViolations(event);
+        function retryFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().then(() => {
+                    const overlay = document.getElementById('fullscreen-overlay');
+                    if (overlay) overlay.remove();
+                });
+            }
         }
-    });
-});
+
+        document.addEventListener('keydown', function(e) {
+            if (!isTestActive || testForcedEnd) return;
+            
+            const blockedKeys = [
+                { cond: e.altKey && e.key === 'Tab', name: 'Alt+Tab' },
+                { cond: e.key === 'Meta' || e.key === 'OS', name: 'Windows key' },
+                { cond: e.ctrlKey && e.key === 'w', name: 'Ctrl+W' },
+                { cond: (e.ctrlKey && e.key === 'r') || e.key === 'F5', name: 'Refresh' },
+                { cond: e.ctrlKey && e.shiftKey && e.key === 'I', name: 'DevTools' },
+                { cond: e.key === 'F12', name: 'F12' }
+            ];
+            
+            for (let item of blockedKeys) {
+                if (item.cond) {
+                    e.preventDefault();
+                    const shouldEnd = checkViolations(`Использование ${item.name}`);
+                    if (!shouldEnd) {
+                        alert(`⚠️ Использование ${item.name} запрещено!\n\nНарушение #${violationCount}`);
+                    }
+                    return;
+                }
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            if (isTestActive && !testForcedEnd) {
+                e.preventDefault();
+                checkViolations('Контекстное меню');
+            }
+        });
+
+        ['copy', 'paste', 'cut'].forEach(event => {
+            document.addEventListener(event, function(e) {
+                if (isTestActive && !testForcedEnd) {
+                    e.preventDefault();
+                    checkViolations(event);
+                }
+            });
+        });
 
         function activateLockdown() {
             return new Promise((resolve) => {
