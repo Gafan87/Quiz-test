@@ -471,13 +471,15 @@
                 <p id="loadingUrl" style="font-size: 0.9em; color: #64748b; margin-top: 20px;"></p>
             </div>
 
-            <!-- Экран ошибки -->
-            <div id="errorScreen" class="hidden">
-                <div class="error-message" id="errorMessage"></div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button class="btn btn-primary" onclick="location.reload()">🔄 Попробовать снова</button>
-                </div>
-            </div>
+<!-- Экран ошибки -->
+<div id="errorScreen" class="hidden">
+    <div class="error-message" id="errorMessage"></div>
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="btn btn-primary" onclick="location.reload()">🔄 Попробовать снова</button>
+        <button class="btn btn-success" onclick="document.getElementById('localFileInput').click()" style="margin-left: 10px;">📁 Загрузить локальный JSON</button>
+        <input type="file" id="localFileInput" accept=".json" style="display: none;" onchange="loadLocalFile(event)">
+    </div>
+</div>
 
             <!-- Стартовый экран -->
             <div id="startScreen" class="hidden">
@@ -527,6 +529,37 @@
                     </div>
                 </div>
             </div>
+            <!-- Окно восстановления при нарушениях -->
+            <div id="recoveryPage" class="hidden">
+                <div class="results-container" style="text-align: center; max-width: 500px; margin: 0 auto;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">🔒</div>
+                    <h2 style="color: #dc2626; margin-bottom: 20px;">ТЕСТ ЗАБЛОКИРОВАН</h2>
+                    
+                    <div style="background: #fee2e2; color: #991b1b; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
+                        <p id="recoveryReason" style="font-weight: 600; margin-bottom: 10px;"></p>
+                        <p id="recoveryCount" style="font-size: 1.2em;"></p>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <input type="password" id="recoveryPassword" 
+                            class="user-name-input" 
+                            placeholder="Введите пароль для разблокировки"
+                            style="width: 100%;">
+                    </div>
+
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn btn-success" onclick="unlockTest()">
+                            🔓 Разблокировать тест
+                        </button>
+                        <button class="btn btn-primary" onclick="finishAndDownloadResults()">
+                            📥 Завершить и Скачать результаты
+                        </button>
+                        <button class="btn" onclick="forceEndTestFromRecovery()">
+                            ⏹️ Завершить без результатов
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -534,6 +567,7 @@
         // ==============================================
         // ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ
         // ==============================================
+        const RESUME_PASSWORD = "111";
         let testData = null;
         let questions = [];
         let currentQuestions = [];
@@ -591,6 +625,28 @@
                     showError(`Ошибка загрузки теста: ${error.message}\n\nУбедитесь, что файл ${testFile} существует в той же папке.`);
                 });
         }
+
+function loadLocalFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            validateAndSetTestData(data);
+        } catch (error) {
+            showError(`Ошибка парсинга JSON: ${error.message}`);
+        }
+    };
+    
+    reader.onerror = function() {
+        showError('Ошибка чтения файла');
+    };
+    
+    reader.readAsText(file);
+}
 
         function validateAndSetTestData(data) {
             // Проверяем структуру
@@ -710,97 +766,225 @@
             if (securityLogs.length > 100) securityLogs.shift();
         }
 
-        function checkViolations(reason) {
-            if (!isTestActive || testForcedEnd) return false;
+function checkViolations(reason) {
+    if (!isTestActive || testForcedEnd) return false;
+    
+    violationCount++;
+    const remainingViolations = maxViolations - violationCount;
+    logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
+    
+    // Показываем предупреждение с счетчиком нарушений
+    alert(`⚠️ НАРУШЕНИЕ #${violationCount} из ${maxViolations}\n\nПричина: ${reason}\nОсталось попыток: ${Math.max(0, remainingViolations)}`);
+    
+    if (violationCount > maxViolations) {
+        // Вызываем окно восстановления
+        handleExcessiveViolations(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+        return true;
+    }
+    return false;
+}
+
+function handleExcessiveViolations(reason) {
+    if (!isTestActive || testForcedEnd) return true;
+    
+    // Блокируем тест временно
+    isTestActive = false;
+    
+    // Сохраняем причину для отображения
+    window.recoveryReason = reason;
+    window.recoveryViolationCount = violationCount;
+    
+    // Прячем текущую страницу и показываем окно восстановления
+    document.getElementById('quizPage').classList.add('hidden');
+    document.getElementById('recoveryPage').classList.remove('hidden');
+    
+    // Заполняем информацию
+    document.getElementById('recoveryReason').textContent = reason;
+    document.getElementById('recoveryCount').innerHTML = 
+        `Нарушений: ${violationCount} из ${maxViolations}<br>` +
+        `Превышение лимита на ${violationCount - maxViolations}`;
+    
+    // Очищаем поле пароля
+    document.getElementById('recoveryPassword').value = '';
+    
+    return true;
+}
+
+function unlockTest() {
+    const password = document.getElementById('recoveryPassword').value;
+    
+    if (password === RESUME_PASSWORD) {
+        alert('✅ Пароль принят. Тест продолжается.\nБудьте внимательны!');
+        
+        // Скрываем окно восстановления
+        document.getElementById('recoveryPage').classList.add('hidden');
+        
+        // Возвращаемся к тесту
+        document.getElementById('quizPage').classList.remove('hidden');
+        
+        // Восстанавливаем активность теста
+        isTestActive = true;
+        
+        // СБРАСЫВАЕМ СЧЕТЧИК НАРУШЕНИЙ В НОЛЬ
+        violationCount = 0;
+        
+        // ПЕРЕАКТИВИРУЕМ ОТСЛЕЖИВАНИЕ ПОЛНОЭКРАННОГО РЕЖИМА
+        fullscreenEnabled = true;
+        
+        // Проверяем, находится ли сейчас браузер в полноэкранном режиме
+        if (!document.fullscreenElement) {
+            // Если нет - запускаем проверку
+            checkFullscreenLoop();
+        }
+        
+        // Логируем событие разблокировки
+        logSecurityEvent('unlock', 'Тест разблокирован по паролю, счетчик нарушений сброшен');
+        
+        // Обновляем текущий вопрос
+        showQuestion();
+    } else {
+        alert('❌ Неверный пароль!');
+    }
+}
+
+function finishQuizFromRecovery() {
+    if (confirm('Завершить тест и показать результаты за отвеченные вопросы?')) {
+        document.getElementById('recoveryPage').classList.add('hidden');
+        calculateAndShowForcedResults(window.recoveryReason || 'Превышение лимита нарушений');
+    }
+}
+
+function forceEndTestFromRecovery() {
+    if (confirm('Завершить тест без сохранения результатов?')) {
+        document.getElementById('recoveryPage').classList.add('hidden');
+        
+        testForcedEnd = true;
+        
+        const overlay = document.getElementById('fullscreen-overlay');
+        if (overlay) overlay.remove();
+        
+        if (fullscreenBlockInterval) {
+            clearInterval(fullscreenBlockInterval);
+        }
+        
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+        
+        document.getElementById('startScreen').classList.remove('hidden');
+    }
+}
+
+function finishAndDownloadResults() {
+    if (confirm('Завершить тест и скачать результаты за отвеченные вопросы?')) {
+        document.getElementById('recoveryPage').classList.add('hidden');
+        
+        // Сначала показываем результаты на экране
+        calculateAndShowForcedResults(window.recoveryReason || 'Превышение лимита нарушений');
+        
+        // Затем автоматически скачиваем в HTML формате
+        setTimeout(() => {
+            exportResultsToHTML();
+        }, 500); // Небольшая задержка чтобы результаты отобразились на экране
+    }
+}
+
+document.addEventListener('visibilitychange', function() {
+    if (!isTestActive || testForcedEnd) return;
+    
+    if (document.hidden) {
+        logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
+        violationCount++;
+        
+        if (violationCount > maxViolations) {
+            handleExcessiveViolations(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
+        } else {
+            alert(`⚠️ ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ЗАПРЕЩЕНО!\n\nНарушение #${violationCount} из ${maxViolations}`);
+        }
+    }
+});
+
+document.addEventListener('fullscreenchange', function() {
+    if (!isTestActive || testForcedEnd) return;
+    
+    if (!document.fullscreenElement && fullscreenEnabled) {
+        logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
+        // Сбрасываем флаг, чтобы показать новое предупреждение
+        window.fullscreenWarningShown = false;
+        checkFullscreenLoop();
+    }
+});
+
+function checkFullscreenLoop() {
+    if (!isTestActive || testForcedEnd) return;
+    
+    if (fullscreenBlockInterval) {
+        clearInterval(fullscreenBlockInterval);
+    }
+    
+    // Увеличиваем счетчик только если это новое нарушение, а не повторная проверка
+    // (используем флаг, чтобы не накручивать счетчик multiple раз)
+    if (!window.fullscreenWarningShown) {
+        violationCount++;
+        window.fullscreenWarningShown = true;
+    }
+    
+    if (violationCount > maxViolations) {
+        handleExcessiveViolations(`Выход из полноэкранного режима (${violationCount} > ${maxViolations})`);
+        return;
+    }
+    
+    // Показываем предупреждение только если это первое предупреждение
+    if (window.fullscreenWarningShown) {
+        alert(`⚠️ ВЫ ВЫШЛИ ИЗ ПОЛНОЭКРАННОГО РЕЖИМА! (Нарушение #${violationCount} из ${maxViolations})\n\nТест приостановлен до возврата.\nНажмите F11 для продолжения.`);
+    }
+    
+    const overlay = document.getElementById('fullscreen-overlay');
+    if (!overlay) {
+        const div = document.createElement('div');
+        div.id = 'fullscreen-overlay';
+        div.innerHTML = `
+            <div style="margin-bottom: 30px;">⚠️ ПОЛНОЭКРАННЫЙ РЕЖИМ ОТКЛЮЧЁН</div>
+            <div style="margin-bottom: 20px;">Нарушение #${violationCount} из ${maxViolations}</div>
+            <div style="margin-bottom: 30px;">Нажмите F11 для возврата</div>
+            <button onclick="retryFullscreen()" style="
+                padding: 15px 40px;
+                font-size: 20px;
+                background: #2563eb;
+                color: white;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+            ">🔄 ВЕРНУТЬСЯ В ПОЛНОЭКРАННЫЙ РЕЖИМ</button>
+        `;
+        document.body.appendChild(div);
+    }
+    
+    fullscreenBlockInterval = setInterval(() => {
+        if (!isTestActive || testForcedEnd) {
+            clearInterval(fullscreenBlockInterval);
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (overlay) overlay.remove();
+            return;
+        }
+        
+        if (document.fullscreenElement) {
+            const overlay = document.getElementById('fullscreen-overlay');
+            if (overlay) overlay.remove();
             
-            violationCount++;
-            logSecurityEvent('violation', `Нарушение #${violationCount}: ${reason}`);
+            clearInterval(fullscreenBlockInterval);
+            
+            logSecurityEvent('fullscreen_restored', 'Режим восстановлен');
+            
+            // Сбрасываем флаг предупреждения
+            window.fullscreenWarningShown = false;
             
             if (violationCount > maxViolations) {
-                forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-                return true;
+                handleExcessiveViolations(`Восстановление после превышения лимита (${violationCount} > ${maxViolations})`);
             }
-            return false;
         }
-
-        document.addEventListener('visibilitychange', function() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (document.hidden) {
-                logSecurityEvent('tab_switch', 'Студент переключился на другую вкладку');
-                violationCount++;
-                
-                if (violationCount > maxViolations) {
-                    forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-                } else {
-                    alert(`⚠️ ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК ЗАПРЕЩЕНО!\n\nНарушение #${violationCount}`);
-                }
-            }
-        });
-
-        document.addEventListener('fullscreenchange', function() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (!document.fullscreenElement && fullscreenEnabled) {
-                logSecurityEvent('fullscreen_exit', 'Выход из полноэкранного режима');
-                checkFullscreenLoop();
-            }
-        });
-
-        function checkFullscreenLoop() {
-            if (!isTestActive || testForcedEnd) return;
-            
-            if (fullscreenBlockInterval) {
-                clearInterval(fullscreenBlockInterval);
-            }
-            
-            alert('⚠️ ВЫ ВЫШЛИ ИЗ ПОЛНОЭКРАННОГО РЕЖИМА!\n\nТест приостановлен до возврата.\nНажмите F11 для продолжения.');
-            
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (!overlay) {
-                const div = document.createElement('div');
-                div.id = 'fullscreen-overlay';
-                div.innerHTML = `
-                    <div style="margin-bottom: 30px;">⚠️ ПОЛНОЭКРАННЫЙ РЕЖИМ ОТКЛЮЧЁН</div>
-                    <div style="margin-bottom: 20px;">Тест продолжается только в полноэкранном режиме</div>
-                    <div style="margin-bottom: 30px;">Нажмите F11 для возврата</div>
-                    <button onclick="retryFullscreen()" style="
-                        padding: 15px 40px;
-                        font-size: 20px;
-                        background: #2563eb;
-                        color: white;
-                        border: none;
-                        border-radius: 10px;
-                        cursor: pointer;
-                    ">🔄 ВЕРНУТЬСЯ В ПОЛНОЭКРАННЫЙ РЕЖИМ</button>
-                `;
-                document.body.appendChild(div);
-            }
-            
-            fullscreenBlockInterval = setInterval(() => {
-                if (!isTestActive || testForcedEnd) {
-                    clearInterval(fullscreenBlockInterval);
-                    const overlay = document.getElementById('fullscreen-overlay');
-                    if (overlay) overlay.remove();
-                    return;
-                }
-                
-                if (document.fullscreenElement) {
-                    const overlay = document.getElementById('fullscreen-overlay');
-                    if (overlay) overlay.remove();
-                    
-                    clearInterval(fullscreenBlockInterval);
-                    
-                    logSecurityEvent('fullscreen_restored', 'Режим восстановлен');
-                    violationCount++;
-                    
-                    if (violationCount > maxViolations) {
-                        forceEndTest(`Превышение лимита нарушений (${violationCount} > ${maxViolations})`);
-                    }
-                }
-            }, 500);
-        }
-
+    }, 500);
+}
         function retryFullscreen() {
             const elem = document.documentElement;
             if (elem.requestFullscreen) {
@@ -877,6 +1061,10 @@
                     alert('❌ Браузер не поддерживает полноэкранный режим');
                     resolve(false);
                 }
+                // Сохраняем состояние в sessionStorage на случай перезагрузки
+                sessionStorage.setItem('testActive', 'true');
+                sessionStorage.setItem('violationCount', violationCount);
+                sessionStorage.setItem('userName', document.getElementById('userName').value);
             });
         }
 
@@ -898,30 +1086,199 @@
             }
         }
 
-        function forceEndTest(reason) {
-            if (!isTestActive || testForcedEnd) return;
+function forceEndTest(reason) {
+    if (!isTestActive || testForcedEnd) return;
+    
+    testForcedEnd = true;
+    
+    const overlay = document.getElementById('fullscreen-overlay');
+    if (overlay) overlay.remove();
+    
+    if (fullscreenBlockInterval) {
+        clearInterval(fullscreenBlockInterval);
+    }
+    
+    alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
+    
+    isTestActive = false;
+    
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    }
+    
+    document.getElementById('quizPage').classList.add('hidden');
+    document.getElementById('resultsPage').classList.add('hidden');
+    document.getElementById('startScreen').classList.remove('hidden');
+}
+
+// Новая функция для завершения с показом результатов
+function forceEndTestWithResults(reason) {
+    if (!isTestActive || testForcedEnd) return;
+    
+    testForcedEnd = true;
+    
+    const overlay = document.getElementById('fullscreen-overlay');
+    if (overlay) overlay.remove();
+    
+    if (fullscreenBlockInterval) {
+        clearInterval(fullscreenBlockInterval);
+    }
+    
+    alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}\n\nБудут показаны результаты за отвеченные вопросы.`);
+    
+    isTestActive = false;
+    
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    }
+    
+    // Подсчитываем результаты за уже отвеченные вопросы
+    calculateAndShowForcedResults(reason);
+}
+
+function calculateAndShowForcedResults(reason) {
+    // Подсчет баллов только за отвеченные вопросы
+    let totalScore = 0;
+    let totalPossibleScore = 0;
+    let answeredCount = 0;
+    
+    currentQuestions.forEach((q, idx) => {
+        const points = q.points || 1;
+        totalPossibleScore += points;
+        
+        if (submitted[idx] && userAnswers[idx]) {
+            answeredCount++;
+            const answer = userAnswers[idx];
+            const correct = q.correct || '';
+            const isMulti = q.type?.includes('Multi Choice');
             
-            testForcedEnd = true;
-            
-            const overlay = document.getElementById('fullscreen-overlay');
-            if (overlay) overlay.remove();
-            
-            if (fullscreenBlockInterval) {
-                clearInterval(fullscreenBlockInterval);
+            let isCorrect = false;
+            if (!isMulti) {
+                isCorrect = answer === correct;
+            } else {
+                const correctArray = correct.split(',').map(s => s.trim()).sort();
+                const userArray = answer?.sort ? answer.sort() : [];
+                isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
             }
             
-            alert(`🚫 ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЁН!\n\nПричина: ${reason}`);
-            
-            isTestActive = false;
-            
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
+            if (isCorrect) {
+                totalScore += points;
             }
-            
-            document.getElementById('quizPage').classList.add('hidden');
-            document.getElementById('resultsPage').classList.add('hidden');
-            document.getElementById('startScreen').classList.remove('hidden');
         }
+    });
+    
+    const percent = Math.round((totalScore / totalPossibleScore) * 100);
+    
+    // Показываем страницу результатов с предупреждением
+    document.getElementById('quizPage').classList.add('hidden');
+    document.getElementById('resultsPage').classList.remove('hidden');
+    
+    // Добавляем предупреждение о принудительном завершении
+    const warningBanner = `
+        <div style="background: #fee2e2; color: #991b1b; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; border: 2px solid #dc2626;">
+            <strong>⚠️ ТЕСТ ПРИНУДИТЕЛЬНО ЗАВЕРШЕН</strong><br>
+            Причина: ${reason}<br>
+            Показаны результаты только за отвеченные вопросы.
+        </div>
+    `;
+    
+    // Используем существующую логику отображения результатов
+    const showDetailed = testData?.showResults?.showDetailedResults !== false;
+    
+    let resultsHtml = warningBanner + `
+        <div class="results-summary">
+            <div class="result-card">
+                <div class="value">${totalScore}</div>
+                <div class="label">Набрано баллов</div>
+            </div>
+            <div class="result-card">
+                <div class="value">${totalPossibleScore}</div>
+                <div class="label">Максимум баллов</div>
+            </div>
+            <div class="result-card">
+                <div class="value">${percent}%</div>
+                <div class="label">Успешность</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin: 20px 0;">
+            <strong>Студент:</strong> ${document.getElementById('displayName').textContent}<br>
+            <strong>Отвечено вопросов:</strong> ${answeredCount} из ${currentQuestions.length}<br>
+            <strong>Правильных ответов:</strong> ${currentQuestions.filter((_, idx) => {
+                if (!submitted[idx] || !userAnswers[idx]) return false;
+                const q = currentQuestions[idx];
+                const answer = userAnswers[idx];
+                const correct = q.correct || '';
+                const isMulti = q.type?.includes('Multi Choice');
+                
+                if (!isMulti) return answer === correct;
+                const correctArray = correct.split(',').map(s => s.trim()).sort();
+                const userArray = answer?.sort ? answer.sort() : [];
+                return JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+            }).length} из ${answeredCount}
+        </div>
+    `;
+    
+    // Добавляем детализацию только для отвеченных вопросов
+    if (showDetailed) {
+        resultsHtml += `<h3>📋 Детализация ответов (только отвеченные вопросы)</h3>`;
+        
+        currentQuestions.forEach((q, idx) => {
+            if (!submitted[idx] || !userAnswers[idx]) return; // Пропускаем неотвеченные
+            
+            const answer = userAnswers[idx];
+            const correct = q.correct || '';
+            const isMulti = q.type?.includes('Multi Choice');
+            const points = q.points || 1;
+            
+            let answerText = 'Не отвечен';
+            if (answer) {
+                if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
+                else answerText = answer;
+            }
+            
+            const isCorrect = (!isMulti && answer === correct) || 
+                (isMulti && JSON.stringify(answer?.sort ? answer.sort() : []) === 
+                 JSON.stringify(correct.split(',').map(s => s.trim()).sort()));
+            
+            const resultClass = isCorrect ? 'result-correct' : 'result-incorrect';
+            const resultText = isCorrect ? '✅ Верно' : '❌ Неверно';
+            const scoreText = isCorrect ? `${points}/${points}` : `0/${points}`;
+            
+            resultsHtml += `
+                <div class="answer-detail-card">
+                    <div class="answer-detail-question">${idx+1}. ${q.question}</div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Ваш ответ:</span>
+                        <span class="answer-value">${answerText}</span>
+                    </div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Правильный ответ:</span>
+                        <span class="answer-value">${correct}</span>
+                    </div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Баллы:</span>
+                        <span class="answer-value">${scoreText}</span>
+                    </div>
+                    <div class="answer-detail-result ${resultClass}">${resultText}</div>
+                </div>
+            `;
+        });
+    }
+    
+    // Добавляем кнопки экспорта
+    resultsHtml += `
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
+            <button class="btn btn-primary" onclick="exportResultsToTXT()" style="margin-right: 10px;">
+                📥 Сохранить результаты (TXT)
+            </button>
+            <button class="btn btn-success" onclick="exportResultsToHTML()">
+                📥 Сохранить результаты (HTML)
+            </button>
+        </div>
+    `;
+    
+    document.getElementById('resultsContent').innerHTML = resultsHtml;
+}
 
         // ==============================================
         // ЛОГИКА ТЕСТИРОВАНИЯ
@@ -1493,6 +1850,13 @@
         // Инициализация
         window.onload = function() {
             loadTestFromGitHub();
+            function restoreTestState() {
+                if (sessionStorage.getItem('testActive') === 'true') {
+                    const savedViolations = parseInt(sessionStorage.getItem('violationCount') || '0');
+                    violationCount = savedViolations;
+                    // Остальное состояние можно восстановить при необходимости
+                }
+            }
         };
             // Функция для получения параметра из URL
     function getUrlParameter(name) {
