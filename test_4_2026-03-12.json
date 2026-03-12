@@ -1,0 +1,1536 @@
+{
+  "testName": "Телеком-опрос_№4",
+  "dateGenerated": "2026-03-12T12:17:34.067Z",
+  "expires": "2026-03-12T14:17:33.426Z",
+  "expiresLocal": "12.03.2026, 17:17:33",
+  "maxViolations": 5,
+  "showResults": {
+    "showCorrectnessDuringTest": false,
+    "showExplanationsDuringTest": false,
+    "showDetailedResults": true
+  },
+  "basePoints": {
+    "level0": 1,
+    "level1": 2,
+    "level2": 3,
+    "levelNone": 1
+  },
+  "coefficients": {
+    "type": {
+      "tf": 50,
+      "single": 100,
+      "multi": 130
+    },
+    "difficulty": {
+      "easy": 80,
+      "medium": 100,
+      "hard": 120
+    }
+  },
+  "topicWeights": [
+    {
+      "topic": "Basic Foundation",
+      "weight": 10,
+      "normalizedWeight": 0.005235602094240838
+    },
+    {
+      "topic": "Charging & Billing Systems",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Cloud & Virtualization Architecture",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Core Protocols & Signaling",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Fixed Broadband (FBB) overview",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "IMS & Voice Architecture",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "IP Network Architecture",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Identity & Subscriber Data",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Industry & business",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Interconnect / Internet / Roaming",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Mobile Broadband (MBB) overview",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Mobile Core Network",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Network Architecture Concepts",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Network Metrics & KPIs",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Network domains overview",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "OSS/BSS & Operations",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Security & Compliance",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Transport network",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Wireless Network (RAN)",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    },
+    {
+      "topic": "Инфраструктура",
+      "weight": 100,
+      "normalizedWeight": 0.05235602094240838
+    }
+  ],
+  "questions": [
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Identity & Subscriber Data",
+      "type": "Multi Choice",
+      "question": "Какие идентификаторы используются для идентификации абонента и оборудования в мобильных сетях?",
+      "optA": "IMSI (International Mobile Subscriber Identity)",
+      "optB": "MSISDN (Mobile Station International Subscriber Directory Number)",
+      "optC": "IMEI (International Mobile Equipment Identity)",
+      "optD": "ICCID (Integrated Circuit Card Identifier)",
+      "correct": "A, B, C, D",
+      "explanation": "Все четыре идентификатора описаны в Level-1 (Identity & Subscriber Data).",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Network domains overview",
+      "type": "Multi Choice",
+      "question": "Что позволяет технология NFV?",
+      "optA": "Заменять аппаратные сетевые функции программными",
+      "optB": "Запускать VNF на стандартных серверах",
+      "optC": "Полностью отказаться от оборудования",
+      "optD": "Гибко масштабировать сетевые функции",
+      "correct": "A, B, D",
+      "explanation": "Полный отказ от оборудования невозможен (серверы, СКС нужны).",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "question": "Какие модели обслуживания (service models) облачных вычислений существуют?",
+      "optA": "IaaS (Infrastructure as a Service)",
+      "optB": "CaaS (Container as a Service)",
+      "optC": "SaaS (Software as a Service)",
+      "optD": "PaaS (Platform as a Service)",
+      "correct": "A, C, D",
+      "explanation": "CaaS — тоже модель, но в глоссарии Level-1 упомянуты IaaS, PaaS, SaaS.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Core Protocols & Signaling",
+      "type": "Multi Choice",
+      "question": "Какие протоколы используются для сигнализации в мобильных сетях?",
+      "optA": "SS7 (Signaling System No. 7)",
+      "optB": "Diameter",
+      "optC": "SIP (Session Initiation Protocol)",
+      "optD": "GTP (GPRS Tunneling Protocol)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленные протоколы есть в Level-1 (Core Protocols & Signaling).",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Wireless Network (RAN)",
+      "type": "Single Choice",
+      "question": "Почему в торговых центрах и на стадионах операторы ставят малые соты, а не усиливают сигнал одной мощной макросоты?",
+      "optA": " Малые соты дешевле в обслуживании ",
+      "optB": " Это требование пожарной безопасности ",
+      "optC": " Малые соты работают на других частотах, не требующих лицензирования ",
+      "optD": " Одна макросота не сможет обеспечить нужную ёмкость (пропускную способность) для тысяч абонентов одновременно ",
+      "correct": "D",
+      "explanation": " Ёмкость соты ограничена. Одна макросота не может обслужить тысячи одновременных соединений. Малые соты \"дробят\" зону на ячейки, каждая со своим ресурсом.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "Single Choice",
+      "question": "Termination в контексте межсетевого взаимодействия (interconnect) означает…",
+      "optA": "Ограничение максимального размера передаваемого пакета (MTU) на интерфейсе",
+      "optB": "Логическую область сети, где распространяется широковещательный трафик",
+      "optC": "Процесс разделения большой IP-сети на несколько логических подсетей",
+      "optD": "Завершение (доставка) трафика/вызова в сеть назначения, где находится адресат",
+      "correct": "D",
+      "explanation": "Termination — завершение трафика/вызова в целевой сети (например, на стороне принимающего оператора).",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Wireless Network (RAN)",
+      "type": "Single Choice",
+      "question": "Абонент разговаривает по телефону и идёт по улице. На пути встречается высотное здание, которое полностью экранирует сигнал текущей соты, но телефон переключился на другую соту ДО того, как связь прервалась. Что произошло?",
+      "optA": " Телефон предсказал экранирование по GPS ",
+      "optB": " Сработал таймер принудительного переключения ",
+      "optC": " Просто повезло ",
+      "optD": " Сеть заранее подготовила хэндовер на основе измерений телефона (соседние соты) ",
+      "correct": "D",
+      "explanation": " Телефон постоянно измеряет уровень сигнала соседних сот и сообщает в сеть. Сеть принимает решение о хэндовере заранее, когда сигнал текущей соты ещё есть, но уже ухудшается.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Network domains overview",
+      "type": "Multi Choice",
+      "question": "Какие преимущества даёт перенос вычислений на периферию сети (Edge)?",
+      "optA": "Снижение задержки",
+      "optB": "Уменьшение трафика в ядре",
+      "optC": "Упрощение централизованного управления",
+      "optD": "Повышение отказоустойчивости",
+      "correct": "A, B, D",
+      "explanation": "Edge усложняет управление (распределённость).",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Network domains overview",
+      "type": "True/False",
+      "question": "В архитектуре SDN (Software-Defined Networking) плоскость управления (Control Plane) отделена от плоскости передачи данных.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Это ключевой принцип SDN: централизованный контроллер управляет «глупыми» устройствами пересылки.",
+      "basePoints": 1,
+      "points": 0.5,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "True/False",
+      "question": "Traceroute показывает маршрут (список узлов), через которые проходят пакеты до цели.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Да, утилита отображает путь (хопы) пакета в сети.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IP Network Architecture",
+      "type": "Multi Choice",
+      "question": "Какие преимущества даёт Segment Routing (SR) по сравнению с традиционным MPLS?",
+      "optA": "Упрощение управления (no LDP/RSVP)",
+      "optB": "Обязательное использование IPv6",
+      "optC": "Интеграция с SDN",
+      "optD": "Программируемость путей",
+      "correct": "A, C, D",
+      "explanation": "SR может работать с MPLS и IPv6, не обязательно IPv6.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "question": "От чего зависит скорость xDSL?",
+      "optA": "Расстояния до станции",
+      "optB": "Диаметра жил кабеля",
+      "optC": "Наличия загрузок абонента",
+      "optD": "Качества скрутки пар",
+      "correct": "A, B, D",
+      "explanation": "Скорость зависит от физических параметров линии, но не от загрузок абонента.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Industry & business",
+      "type": "Single Choice",
+      "question": "В чем ключевое различие между CAPEX и OPEX в операторском бизнесе?",
+      "optA": "CAPEX — текущие операционные расходы, OPEX — долгосрочные инвестиции в активы",
+      "optB": "CAPEX — капитальные инвестиции в оборудование/инфраструктуру, OPEX — регулярные операционные расходы",
+      "optC": "CAPEX относится исключительно к расходам на RAN, OPEX — только к Core Network",
+      "optD": "OPEX включает только затраты на радиочастотный спектр, CAPEX — на персонал",
+      "correct": "B",
+      "explanation": "CAPEX — капитальные инвестиции в долгосрочные активы; OPEX — регулярные операционные затраты на поддержку бизнеса.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "True/False",
+      "question": "Проактивный мониторинг сети позволяет обнаружить проблему до того, как она повлияет на пользователей.",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "A",
+      "explanation": " Верно. Анализ трендов и пороговых значений помогает предотвратить инциденты. ",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Multi Choice",
+      "question": "Какие особенности сети 4G (LTE) верны?",
+      "optA": "All-IP архитектура",
+      "optB": "Отсутствие коммутации каналов",
+      "optC": "Использование OFDMA в下行",
+      "optD": "Использование технологии MIMO",
+      "correct": "A, B, C, D",
+      "explanation": "Все верно для LTE.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "",
+      "difficulty": "Базовый",
+      "topic": "Инфраструктура",
+      "type": "Multi Choice",
+      "question": "Какие виды резервирования питания используются в ЦОД?",
+      "optA": "UPS (ИБП)",
+      "optB": "Дизель-генераторы (DGS)",
+      "optC": "Два независимых ввода от города",
+      "optD": "Батарейки АА",
+      "correct": "A, B, C",
+      "explanation": "Батарейки АА не потянут серверную стойку.",
+      "basePoints": 1,
+      "points": 1.04,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Security & Compliance",
+      "type": "Single Choice",
+      "question": "DDoS (Distributed Denial of Service) — это тип атаки, при которой…",
+      "optA": "Множество источников одновременно перегружают ресурсы целевого сервиса/канала",
+      "optB": "Используется пассивная оптическая сеть для доступа абонентов к интернету",
+      "optC": "Применяется протокол динамической маршрутизации OSPF в магистральной сети",
+      "optD": "Выполняется преобразование частных IP-адресов в публичные через NAT",
+      "correct": "A",
+      "explanation": "DDoS — распределённая атака отказа в обслуживании с множества источников для перегрузки цели.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Identity & Subscriber Data",
+      "type": "Multi Choice",
+      "question": "Какие идентификаторы меняются при смене SIM-карты?",
+      "optA": "IMSI",
+      "optB": "MSISDN (если не перенос номера)",
+      "optC": "ICCID",
+      "optD": "IMEI",
+      "correct": "A, B, C",
+      "explanation": "IMEI привязан к телефону, а не к SIM.",
+      "basePoints": 2,
+      "points": 2.08,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Network domains overview",
+      "type": "Single Choice",
+      "question": "Что является главным практическим преимуществом NFV (Network Functions Virtualization) для оператора?",
+      "optA": "Автоматическое увеличение доступного радиочастотного спектра для мобильной связи",
+      "optB": "Возможность запускать сетевые функции как ПО на стандартных x86-серверах",
+      "optC": "Замена DNS-серверов на распределенную систему без единой точки отказа",
+      "optD": "Полное устранение необходимости в механизмах QoS и приоритизации трафика",
+      "correct": "B",
+      "explanation": "NFV виртуализирует сетевые функции (VNF) и переносит их с аппаратных «коробок» на стандартные вычислительные платформы.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Multi Choice",
+      "question": "Какие ключевые характеристики заявлены для 5G?",
+      "optA": "Пиковая скорость до 20 Гбит/с",
+      "optB": "Задержка до 1 мс",
+      "optC": "Работа только в мм-диапазоне",
+      "optD": "Поддержка миллионов устройств на км²",
+      "correct": "A, B, D",
+      "explanation": "5G работает во всех диапазонах, не только mmWave.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "Single Choice",
+      "question": "IXP (Internet Exchange Point) используется в первую очередь для…",
+      "optA": "Инкапсуляции и декапсуляции кадров Ethernet на канальном уровне (L2)",
+      "optB": "Организации физической точки обмена трафиком между сетями (peering) в одном месте",
+      "optC": "Массовой выдачи SIM-карт абонентам мобильного оператора в розничных точках",
+      "optD": "Шифрования VPN-туннелей для защищенной передачи данных по публичной сети",
+      "correct": "B",
+      "explanation": "IXP — точка обмена интернет-трафиком, где операторы/AS подключаются для взаимного peering.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Core Protocols & Signaling",
+      "type": "Multi Choice",
+      "question": "Какие протоколы относятся к внутренним шлюзовым протоколам (IGP)?",
+      "optA": "OSPF (Open Shortest Path First)",
+      "optB": "IS-IS (Intermediate System to Intermediate System)",
+      "optC": "RIP (Routing Information Protocol)",
+      "optD": "BGP (Border Gateway Protocol)",
+      "correct": "A, B, C",
+      "explanation": "BGP — это внешний протокол (EGP).",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Network Architecture Concepts",
+      "type": "Multi Choice",
+      "question": "Какие топологии используются в современных центрах обработки данных (ЦОД)?",
+      "optA": "Spine-Leaf (лист-шина)",
+      "optB": "Трёхуровневая иерархия (Core-Aggregation-Access)",
+      "optC": "Collapsed Core",
+      "optD": "Mesh (ячеистая)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленные топологии могут применяться в ЦОД, но Spine-Leaf — наиболее современная для больших сетей.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Core Protocols & Signaling",
+      "type": "Multi Choice",
+      "question": "Какие протоколы используются на интерфейсах между eNB и MME, eNB и SGW?",
+      "optA": "S1-AP (на S1-MME)",
+      "optB": "GTP-C (на S11)",
+      "optC": "GTP-U (на S1-U)",
+      "optD": "Diameter (на S6a)",
+      "correct": "A, C",
+      "explanation": "S1-AP и GTP-U — на интерфейсах с eNB. GTP-C — между MME и SGW, Diameter — между MME и HSS.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Transport network",
+      "type": "Single Choice",
+      "question": "Какое преимущество у одномодового оптического волокна перед многомодовым?",
+      "optA": " Меньшая стоимость ",
+      "optB": " Возможность передачи на большие расстояния без искажений ",
+      "optC": " Более простая технология сращивания ",
+      "optD": " Большая устойчивость к изгибам ",
+      "correct": "B",
+      "explanation": " Одномодовое волокно имеет меньшую дисперсию и затухание, поэтому применяется для дальних линий.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Network Metrics & KPIs",
+      "type": "Multi Choice",
+      "question": "Какие показатели используются для оценки качества радиоканала в LTE/5G?",
+      "optA": "RSRP (Reference Signal Received Power)",
+      "optB": "RSRQ (Reference Signal Received Quality)",
+      "optC": "SINR (Signal-to-Interference-plus-Noise Ratio)",
+      "optD": "RSSI (Received Signal Strength Indicator)",
+      "correct": "A, B, C, D",
+      "explanation": "Все четыре показателя используются в сетях.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "OSS/BSS & Operations",
+      "type": "Single Choice",
+      "question": "SLA (Service Level Agreement) в телекоме — это…",
+      "optA": "Договорное соглашение об уровне сервиса с метриками доступности, задержки, времени восстановления",
+      "optB": "Тип динамической маршрутизации с использованием алгоритма выбора кратчайшего пути",
+      "optC": "Технический протокол маршрутизации для обмена информацией о доступных сетях",
+      "optD": "Технология международного роуминга между операторами разных стран и регионов",
+      "correct": "A",
+      "explanation": "SLA фиксирует обязательства по качеству услуги: availability, performance, время реакции/восстановления.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Charging & Billing Systems",
+      "type": "Multi Choice",
+      "question": "Какие форматы обмена данными используются в роуминге для передачи CDR?",
+      "optA": "TAP (Transferred Account Procedure)",
+      "optB": "RAP (Returned Account Procedure)",
+      "optC": "EDIFACT",
+      "optD": "XML",
+      "correct": "A, B, C, D",
+      "explanation": "TAP и RAP — специфические форматы для роуминга, EDIFACT и XML также используются.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "question": "Почему некоторые онлайн-игры и P2P-приложения плохо работают из-за NAT?",
+      "optA": " NAT увеличивает задержку ",
+      "optB": " NAT блокирует входящие соединения, инициированные извне, так как не знает, какому внутреннему устройству адресован пакет ",
+      "optC": " NAT шифрует трафик, что мешает играм ",
+      "optD": " NAT работает только с IPv4, а игры требуют IPv6 ",
+      "correct": "B",
+      "explanation": " NAT нарушает принцип end-to-end. Внешний хост не может инициировать соединение с устройством за NAT, если на NAT не настроено проброс портов.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IP Network Architecture",
+      "type": "Multi Choice",
+      "question": "Какие атрибуты BGP влияют на выбор наилучшего пути?",
+      "optA": "AS-PATH (длина пути)",
+      "optB": "Cost (метрика OSPF)",
+      "optC": "MED (Multi-Exit Discriminator)",
+      "optD": "LOCAL_PREF (локальное предпочтение)",
+      "correct": "A, C, D",
+      "explanation": "Cost — метрика OSPF, не атрибут BGP.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "question": "Макросоты (Macro cells) обычно используются для обеспечения базового покрытия на больших территориях, в то время как малые соты (Small cells) служат для увеличения ёмкости в местах скопления пользователей.",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "A",
+      "explanation": " Верно, это классическое разделение.",
+      "basePoints": 1,
+      "points": 0.5,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Industry & business",
+      "type": "Single Choice",
+      "question": "Кто в телеком-бизнесе является плательщиком по договору и покупателем услуги связи?",
+      "optA": "Subscriber — абонент, зарегистрированный в сети с уникальным идентификатором MSISDN",
+      "optB": "End User — конечный пользователь, фактически использующий устройство и сервис",
+      "optC": "Vendor — вендор/поставщик сетевого оборудования и программного обеспечения",
+      "optD": "Customer — клиент/заказчик, заключивший договор и оплачивающий услуги оператора",
+      "correct": "D",
+      "explanation": "Customer — покупатель/плательщик по договору; End User может отличаться (например, в корпоративных контрактах).",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "Single Choice",
+      "question": "OSS (Operations Support Systems) у телеком-оператора — это системы для…",
+      "optA": "Выставления счетов и тарификации услуг связи (биллинг) для конечных абонентов",
+      "optB": "Предоставления онлайн-сервисов стриминга видео поверх интернет-подключения",
+      "optC": "Оптической передачи данных с использованием технологии уплотнения DWDM",
+      "optD": "Поддержки операций: мониторинг сети, управление конфигурацией, обработка инцидентов",
+      "correct": "D",
+      "explanation": "OSS поддерживают эксплуатацию сети: мониторинг, конфигурацию, инциденты, производительность и т.п.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Wireless Network (RAN)",
+      "type": "Single Choice",
+      "question": "Почему макросоты в городах обычно имеют меньший радиус действия, чем в сельской местности?",
+      "optA": " Из-за большего количества абонентов на квадратный километр требуется более частое размещение сот для увеличения ёмкости ",
+      "optB": " В городах используются другие частоты, которые хуже распространяются ",
+      "optC": " Антенны макросот в городах намеренно снижают мощность для экономии электроэнергии ",
+      "optD": " Это требование международных регуляторов ",
+      "correct": "A",
+      "explanation": " В городах высокая плотность абонентов, поэтому соты делают меньшего радиуса для увеличения ёмкости (частотный ресурс повторяется чаще).",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Industry & business",
+      "type": "Multi Choice",
+      "question": "Какие расходы относятся к CAPEX?",
+      "optA": "Аренда каналов связи",
+      "optB": "Строительство волоконно-оптических линий",
+      "optC": "Приобретение лицензий на частоты",
+      "optD": "Закупка базовых станций",
+      "correct": "B, C, D",
+      "explanation": "Аренда – операционные расходы (OPEX).",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Single Choice",
+      "question": "Какая концепция 5G позволяет создавать несколько логических сетей с разными SLA на одной физической инфраструктуре?",
+      "optA": "Carrier Aggregation — объединение нескольких частотных диапазонов для увеличения скорости",
+      "optB": "Network Slicing — логическая сегментация сети под разные сценарии и требования",
+      "optC": "Massive MIMO — использование большого числа антенн для увеличения емкости",
+      "optD": "Beamforming — направленная передача сигнала для улучшения покрытия и качества",
+      "correct": "B",
+      "explanation": "Network Slicing создает изолированные логические «срезы» сети с индивидуальными характеристиками под разные use cases.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "question": "Какие утверждения о Backhaul и Fronthaul верны?",
+      "optA": "Backhaul соединяет базовую станцию с ядром",
+      "optB": "Fronthaul соединяет RRU и BBU",
+      "optC": "Оба термина относятся к транспортной сети",
+      "optD": "Fronthaul используется в C-RAN",
+      "correct": "A, B, C, D",
+      "explanation": "Все верно.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Industry & business",
+      "type": "Multi Choice",
+      "question": "Какие факторы могут влиять на рост ARPU?",
+      "optA": "Увеличение числа абонентов",
+      "optB": "Рост потребления данных",
+      "optC": "Подключение дополнительных услуг",
+      "optD": "Увеличение тарифов",
+      "correct": "B, C, D",
+      "explanation": "Рост числа абонентов увеличивает общую выручку, но не обязательно ARPU (среднюю на абонента).",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Network Metrics & KPIs",
+      "type": "Multi Choice",
+      "question": "Какие типы задержек вносят вклад в общую Latency сети?",
+      "optA": "Задержка распространения (Propagation Delay)",
+      "optB": "Задержка обработки (Processing Delay)",
+      "optC": "Задержка в очереди (Queuing Delay)",
+      "optD": "Задержка сериализации (Serialization Delay)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленное составляет суммарную сетевую задержку.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Single Choice",
+      "question": "Где обычно устанавливается оборудование OLT (Optical Line Terminal) в сети PON?",
+      "optA": " В квартире абонента ",
+      "optB": " На распределительном щитке в подъезде ",
+      "optC": " В центральном узле оператора (например, в CO – центральном офисе) ",
+      "optD": " На оптическом сплиттере ",
+      "correct": "C",
+      "explanation": " OLT находится на стороне оператора, подключается к магистральной сети и управляет множеством ONT/ONU.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Высокий",
+      "topic": "IMS & Voice Architecture",
+      "type": "True/False",
+      "question": "IMS (IP Multimedia Subsystem) может работать без поддержки со стороны сети доступа (RAN).",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "B",
+      "explanation": " Неверно. IMS требует поддержки QoS и приоритизации от RAN для гарантии качества голоса (VoLTE). Без этого голос будет деградировать как обычный OTT-трафик. ",
+      "basePoints": 2,
+      "points": 1.2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "question": "Какие преимущества дает внедрение NFV (Network Functions Virtualization) оператору?",
+      "optA": " Снижение зависимости от специфического «железа» вендоров ",
+      "optB": " Гибкое масштабирование функций в зависимости от нагрузки ",
+      "optC": " Ускорение вывода новых сервисов на рынок (Time-to-Market) ",
+      "optD": " Полное исключение необходимости в электропитании ",
+      "correct": "A, B, C",
+      "explanation": " Виртуальные функции все равно работают на серверах, требующих питания. NFV меняет тип оборудования, но не устраняет инфраструктуру. ",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IMS & Voice Architecture",
+      "type": "True/False",
+      "question": "SMS передается через сигнальные каналы сети, а не через каналы передачи данных пользователя.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Верно, поэтому SMS работает даже при занятом голосовом канале (в GSM) и без интернета.",
+      "basePoints": 3,
+      "points": 1.5,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Transport network",
+      "type": "Single Choice",
+      "question": "Какая технология позволяет передавать множество оптических каналов по одному волокну на разных длинах волн?",
+      "optA": "WDM (DWDM)",
+      "optB": "TDM",
+      "optC": "MPLS",
+      "optD": "OTN",
+      "correct": "A",
+      "explanation": "DWDM — плотное волновое мультиплексирование.",
+      "basePoints": 1,
+      "points": 1.2,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Charging & Billing Systems",
+      "type": "Multi Choice",
+      "question": "Какие компоненты участвуют в процессе тарификации услуг?",
+      "optA": "OCS (Online Charging System)",
+      "optB": "OFCS (Offline Charging System)",
+      "optC": "CDR (Call Detail Record)",
+      "optD": "PCRF (Policy and Charging Rules Function)",
+      "correct": "A, B, C",
+      "explanation": "PCRF отвечает за политики, а не за саму тарификацию.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "question": "Какие протоколы могут работать поверх MPLS?",
+      "optA": "IP",
+      "optB": "Ethernet",
+      "optC": "ATM",
+      "optD": "Frame Relay",
+      "correct": "A, B, C, D",
+      "explanation": "MPLS мультипротокольный – поддерживает многие L2/L3 протоколы.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "True/False",
+      "question": "Оптический сетевой терминал (ONT) в сети PON является пассивным устройством и не требует электропитания.",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "B",
+      "explanation": " ONT — активное устройство, оно преобразует оптический сигнал в электрический и требует питания (обычно от розетки).",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Security & Compliance",
+      "type": "True/False",
+      "question": "Firewall (Межсетевой экран) используется для физического соединения оптических кабелей.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "Firewall — это средство защиты сети, фильтрующее трафик. Кабели соединяют патч-панели или муфты.",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "question": "Какие элементы входят в архитектуру NFV (Network Functions Virtualization)?",
+      "optA": "VNF (Virtual Network Function)",
+      "optB": "NFVI (NFV Infrastructure)",
+      "optC": "MANO (Management and Orchestration)",
+      "optD": "SDN (Software-Defined Networking)",
+      "correct": "A, B, C",
+      "explanation": "SDN — отдельная концепция, хотя может быть связана с NFV.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Identity & Subscriber Data",
+      "type": "Multi Choice",
+      "question": "Какие временные идентификаторы используются в мобильных сетях для защиты постоянных?",
+      "optA": "TMSI (Temporary Mobile Subscriber Identity)",
+      "optB": "IMSI (International Mobile Subscriber Identity)",
+      "optC": "5G-GUTI (5G Globally Unique Temporary Identifier)",
+      "optD": "GUTI (Globally Unique Temporary Identifier)",
+      "correct": "A, C, D",
+      "explanation": "IMSI — постоянный идентификатор, не временный.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Core Network",
+      "type": "True/False",
+      "question": "HSS (Home Subscriber Server) в сетях 4G выполняет те же функции, что и HLR (Home Location Register) в сетях 2G/3G, но дополнительно поддерживает протоколы Diameter и интерфейсы для IMS.",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "A",
+      "explanation": " HSS — эволюционное развитие HLR с поддержкой новых протоколов и функций.",
+      "basePoints": 2,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "IP Network Architecture",
+      "type": "Multi Choice",
+      "question": "Какие технологии позволяют создавать виртуальные сети поверх физической инфраструктуры?",
+      "optA": "VLAN (Virtual LAN)",
+      "optB": "VxLAN (Virtual Extensible LAN)",
+      "optC": "VRF (Virtual Routing and Forwarding)",
+      "optD": "MPLS L3VPN",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленные технологии используются для сетевой виртуализации.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "question": "Что такое «Bearer» (носитель) в контексте сети LTE?",
+      "optA": " Логический туннель между абонентом и PGW с определёнными параметрами QoS ",
+      "optB": " Физический канал между базовой станцией и телефоном ",
+      "optC": " Имя точки доступа (APN) ",
+      "optD": " Тип SIM-карты ",
+      "correct": "A",
+      "explanation": " Bearer — это виртуальное соединение с заданными характеристиками (скорость, задержка).",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Wireless Network (RAN)",
+      "type": "Single Choice",
+      "question": "Если базовая станция имеет три сектора, каждый со своей антенной, и один из секторов выходит из строя, что произойдёт?",
+      "optA": " Вся сота перестанет работать ",
+      "optB": " Упадет ёмкость сети в зоне этого сектора, но абоненты в других секторах останутся на связи ",
+      "optC": " Абоненты из повреждённого сектора автоматически переключатся на соседние станции других операторов ",
+      "optD": " Ничего, так как сектора дублируют друг друга ",
+      "correct": "B",
+      "explanation": " Секторы независимы. В зоне отказавшего сектора связь пропадёт (если нет перекрытия с другими сотами), но остальные секторы продолжат работу.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "True/False",
+      "question": "Роуминг (Roaming) позволяет абоненту пользоваться услугами связи в зоне покрытия чужого оператора.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "A",
+      "explanation": "Да, это механизм обслуживания гостевых абонентов в партнерских сетях.",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Basic Foundation",
+      "type": "Single Choice",
+      "question": "Что такое окно перегрузки (congestion window) в TCP?",
+      "optA": "Количество неподтверждённых сегментов, которые можно отправить",
+      "optB": "Размер буфера приложения",
+      "optC": "Максимальный размер сегмента",
+      "optD": "Порт назначения",
+      "correct": "B",
+      "explanation": "Это механизм управления потоком.",
+      "basePoints": 1,
+      "points": 1.2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Single Choice",
+      "question": "Какое поколение мобильной связи впервые представило скоростной мобильный интернет?",
+      "optA": "3G",
+      "optB": "2G",
+      "optC": "4G",
+      "optD": "5G",
+      "correct": "A",
+      "explanation": "3G (UMTS) обеспечило скорости для интернета.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Security & Compliance",
+      "type": "Single Choice",
+      "question": "Firewall в телекоммуникационной сети используется для…",
+      "optA": "Маршрутизации пакетов на основе MAC-адресов на канальном уровне L2",
+      "optB": "Фильтрации и контроля трафика по правилам безопасности (security policy)",
+      "optC": "Автоматического увеличения доступной полосы пропускания (bandwidth)",
+      "optD": "Организации многоадресной рассылки (multicast) для IPTV-трансляций",
+      "correct": "B",
+      "explanation": "Firewall контролирует доступ и фильтрует трафик по правилам безопасности (источник/назначение/порт/протокол).",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "question": "Какие компоненты PON являются пассивными?",
+      "optA": "Оптический сплиттер",
+      "optB": "Оптический кабель",
+      "optC": "OLT",
+      "optD": "ONT",
+      "correct": "A, B",
+      "explanation": "OLT и ONT – активное оборудование на концах.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Network domains overview",
+      "type": "Single Choice",
+      "question": "Какая часть сети оператора отвечает за last mile — подключение абонента к первому узлу оператора?",
+      "optA": "Core Network — ядро сети с функциями маршрутизации и управления",
+      "optB": "Backbone Network — опорная магистральная сеть между городами и регионами",
+      "optC": "Data Center — центр обработки данных с серверами и системами хранения",
+      "optD": "Access Network — сеть доступа, обеспечивающая подключение абонентов",
+      "correct": "D",
+      "explanation": "Access Network — домен сети, обеспечивающий подключение абонентов (последняя миля) к сети оператора.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Security & Compliance",
+      "type": "True/False",
+      "question": "Межсетевой экран (Firewall) обычно размещается на границе между сетями с разным уровнем доверия.",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "A",
+      "explanation": " Верно. Например, между интернетом (недоверенная) и корпоративной сетью (доверенная). ",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "IMS & Voice Architecture",
+      "type": "True/False",
+      "question": "IMS (IP Multimedia Subsystem) необходима только для передачи данных, но не для голоса.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "-",
+      "optD": "-",
+      "correct": "B",
+      "explanation": "IMS как раз создана для управления мультимедийными сессиями, в первую очередь для VoLTE (голоса) и видеозвонков.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "question": "Что является основной функцией PGW (PDN Gateway) в сети LTE?",
+      "optA": " Управление мобильностью ",
+      "optB": " Шлюз во внешние сети (Интернет, корпоративные VPN), выделение IP-адресов ",
+      "optC": " Хранение профилей абонентов ",
+      "optD": " Шифрование трафика в радиоканале ",
+      "correct": "B",
+      "explanation": " PGW — это точка выхода во внешние сети, аналог GGSN в 3G.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Высокий",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "True/False",
+      "question": "Обновление информации о местоположении (Location Update) происходит только при перемещении абонента в другой город.",
+      "optA": " Верно ",
+      "optB": " Неверно ",
+      "optC": " - ",
+      "optD": " - ",
+      "correct": "B",
+      "explanation": " Неверно. Location Update происходит при смене Tracking Area (TA) или Location Area (LA), что может быть в пределах одного города. ",
+      "basePoints": 1,
+      "points": 0.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Network Metrics & KPIs",
+      "type": "Multi Choice",
+      "question": "Какие KPI используются для оценки производительности сети?",
+      "optA": "RRC Connection Success Rate",
+      "optB": "ARPU",
+      "optC": "Handover Success Rate",
+      "optD": "E-RAB Setup Success Rate",
+      "correct": "A, C, D",
+      "explanation": "ARPU — финансовый KPI, не технический.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Charging & Billing Systems",
+      "type": "Multi Choice",
+      "question": "Какие типы записей CDR (Call Detail Record) существуют?",
+      "optA": "M-CDR (Mobile originated)",
+      "optB": "T-CDR (Mobile terminated)",
+      "optC": "S-CDR (Serving system)",
+      "optD": "I-CDR (Interconnect)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленные типы CDR есть в практике, хотя в глоссарии Level-2 упомянуты обобщённо.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 1,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    }
+  ],
+  "targets": {
+    "level": {
+      "Level-0": 36.300000000000004,
+      "Level-1": 19.8,
+      "Level-2": 9.9,
+      "None": 0
+    },
+    "difficulty": {
+      "Базовый": 19.8,
+      "Средний": 33,
+      "Сложный": 13.2
+    },
+    "type": {
+      "tf": 13.2,
+      "single": 23.1,
+      "multi": 29.7
+    },
+    "topic": {
+      "Basic Foundation": 0.34554973821989526,
+      "Charging & Billing Systems": 3.4554973821989527,
+      "Cloud & Virtualization Architecture": 3.4554973821989527,
+      "Core Protocols & Signaling": 3.4554973821989527,
+      "Fixed Broadband (FBB) overview": 3.4554973821989527,
+      "IMS & Voice Architecture": 3.4554973821989527,
+      "IP Network Architecture": 3.4554973821989527,
+      "Identity & Subscriber Data": 3.4554973821989527,
+      "Industry & business": 3.4554973821989527,
+      "Interconnect / Internet / Roaming": 3.4554973821989527,
+      "Mobile Broadband (MBB) overview": 3.4554973821989527,
+      "Mobile Core Network": 3.4554973821989527,
+      "Network Architecture Concepts": 3.4554973821989527,
+      "Network Metrics & KPIs": 3.4554973821989527,
+      "Network domains overview": 3.4554973821989527,
+      "OSS/BSS & Operations": 3.4554973821989527,
+      "Security & Compliance": 3.4554973821989527,
+      "Transport network": 3.4554973821989527,
+      "Wireless Network (RAN)": 3.4554973821989527,
+      "Инфраструктура": 3.4554973821989527
+    }
+  },
+  "stats": {
+    "total": 66,
+    "byType": {
+      "tf": 13,
+      "single": 23,
+      "multi": 30
+    },
+    "byLevel": {
+      "Level-0": 36,
+      "Level-1": 19,
+      "Level-2": 10,
+      "None": 1
+    },
+    "byDifficulty": {
+      "Базовый": 19,
+      "Средний": 33,
+      "Сложный": 12
+    },
+    "byTopic": {
+      "Basic Foundation": 1,
+      "Charging & Billing Systems": 3,
+      "Cloud & Virtualization Architecture": 3,
+      "Core Protocols & Signaling": 3,
+      "Fixed Broadband (FBB) overview": 4,
+      "IMS & Voice Architecture": 3,
+      "IP Network Architecture": 3,
+      "Identity & Subscriber Data": 3,
+      "Industry & business": 4,
+      "Interconnect / Internet / Roaming": 4,
+      "Mobile Broadband (MBB) overview": 4,
+      "Mobile Core Network": 4,
+      "Network Architecture Concepts": 1,
+      "Network Metrics & KPIs": 3,
+      "Network domains overview": 5,
+      "OSS/BSS & Operations": 4,
+      "Security & Compliance": 4,
+      "Transport network": 4,
+      "Wireless Network (RAN)": 5,
+      "Инфраструктура": 1
+    },
+    "totalPoints": 112.52
+  }
+}
