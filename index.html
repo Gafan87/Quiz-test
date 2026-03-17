@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1308,128 +1307,6 @@ function calculateAndShowForcedResults(reason) {
             showQuestion();
         }
 
-        function showQuestion() {
-            const q = currentQuestions[currentIndex];
-            const content = document.getElementById('quizContent');
-
-            const isMulti = q.type?.includes('Multi Choice');
-            const isTrueFalse = q.type?.includes('True/False') || (q.optA === 'Верно' && q.optB === 'Неверно');
-
-            let displayType = q.type || '';
-            if (isTrueFalse) displayType = 'True/False';
-            else if (isMulti) displayType = 'Multi Choice';
-            else if (displayType.includes('Single')) displayType = 'Single Choice';
-
-            let optionsHtml = '';
-            const letters = ['A', 'B', 'C', 'D'];
-            const optKeys = ['optA', 'optB', 'optC', 'optD'];
-
-            optKeys.forEach((key, i) => {
-                const letter = letters[i];
-                const text = q[key];
-                if (!text) return;
-                if (isTrueFalse && (letter === 'C' || letter === 'D')) return;
-
-                const checked = userAnswers[currentIndex] && 
-                    (isMulti ? userAnswers[currentIndex].includes(letter) : userAnswers[currentIndex] === letter);
-
-                const inputType = isMulti ? 'checkbox' : 'radio';
-                const name = isMulti ? `q${currentIndex}` : 'answer';
-
-                optionsHtml += `
-                    <div class="option-item ${checked ? 'selected' : ''}" onclick="selectOption('${letter}')">
-                        <input type="${inputType}" name="${name}" value="${letter}" ${checked ? 'checked' : ''}>
-                        <label>${letter}. ${text}</label>
-                    </div>
-                `;
-            });
-
-            const levelClass = {
-                'Level-0': 'badge-level0',
-                'Level-1': 'badge-level1',
-                'Level-2': 'badge-level2'
-            }[q.level] || '';
-
-            const difficultyClass = {
-                'Базовый': 'badge-basic',
-                'Средний': 'badge-medium',
-                'Сложный': 'badge-hard'
-            }[q.difficulty] || '';
-
-            const isLast = currentIndex === currentQuestions.length - 1;
-            document.getElementById('finishBtn').style.display = isLast ? 'inline-block' : 'none';
-            document.getElementById('nextBtn').style.display = isLast ? 'none' : 'inline-block';
-
-            let isAnswerCorrect = false;
-            if (submitted[currentIndex] && userAnswers[currentIndex]) {
-                const answer = userAnswers[currentIndex];
-                const correct = q.correct || '';
-
-                if (!isMulti) {
-                    isAnswerCorrect = answer === correct;
-                } else {
-                    const correctArray = correct.split(',').map(s => s.trim()).sort();
-                    const userArray = answer.sort ? answer.sort() : [];
-                    isAnswerCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
-                }
-            }
-
-            // Проверяем настройки отображения
-            const showCorrectness = testData?.showResults?.showCorrectnessDuringTest !== false;
-            const showExplanations = testData?.showResults?.showExplanationsDuringTest !== false;
-
-            // Формируем блок объяснения с учетом настроек
-            let explanationHtml = '';
-            if (submitted[currentIndex]) {
-                const explanationClass = isAnswerCorrect ? 'explanation-box correct' : 'explanation-box incorrect';
-                
-                let correctAnswerHtml = '';
-                if (showCorrectness) {
-                    correctAnswerHtml = `<div class="correct-answer">✅ Правильный ответ: ${q.correct}</div>`;
-                }
-                
-                let explanationTextHtml = '';
-                if (showExplanations && q.explanation) {
-                    explanationTextHtml = `<div class="explanation-text">${q.explanation}</div>`;
-                }
-                
-                if (correctAnswerHtml || explanationTextHtml) {
-                    explanationHtml = `
-                        <div class="${explanationClass}" style="display: block;">
-                            ${correctAnswerHtml}
-                            ${explanationTextHtml}
-                        </div>
-                    `;
-                }
-            }
-
-            content.innerHTML = `
-                <div class="question-container">
-                    <div class="question-meta">
-                        <span class="badge ${levelClass}">${q.level || 'Уровень'}</span>
-                        <span class="badge ${difficultyClass}">${q.difficulty || 'Сложность'}</span>
-                        <span class="badge badge-topic">${q.topic || 'Тема'}</span>
-                        <span class="badge badge-type">📌 ${displayType}</span>
-                    </div>
-                    
-                    <div class="question-text">${q.question}</div>
-                    
-                    <div class="options-list">
-                        ${optionsHtml}
-                    </div>
-                    
-                    <button class="submit-button" onclick="submitAnswer()" ${submitted[currentIndex] ? 'disabled' : ''}>
-                        ${submitted[currentIndex] ? '✓ Ответ принят' : '📤 Отправить ответ'}
-                    </button>
-                    
-                    ${explanationHtml}
-                </div>
-            `;
-
-            document.getElementById('progressInfo').textContent = 
-                `Вопрос ${currentIndex + 1} из ${currentQuestions.length}`;
-        }
-
         function selectOption(letter) {
             if (submitted[currentIndex]) return;
 
@@ -1471,140 +1348,178 @@ function calculateAndShowForcedResults(reason) {
             }
         }
 
-        function finishQuiz() {
-            // Проверяем, нужно ли показывать детальные результаты
-            const showDetailed = testData?.showResults?.showDetailedResults !== false;
+function exportResultsToHTML() {
+    const userName = document.getElementById('displayName').textContent || 'Аноним';
+    const date = new Date().toLocaleString('ru-Ru');
+    const showDetailed = testData?.showResults?.showDetailedResults !== false;
+    
+    // Пересчитываем баллы
+    let totalScore = 0;
+    let totalPossibleScore = 0;
+    let correctCount = 0;
+    
+    currentQuestions.forEach((q, idx) => {
+        const points = q.points || 1;
+        totalPossibleScore += points;
+        
+        if (submitted[idx] && userAnswers[idx]) {
+            const answer = userAnswers[idx];
+            const correct = q.correct || '';
+            const isMulti = q.type?.includes('Multi Choice');
             
-            if (testForcedEnd) {
-                alert('⚠️ Тест был прерван из-за нарушения правил.\n\nРезультаты не могут быть сохранены.');
-                restartQuiz();
-                return;
+            let isCorrect = false;
+            if (!isMulti) {
+                isCorrect = answer === correct;
+            } else {
+                const correctArray = correct.split(',').map(s => s.trim()).sort();
+                const userArray = answer?.sort ? answer.sort() : [];
+                isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
             }
-
-            score = 0;
-            let totalPossibleScore = 0;
-            let questionScores = [];
-
-            deactivateLockdown();
-
-            currentQuestions.forEach((q, idx) => {
-                const questionPoints = q.points || 1;
-                totalPossibleScore += questionPoints;
-
-                if (!submitted[idx]) {
-                    questionScores[idx] = { points: 0, maxPoints: questionPoints };
-                    return;
-                }
-
-                const answer = userAnswers[idx];
-                const correct = q.correct || '';
-                const isMulti = q.type?.includes('Multi Choice');
-
-                let isCorrect = false;
+            
+            if (isCorrect) {
+                totalScore += points;
+                correctCount++;
+            }
+        }
+    });
+    
+    const percent = Math.round((totalScore / totalPossibleScore) * 100);
+    
+    // Получаем детальные данные для экспорта (из скрытого контейнера или формируем заново)
+    let detailedHtml = '';
+    
+    // Пытаемся получить данные из скрытого контейнера
+    const exportContainer = document.getElementById('exportDataContainer');
+    if (exportContainer) {
+        detailedHtml = exportContainer.innerHTML;
+    } else {
+        // Если контейнера нет (например, при показе деталей на экране), формируем заново
+        currentQuestions.forEach((q, idx) => {
+            const answer = userAnswers[idx];
+            const correct = q.correct || '';
+            const isMulti = q.type?.includes('Multi Choice');
+            const points = q.points || 1;
+            
+            let answerText = 'Не отвечен';
+            if (answer) {
+                if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
+                else answerText = answer;
+            }
+            
+            let status = 'not-answered';
+            let statusText = 'Не отвечен';
+            let pointsText = `0/${points}`;
+            
+            if (submitted[idx] && answer) {
                 if (!isMulti) {
-                    isCorrect = answer === correct;
+                    if (answer === correct) {
+                        status = 'correct';
+                        statusText = 'Верно';
+                        pointsText = `${points}/${points}`;
+                    } else {
+                        status = 'incorrect';
+                        statusText = 'Неверно';
+                        pointsText = `0/${points}`;
+                    }
                 } else {
                     const correctArray = correct.split(',').map(s => s.trim()).sort();
                     const userArray = answer?.sort ? answer.sort() : [];
-                    isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
-                }
-
-                if (isCorrect) {
-                    score += questionPoints;
-                    questionScores[idx] = { points: questionPoints, maxPoints: questionPoints };
-                } else {
-                    questionScores[idx] = { points: 0, maxPoints: questionPoints };
-                }
-            });
-
-            document.getElementById('quizPage').classList.add('hidden');
-            document.getElementById('resultsPage').classList.remove('hidden');
-
-            const percent = Math.round((score / totalPossibleScore) * 100);
-
-            // Формируем детализацию только если разрешено
-            let answersHtml = '';
-            if (showDetailed) {
-                currentQuestions.forEach((q, idx) => {
-                    const answer = userAnswers[idx];
-                    const correct = q.correct || '';
-                    const isMulti = q.type?.includes('Multi Choice');
-                    const questionScore = questionScores[idx];
-
-                    let answerText = 'Не отвечен';
-                    if (answer) {
-                        if (isMulti && Array.isArray(answer)) answerText = answer.join(', ');
-                        else answerText = answer;
-                    }
-
-                    let resultClass = '', resultText = '', scoreText = '';
-
-                    if (!submitted[idx]) {
-                        resultClass = 'result-not-submitted';
-                        resultText = '⏳ Не отвечен';
-                        scoreText = `0/${questionScore.maxPoints}`;
+                    if (JSON.stringify(userArray) === JSON.stringify(correctArray.sort())) {
+                        status = 'correct';
+                        statusText = 'Верно';
+                        pointsText = `${points}/${points}`;
                     } else {
-                        const isCorrect = questionScore.points > 0;
-                        resultClass = isCorrect ? 'result-correct' : 'result-incorrect';
-                        resultText = isCorrect ? '✅ Верно' : '❌ Неверно';
-                        scoreText = `${questionScore.points}/${questionScore.maxPoints}`;
+                        status = 'incorrect';
+                        statusText = 'Неверно';
+                        pointsText = `0/${points}`;
                     }
-
-                    answersHtml += `
-                        <div class="answer-detail-card">
-                            <div class="answer-detail-question">${idx+1}. ${q.question}</div>
-                            <div class="answer-detail-row">
-                                <span class="answer-label">Ваш ответ:</span>
-                                <span class="answer-value">${answerText}</span>
-                            </div>
-                            <div class="answer-detail-row">
-                                <span class="answer-label">Правильный ответ:</span>
-                                <span class="answer-value">${correct}</span>
-                            </div>
-                            <div class="answer-detail-row">
-                                <span class="answer-label">Баллы:</span>
-                                <span class="answer-value">${scoreText}</span>
-                            </div>
-                            <div class="answer-detail-result ${resultClass}">${resultText}</div>
-                        </div>
-                    `;
-                });
+                }
             }
-
-            document.getElementById('resultsContent').innerHTML = `
-                <div class="results-summary">
-                    <div class="result-card">
-                        <div class="value">${score}</div>
-                        <div class="label">Набрано баллов</div>
+            
+            detailedHtml += `
+                <div class="answer-detail-card">
+                    <div class="answer-detail-question">${idx+1}. ${q.question}</div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Ваш ответ:</span>
+                        <span class="answer-value">${answerText}</span>
                     </div>
-                    <div class="result-card">
-                        <div class="value">${totalPossibleScore}</div>
-                        <div class="label">Максимум баллов</div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Правильный ответ:</span>
+                        <span class="answer-value">${correct}</span>
                     </div>
-                    <div class="result-card">
-                        <div class="value">${percent}%</div>
-                        <div class="label">Успешность</div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Баллы:</span>
+                        <span class="answer-value">${pointsText}</span>
                     </div>
-                </div>
-                <div style="text-align: center; margin: 20px 0;">
-                    <strong>Студент:</strong> ${document.getElementById('displayName').textContent}<br>
-                    <strong>Правильных ответов:</strong> ${currentQuestions.filter((_, idx) => questionScores[idx]?.points > 0).length} из ${currentQuestions.length}
-                </div>
-                
-                ${showDetailed ? `<h3>📋 Детализация ответов</h3>${answersHtml}` : ''}
-                
-                <!-- Кнопки экспорта результатов -->
-                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
-                    <button class="btn btn-primary" onclick="exportResultsToTXT()" style="margin-right: 10px;">
-                        📥 Сохранить результаты (TXT)
-                    </button>
-                    <button class="btn btn-success" onclick="exportResultsToHTML()">
-                        📥 Сохранить результаты (HTML)
-                    </button>
+                    <div class="answer-detail-result result-${status}">${statusText}</div>
+                    ${q.explanation ? `<div class="explanation-text">${q.explanation}</div>` : ''}
                 </div>
             `;
-        }
-
+        });
+    }
+    
+    // Генерируем HTML отчет (ВСЕГДА с полной детализацией)
+    let html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты теста</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f8fafc; }
+        h1 { color: #2563eb; }
+        .summary { background: white; padding: 20px; border-radius: 10px; margin: 20px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .question { background: white; border: 1px solid #e5e7eb; padding: 20px; margin: 15px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .correct { border-left: 5px solid #059669; }
+        .incorrect { border-left: 5px solid #dc2626; }
+        .not-answered { border-left: 5px solid #d97706; }
+        .label { font-weight: bold; color: #4b5563; min-width: 140px; display: inline-block; }
+        .meta-info { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .badge { padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; }
+        .badge-level0 { background: #e9d8fd; color: #553c9a; }
+        .badge-level1 { background: #fef9e7; color: #97500e; }
+        .badge-level2 { background: #fde2e2; color: #9b2c2c; }
+        .badge-basic { background: #dbeafe; color: #1e40af; }
+        .badge-medium { background: #fef3c7; color: #92400e; }
+        .badge-hard { background: #fee2e2; color: #991b1b; }
+        .badge-topic { background: #cbd5e1; color: #334155; }
+        .badge-type { background: #cbd5e1; color: #334155; }
+        .question-text { font-size: 1.2em; font-weight: 600; margin: 15px 0; }
+        .result-badge { display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: 600; margin: 10px 0; }
+        .result-correct { background: #f0fdf4; color: #059669; border: 1px solid #86efac; }
+        .result-incorrect { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .result-not-submitted { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+        .answer-detail-card { background: white; border: 1px solid #e5e7eb; padding: 20px; margin: 15px 0; border-radius: 12px; }
+        .answer-detail-row { padding: 8px 12px; background: #f8fafc; border-radius: 6px; margin: 5px 0; }
+        .explanation-text { margin-top: 15px; padding: 15px; background: #f1f5f9; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>📊 Результаты теста</h1>
+    <div class="summary">
+        <p><strong>Студент:</strong> ${userName}</p>
+        <p><strong>Тест:</strong> ${testData?.testName || 'Тест'}</p>
+        <p><strong>Дата:</strong> ${date}</p>
+        <p><strong>Баллы:</strong> ${totalScore} из ${totalPossibleScore} (${percent}%)</p>
+        <p><strong>Правильных ответов:</strong> ${correctCount} из ${currentQuestions.length}</p>
+    </div>
+    
+    <h2>Детализация ответов</h2>
+    ${detailedHtml}
+    
+</body>
+</html>`;
+    
+    // Создаем и скачиваем файл
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    
+    const dateStr = new Date().toISOString().slice(0,19).replace(/:/g, '-');
+    link.download = `результаты_${userName}_${dateStr}.html`;
+    
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
         function restartQuiz() {
             deactivateLockdown();
             document.getElementById('resultsPage').classList.add('hidden');
@@ -2035,6 +1950,602 @@ function exportResultsToHTML() {
             ).join('') : ''}
         `;
     }
+
+// ==============================================
+// НАВИГАЦИЯ ПО КЛАВИАТУРЕ
+// ==============================================
+
+document.addEventListener('keydown', function(e) {
+    if (!isTestActive || testForcedEnd) return;
+    
+    // Проверяем, не в фокусе ли поле ввода
+    const activeElement = document.activeElement;
+    const isInputFocused = activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA');
+    
+    // Если в фокусе поле ввода, не перехватываем стрелки (чтобы можно было редактировать)
+    if (isInputFocused) return;
+    
+    // Стрелка влево - предыдущий вопрос
+    if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (currentIndex > 0) {
+            prevQuestion();
+        }
+    }
+    
+    // Стрелка вправо - следующий вопрос
+    if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        if (currentIndex < currentQuestions.length - 1) {
+            nextQuestion();
+        }
+    }
+    
+    // Цифровые клавиши 1-4 для быстрого выбора ответа
+    const digitKeys = ['1', '2', '3', '4'];
+    if (digitKeys.includes(e.key) && !submitted[currentIndex]) {
+        e.preventDefault();
+        const letters = ['A', 'B', 'C', 'D'];
+        const index = parseInt(e.key) - 1;
+        if (index < 4) {
+            const letter = letters[index];
+            const q = currentQuestions[currentIndex];
+            // Проверяем, существует ли такая опция
+            if (q[`opt${letter}`]) {
+                selectOption(letter);
+            }
+        }
+    }
+    
+    // Клавиша Enter для отправки ответа (если не отправлен)
+    if (e.key === 'Enter' && !submitted[currentIndex] && userAnswers[currentIndex]) {
+        e.preventDefault();
+        submitAnswer();
+    }
+    
+    // Клавиша пробел для отправки ответа (альтернатива)
+    if (e.key === ' ' && !submitted[currentIndex] && userAnswers[currentIndex]) {
+        e.preventDefault();
+        submitAnswer();
+    }
+});
+
+// ==============================================
+// ФУНКЦИЯ ЗАВЕРШЕНИЯ ТЕСТА С НАПОМИНАНИЕМ
+// ==============================================
+
+let finishQuizClicked = false;
+
+function finishQuiz() {
+    // Проверяем, есть ли неотправленные ответы (только для предупреждения)
+    const notSubmittedQuestions = [];
+    
+    currentQuestions.forEach((q, idx) => {
+        if (!submitted[idx]) {
+            notSubmittedQuestions.push(idx + 1); // Номера вопросов (1-based)
+        }
+    });
+    
+    // Если это первое нажатие и есть неотправленные ответы - показываем предупреждение
+    if (!finishQuizClicked && notSubmittedQuestions.length > 0) {
+        if (notSubmittedQuestions.length === currentQuestions.length) {
+            alert('⚠️ ПРЕДУПРЕЖДЕНИЕ: Вы не отправили ни одного ответа!\n\nНажмите "Завершить" ещё раз, чтобы закончить тест.');
+        } else {
+            alert(`⚠️ ПРЕДУПРЕЖДЕНИЕ: Вы не отправили ответы на вопросы: ${notSubmittedQuestions.join(', ')}\n\nНажмите "Завершить" ещё раз, чтобы закончить тест.`);
+        }
+        // Устанавливаем флаг и выходим
+        finishQuizClicked = true;
+        return;
+    }
+    
+    // Сбрасываем флаг для следующего запуска
+    finishQuizClicked = false;
+    
+    // Проверка на принудительное завершение
+    if (testForcedEnd) {
+        alert('⚠️ Тест был прерван из-за нарушения правил.\n\nРезультаты не могут быть сохранены.');
+        restartQuiz();
+        return;
+    }
+
+    // Подсчет баллов
+    let totalScore = 0;
+    let totalPossibleScore = 0;
+    let questionScores = [];
+
+    deactivateLockdown();
+
+    currentQuestions.forEach((q, idx) => {
+        const questionPoints = q.points || 1;
+        totalPossibleScore += questionPoints;
+
+        if (!submitted[idx]) {
+            questionScores[idx] = { points: 0, maxPoints: questionPoints };
+            return;
+        }
+
+        const answer = userAnswers[idx];
+        const correct = q.correct || '';
+        const isMulti = q.type?.includes('Multi Choice');
+
+        let isCorrect = false;
+        if (!isMulti) {
+            isCorrect = answer === correct;
+        } else {
+            const correctArray = correct.split(',').map(s => s.trim()).sort();
+            const userArray = answer?.sort ? answer.sort() : [];
+            isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+        }
+
+        if (isCorrect) {
+            totalScore += questionPoints;
+            questionScores[idx] = { points: questionPoints, maxPoints: questionPoints };
+        } else {
+            questionScores[idx] = { points: 0, maxPoints: questionPoints };
+        }
+    });
+
+    // Переключаемся на страницу результатов
+    document.getElementById('quizPage').classList.add('hidden');
+    document.getElementById('resultsPage').classList.remove('hidden');
+
+    const percent = Math.round((totalScore / totalPossibleScore) * 100);
+    const showDetailedOnScreen = testData?.showResults?.showDetailedResults !== false;
+
+    // Формируем детализацию для ЭКРАНА (в зависимости от настроек)
+    let answersHtml = '';
+    // И отдельно формируем ПОЛНЫЕ данные для экспорта (всегда)
+    let exportDataHtml = '';
+    
+    currentQuestions.forEach((q, idx) => {
+        const answer = userAnswers[idx];
+        const correct = q.correct || '';
+        const isMulti = q.type?.includes('Multi Choice');
+        const questionScore = questionScores[idx];
+
+        // Форматируем ответ студента
+        let answerText = '—';
+        if (submitted[idx] && answer) {
+            if (isMulti && Array.isArray(answer)) {
+                answerText = answer.join(', '); // Например "A, B, C"
+            } else {
+                answerText = answer; // Например "A"
+            }
+        } else if (!submitted[idx]) {
+            answerText = 'не отправлен';
+        }
+
+        // ПОЛНЫЕ данные для экспорта (всегда)
+        let resultClass = '', resultText = '', scoreText = '';
+
+        if (!submitted[idx]) {
+            resultClass = 'result-not-submitted';
+            resultText = '⏳ Не отправлен';
+            scoreText = `0/${questionScore.maxPoints}`;
+        } else {
+            const isCorrect = questionScore.points > 0;
+            resultClass = isCorrect ? 'result-correct' : 'result-incorrect';
+            resultText = isCorrect ? '✅ Верно' : '❌ Неверно';
+            scoreText = `${questionScore.points}/${questionScore.maxPoints}`;
+        }
+
+        // Сохраняем полные данные для экспорта
+        exportDataHtml += `
+            <div class="answer-detail-card" data-question="${idx+1}">
+                <div class="answer-detail-question">${idx+1}. ${q.question}</div>
+                <div class="answer-detail-row">
+                    <span class="answer-label">Ваш ответ:</span>
+                    <span class="answer-value">${answerText}</span>
+                </div>
+                <div class="answer-detail-row">
+                    <span class="answer-label">Правильный ответ:</span>
+                    <span class="answer-value">${correct}</span>
+                </div>
+                <div class="answer-detail-row">
+                    <span class="answer-label">Баллы:</span>
+                    <span class="answer-value">${scoreText}</span>
+                </div>
+                <div class="answer-detail-result ${resultClass}">${resultText}</div>
+                ${q.explanation ? `<div class="explanation-text">${q.explanation}</div>` : ''}
+            </div>
+        `;
+
+        if (showDetailedOnScreen) {
+            // ПОЛНЫЙ режим на экране
+            answersHtml += `
+                <div class="answer-detail-card">
+                    <div class="answer-detail-question">${idx+1}. ${q.question}</div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Ваш ответ:</span>
+                        <span class="answer-value">${answerText}</span>
+                    </div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Правильный ответ:</span>
+                        <span class="answer-value">${correct}</span>
+                    </div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Баллы:</span>
+                        <span class="answer-value">${scoreText}</span>
+                    </div>
+                    <div class="answer-detail-result ${resultClass}">${resultText}</div>
+                    ${q.explanation ? `<div class="explanation-text" style="margin-top:10px; padding:10px; background:#f1f5f9; border-radius:6px;">📝 ${q.explanation}</div>` : ''}
+                </div>
+            `;
+        } else {
+            // КРАТКИЙ режим на экране: только вопрос и ответ студента
+            answersHtml += `
+                <div class="answer-detail-card" style="margin-bottom: 15px; padding: 15px;">
+                    <div style="font-weight: 600; margin-bottom: 10px; color: #2563eb;">Вопрос ${idx+1}</div>
+                    <div style="margin-bottom: 10px; font-size: 1.1em;">${q.question}</div>
+                    <div style="display: flex; align-items: center; gap: 10px; padding: 10px; background: #f8fafc; border-radius: 8px;">
+                        <span style="font-weight: 600; color: #475569;">Ответ студента:</span>
+                        <span style="font-family: monospace; font-size: 1.2em; background: white; padding: 5px 15px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                            ${answerText}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+    });
+
+    // Формируем содержимое для экрана
+    let screenHtml = `
+        <div class="results-summary">
+            <div class="result-card">
+                <div class="value">${totalScore}</div>
+                <div class="label">Набрано баллов</div>
+            </div>
+            <div class="result-card">
+                <div class="value">${totalPossibleScore}</div>
+                <div class="label">Максимум баллов</div>
+            </div>
+            <div class="result-card">
+                <div class="value">${percent}%</div>
+                <div class="label">Успешность</div>
+            </div>
+        </div>
+        <div style="text-align: center; margin: 20px 0; padding: 15px; background: #f8fafc; border-radius: 10px;">
+            <strong>Студент:</strong> ${document.getElementById('displayName').textContent}<br>
+            <strong>Правильных ответов:</strong> ${currentQuestions.filter((_, idx) => questionScores[idx]?.points > 0).length} из ${currentQuestions.length}<br>
+            <strong>Отправлено ответов:</strong> ${submitted.filter(s => s).length} из ${currentQuestions.length}
+        </div>
+        
+        <h3 style="margin-top: 30px; margin-bottom: 20px;">
+            ${showDetailedOnScreen ? '📋 Детализация ответов' : '📋 Ответы студента'}
+        </h3>
+        ${answersHtml}
+        
+        <!-- Сохраняем ПОЛНЫЕ данные для экспорта в скрытом контейнере -->
+        <div id="exportDataContainer" style="display: none;">${exportDataHtml}</div>
+    `;
+
+    // Добавляем кнопки экспорта
+    screenHtml += `
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e2e8f0;">
+            <button class="btn btn-primary" onclick="exportResultsToTXT()" style="margin-right: 10px;">
+                📥 Сохранить результаты (TXT)
+            </button>
+            <button class="btn btn-success" onclick="exportResultsToHTML()">
+                📥 Сохранить результаты (HTML)
+            </button>
+        </div>
+    `;
+
+    document.getElementById('resultsContent').innerHTML = screenHtml;
+}
+
+function exportResultsToHTML() {
+    const userName = document.getElementById('displayName').textContent || 'Аноним';
+    const date = new Date().toLocaleString('ru-RU');
+    const showDetailedOnScreen = testData?.showResults?.showDetailedResults !== false;
+    
+    // Пересчитываем баллы
+    let totalScore = 0;
+    let totalPossibleScore = 0;
+    let correctCount = 0;
+    
+    currentQuestions.forEach((q, idx) => {
+        const points = q.points || 1;
+        totalPossibleScore += points;
+        
+        if (submitted[idx] && userAnswers[idx]) {
+            const answer = userAnswers[idx];
+            const correct = q.correct || '';
+            const isMulti = q.type?.includes('Multi Choice');
+            
+            let isCorrect = false;
+            if (!isMulti) {
+                isCorrect = answer === correct;
+            } else {
+                const correctArray = correct.split(',').map(s => s.trim()).sort();
+                const userArray = answer?.sort ? answer.sort() : [];
+                isCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+            }
+            
+            if (isCorrect) {
+                totalScore += points;
+                correctCount++;
+            }
+        }
+    });
+    
+    const percent = Math.round((totalScore / totalPossibleScore) * 100);
+    
+    // Формируем детализацию в зависимости от режима
+    let detailedHtml = '';
+    
+    currentQuestions.forEach((q, idx) => {
+        const answer = userAnswers[idx];
+        const isMulti = q.type?.includes('Multi Choice');
+        
+        // Форматируем ответ студента
+        let answerText = '—';
+        if (submitted[idx] && answer) {
+            if (isMulti && Array.isArray(answer)) {
+                answerText = answer.join(', '); // Например "A, B, C"
+            } else {
+                answerText = answer; // Например "A"
+            }
+        } else if (!submitted[idx]) {
+            answerText = 'не отправлен';
+        }
+        
+        if (showDetailedOnScreen) {
+            // ПОЛНЫЙ режим: показываем всё
+            const correct = q.correct || '';
+            const points = q.points || 1;
+            
+            let status = 'not-submitted';
+            let statusText = 'Не отправлен';
+            let pointsText = `0/${points}`;
+            
+            if (submitted[idx] && answer) {
+                if (!isMulti) {
+                    if (answer === correct) {
+                        status = 'correct';
+                        statusText = 'Верно';
+                        pointsText = `${points}/${points}`;
+                    } else {
+                        status = 'incorrect';
+                        statusText = 'Неверно';
+                        pointsText = `0/${points}`;
+                    }
+                } else {
+                    const correctArray = correct.split(',').map(s => s.trim()).sort();
+                    const userArray = answer?.sort ? answer.sort() : [];
+                    if (JSON.stringify(userArray) === JSON.stringify(correctArray.sort())) {
+                        status = 'correct';
+                        statusText = 'Верно';
+                        pointsText = `${points}/${points}`;
+                    } else {
+                        status = 'incorrect';
+                        statusText = 'Неверно';
+                        pointsText = `0/${points}`;
+                    }
+                }
+            }
+            
+            detailedHtml += `
+                <div class="answer-detail-card">
+                    <div class="answer-detail-question">${idx+1}. ${q.question}</div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Ваш ответ:</span>
+                        <span class="answer-value">${answerText}</span>
+                    </div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Правильный ответ:</span>
+                        <span class="answer-value">${correct}</span>
+                    </div>
+                    <div class="answer-detail-row">
+                        <span class="answer-label">Баллы:</span>
+                        <span class="answer-value">${pointsText}</span>
+                    </div>
+                    <div class="answer-detail-result result-${status}">${statusText}</div>
+                    ${q.explanation ? `<div class="explanation-text">${q.explanation}</div>` : ''}
+                </div>
+            `;
+        } else {
+            // КРАТКИЙ режим: только вопрос и ответ студента (как на экране)
+            detailedHtml += `
+                <div class="answer-detail-card" style="margin-bottom: 20px; padding: 20px;">
+                    <div style="font-weight: 600; margin-bottom: 15px; color: #2563eb; font-size: 1.1em;">Вопрос ${idx+1}</div>
+                    <div style="margin-bottom: 15px; font-size: 1.1em; line-height: 1.5;">${q.question}</div>
+                    <div style="display: flex; align-items: center; gap: 15px; padding: 12px 15px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0;">
+                        <span style="font-weight: 600; color: #475569; min-width: 120px;">Ответ студента:</span>
+                        <span style="font-family: 'Courier New', monospace; font-size: 1.2em; font-weight: 500; background: white; padding: 6px 20px; border-radius: 25px; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                            ${answerText}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }
+    });
+    
+    // Генерируем HTML отчет
+    let html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты теста</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f8fafc; }
+        h1 { color: #2563eb; }
+        .summary { background: white; padding: 25px; border-radius: 12px; margin: 20px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .answer-detail-card { background: white; border: 1px solid #e2e8f0; padding: 20px; margin: 15px 0; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .answer-detail-question { font-weight: 600; font-size: 1.1em; margin-bottom: 15px; color: #2563eb; }
+        .answer-detail-row { display: flex; margin: 10px 0; padding: 8px 12px; background: #f8fafc; border-radius: 6px; }
+        .answer-label { font-weight: 600; width: 140px; color: #475569; }
+        .answer-value { flex: 1; }
+        .answer-detail-result { margin-top: 15px; padding: 12px; border-radius: 8px; font-weight: 600; text-align: center; }
+        .result-correct { background: #f0fdf4; color: #059669; border: 1px solid #86efac; }
+        .result-incorrect { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+        .result-not-submitted { background: #fef9c3; color: #854d0e; border: 1px solid #fde047; }
+        .explanation-text { margin-top: 15px; padding: 15px; background: #f1f5f9; border-radius: 8px; }
+        .stats-badge { display: inline-block; padding: 5px 15px; background: #dbeafe; color: #1e40af; border-radius: 20px; font-weight: 600; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>📊 Результаты теста</h1>
+    <div class="summary">
+        <p><strong>Студент:</strong> ${userName}</p>
+        <p><strong>Тест:</strong> ${testData?.testName || 'Тест'}</p>
+        <p><strong>Дата:</strong> ${date}</p>
+        <p><strong>Баллы:</strong> ${totalScore} из ${totalPossibleScore} (${percent}%)</p>
+        <p><strong>Правильных ответов:</strong> ${correctCount} из ${currentQuestions.length}</p>
+        <p><strong>Отправлено ответов:</strong> ${submitted.filter(s => s).length} из ${currentQuestions.length}</p>
+    </div>
+    
+    <h2 style="margin-top: 30px; margin-bottom: 20px;">${showDetailedOnScreen ? '📋 Детализация ответов' : '📋 Ответы студента'}</h2>
+    ${detailedHtml}
+    
+</body>
+</html>`;
+    
+    // Создаем и скачиваем файл
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    
+    const dateStr = new Date().toISOString().slice(0,19).replace(/:/g, '-');
+    link.download = `результаты_${userName}_${dateStr}.html`;
+    
+    link.click();
+    URL.revokeObjectURL(link.href);
+}
+
+// Также обновим функцию showQuestion, чтобы добавить подсказки по клавишам
+function showQuestion() {
+    const q = currentQuestions[currentIndex];
+    const content = document.getElementById('quizContent');
+
+    const isMulti = q.type?.includes('Multi Choice');
+    const isTrueFalse = q.type?.includes('True/False') || (q.optA === 'Верно' && q.optB === 'Неверно');
+
+    let displayType = q.type || '';
+    if (isTrueFalse) displayType = 'True/False';
+    else if (isMulti) displayType = 'Multi Choice';
+    else if (displayType.includes('Single')) displayType = 'Single Choice';
+
+    let optionsHtml = '';
+    const letters = ['A', 'B', 'C', 'D'];
+    const optKeys = ['optA', 'optB', 'optC', 'optD'];
+
+    optKeys.forEach((key, i) => {
+        const letter = letters[i];
+        const text = q[key];
+        if (!text) return;
+        if (isTrueFalse && (letter === 'C' || letter === 'D')) return;
+
+        const checked = userAnswers[currentIndex] && 
+            (isMulti ? userAnswers[currentIndex].includes(letter) : userAnswers[currentIndex] === letter);
+
+        const inputType = isMulti ? 'checkbox' : 'radio';
+        const name = isMulti ? `q${currentIndex}` : 'answer';
+
+        optionsHtml += `
+            <div class="option-item ${checked ? 'selected' : ''}" onclick="selectOption('${letter}')">
+                <input type="${inputType}" name="${name}" value="${letter}" ${checked ? 'checked' : ''}>
+                <label>${letter}. ${text}</label>
+            </div>
+        `;
+    });
+
+    const levelClass = {
+        'Level-0': 'badge-level0',
+        'Level-1': 'badge-level1',
+        'Level-2': 'badge-level2'
+    }[q.level] || '';
+
+    const difficultyClass = {
+        'Базовый': 'badge-basic',
+        'Средний': 'badge-medium',
+        'Сложный': 'badge-hard'
+    }[q.difficulty] || '';
+
+    const isLast = currentIndex === currentQuestions.length - 1;
+    document.getElementById('finishBtn').style.display = isLast ? 'inline-block' : 'none';
+    document.getElementById('nextBtn').style.display = isLast ? 'none' : 'inline-block';
+
+    let isAnswerCorrect = false;
+    if (submitted[currentIndex] && userAnswers[currentIndex]) {
+        const answer = userAnswers[currentIndex];
+        const correct = q.correct || '';
+
+        if (!isMulti) {
+            isAnswerCorrect = answer === correct;
+        } else {
+            const correctArray = correct.split(',').map(s => s.trim()).sort();
+            const userArray = answer.sort ? answer.sort() : [];
+            isAnswerCorrect = JSON.stringify(userArray) === JSON.stringify(correctArray.sort());
+        }
+    }
+
+    // Проверяем настройки отображения
+    const showCorrectness = testData?.showResults?.showCorrectnessDuringTest !== false;
+    const showExplanations = testData?.showResults?.showExplanationsDuringTest !== false;
+
+    // Формируем блок объяснения с учетом настроек
+    let explanationHtml = '';
+    if (submitted[currentIndex]) {
+        const explanationClass = isAnswerCorrect ? 'explanation-box correct' : 'explanation-box incorrect';
+        
+        let correctAnswerHtml = '';
+        if (showCorrectness) {
+            correctAnswerHtml = `<div class="correct-answer">✅ Правильный ответ: ${q.correct}</div>`;
+        }
+        
+        let explanationTextHtml = '';
+        if (showExplanations && q.explanation) {
+            explanationTextHtml = `<div class="explanation-text">${q.explanation}</div>`;
+        }
+        
+        if (correctAnswerHtml || explanationTextHtml) {
+            explanationHtml = `
+                <div class="${explanationClass}" style="display: block;">
+                    ${correctAnswerHtml}
+                    ${explanationTextHtml}
+                </div>
+            `;
+        }
+    }
+
+    // Добавляем подсказки по клавишам
+    const keyboardHints = `
+        <div style="margin-top: 20px; padding: 10px; background: #f1f5f9; border-radius: 8px; font-size: 0.9em; color: #475569; text-align: center;">
+            <span style="margin-right: 15px;">⌨️ <kbd>←</kbd> <kbd>→</kbd> навигация</span>
+            <span style="margin-right: 15px;"><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> выбор ответа</span>
+            <span><kbd>Enter</kbd> / <kbd>Пробел</kbd> отправить ответ</span>
+        </div>
+    `;
+
+    content.innerHTML = `
+        <div class="question-container">
+            <div class="question-meta">
+                <span class="badge ${levelClass}">${q.level || 'Уровень'}</span>
+                <span class="badge ${difficultyClass}">${q.difficulty || 'Сложность'}</span>
+                <span class="badge badge-topic">${q.topic || 'Тема'}</span>
+                <span class="badge badge-type">📌 ${displayType}</span>
+            </div>
+            
+            <div class="question-text">${q.question}</div>
+            
+            <div class="options-list">
+                ${optionsHtml}
+            </div>
+            
+            <button class="submit-button" onclick="submitAnswer()" ${submitted[currentIndex] ? 'disabled' : ''}>
+                ${submitted[currentIndex] ? '✓ Ответ принят' : '📤 Отправить ответ'}
+            </button>
+            
+            ${explanationHtml}
+            
+            ${!submitted[currentIndex] ? keyboardHints : ''}
+        </div>
+    `;
+
+    document.getElementById('progressInfo').textContent = 
+        `Вопрос ${currentIndex + 1} из ${currentQuestions.length}`;
+}
 
     // Загружаем тест при открытии страницы
     document.addEventListener('DOMContentLoaded', loadQuiz);
