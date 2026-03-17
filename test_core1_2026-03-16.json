@@ -1,0 +1,1424 @@
+{
+  "testName": "CoreNetwork_опрос_№1",
+  "dateGenerated": "2026-03-16T09:11:28.567Z",
+  "expires": "2026-03-19T13:11:28.342Z",
+  "expiresLocal": "19.03.2026, 16:11:28",
+  "maxViolations": 5,
+  "showResults": {
+    "showCorrectnessDuringTest": false,
+    "showExplanationsDuringTest": false,
+    "showDetailedResults": false
+  },
+  "basePoints": {
+    "level0": 1,
+    "level1": 2,
+    "level2": 3,
+    "levelNone": 1
+  },
+  "coefficients": {
+    "type": {
+      "tf": 50,
+      "single": 100,
+      "multi": 130
+    },
+    "difficulty": {
+      "easy": 80,
+      "medium": 100,
+      "hard": 120
+    }
+  },
+  "topicWeights": [
+    {
+      "topic": "1.5 Network Domains & Segments",
+      "weight": 100,
+      "normalizedWeight": 0.16666666666666666
+    },
+    {
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "weight": 100,
+      "normalizedWeight": 0.16666666666666666
+    },
+    {
+      "topic": "4.2 IMS & Voice",
+      "weight": 100,
+      "normalizedWeight": 0.16666666666666666
+    },
+    {
+      "topic": "4.3 Policy & Charging",
+      "weight": 100,
+      "normalizedWeight": 0.16666666666666666
+    },
+    {
+      "topic": "4.4 Signaling & Control",
+      "weight": 100,
+      "normalizedWeight": 0.16666666666666666
+    },
+    {
+      "topic": "7.1 Subscriber Identity & Devices",
+      "weight": 100,
+      "normalizedWeight": 0.16666666666666666
+    }
+  ],
+  "questions": [
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "MRF",
+      "question": "Какие функции выполняет MRF (Media Resource Function) в IMS?",
+      "optA": "Организация конференц-связи (микширование аудио/видео)",
+      "optB": "Воспроизведение тональных сигналов и объявлений (announcements)",
+      "optC": "Транскодирование медиапотоков между разными кодеками",
+      "optD": "Маршрутизация SIP-сообщений между CSCF",
+      "correct": "A,B,C",
+      "explanation": "MRF предоставляет медиаресурсы: конференции, тоны, объявления, транскодирование. Маршрутизацией SIP занимаются CSCF.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "Voice Quality",
+      "question": "Какие факторы влияют на Voice Quality в VoLTE?",
+      "optA": "Потеря пакетов (packet loss) на радиоинтерфейсе",
+      "optB": "Используемый кодек (AMR-NB vs AMR-WB)",
+      "optC": "Размер экрана телефона",
+      "optD": "Джиттер (вариация задержки) пакетов",
+      "correct": "ABD",
+      "explanation": "Качество голоса зависит от потерь пакетов (A), выбранного кодека (B) и джиттера (D). Размер экрана (C) на голос не влияет.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "4.2 IMS & Voice",
+      "type": "True/False",
+      "term": "VoWiFi",
+      "question": "VoWiFi позволяет совершать звонки через Wi-Fi, используя тот же номер и тарифный план, что и в сотовой сети.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "VoWiFi (Voice over WiFi) интегрируется с IMS и позволяет абоненту пользоваться голосовыми услугами через Wi-Fi с тем же номером и тарифом, обеспечивая seamless-переключение между сетями.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "question": "С какими узлами взаимодействует HSS в сети 4G?",
+      "optA": "С MME (S6a) для аутентификации",
+      "optB": "С PCRF (Sp) для передачи профилей QoS",
+      "optC": "С SGW (S5) для управления сессиями",
+      "optD": "С 3GPP AAA Server (SWx) для non-3GPP доступа",
+      "correct": "ABD",
+      "explanation": "HSS общается с MME (A), PCRF (B) и AAA-сервером (D). С SGW (C) — напрямую нет.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "4.2 IMS & Voice",
+      "type": "True/False",
+      "term": "SIP",
+      "question": "SIP используется только для голосовых вызовов и не может применяться для видеозвонков или обмена сообщениями.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "SIP — универсальный протокол для установления мультимедийных сессий, включая видео, сообщения, игры и другие приложения реального времени.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "question": "Для чего используется протокол GTP (GPRS Tunneling Protocol) в мобильных сетях?",
+      "optA": "Для аутентификации абонентов",
+      "optB": "Для туннелирования пользовательского трафика и сигнализации между сетевыми элементами (RAN и Core)",
+      "optC": "Для синхронизации времени",
+      "optD": "Для управления питанием базовых станций",
+      "correct": "B",
+      "explanation": "GTP создает туннели. GTP-C для сигнализации (управление туннелями), GTP-U для передачи пользовательских данных абонентов внутри этих туннелей.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "question": "Чем принципиально отличается архитектура 5G Core от 4G EPC?",
+      "optA": "Более высокими частотами",
+      "optB": "Использованием SBA архитектуры",
+      "optC": "Наличием QoS",
+      "optD": "Поддержкой голосовых вызовов",
+      "correct": "B",
+      "explanation": "5GC построена на принципах SBA, где сетевые функции общаются через API, что обеспечивает гибкость и масштабируемость, в отличие от жесткой иерархии EPC.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "True/False",
+      "question": "Diameter — это протокол, который используется для AAA (аутентификации, авторизации и учета) в сетях 4G/5G.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Да, Diameter пришел на смену RADIUS и используется в 4G/5G для обмена служебной информацией между сетевыми элементами (например, между MME и HSS) для проверки прав абонента и учета услуг.",
+      "basePoints": 1,
+      "points": 0.5,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "PCEF",
+      "question": "Где может располагаться PCEF (Policy and Charging Enforcement Function) в сети 5G?",
+      "optA": "UPF",
+      "optB": "SMF",
+      "optC": "AMF",
+      "optD": "В gNB",
+      "correct": "A",
+      "explanation": "В 5G функции PCEF обычно интегрированы в UPF. UPF получает правила от SMF и применяет их к трафику.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "1.5 Network Domains & Segments",
+      "type": "True/False",
+      "term": "NR",
+      "question": "NR (New Radio) в 5G поддерживает работу только в миллиметровом диапазоне волн (выше 24 ГГц).",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "NR поддерживает два частотных диапазона: FR1 (sub-6 GHz) — от 450 МГц до 6 ГГц, и FR2 (mmWave) — от 24.25 ГГц до 52.6 ГГц. Большинство коммерческих сетей 5G сегодня работают в FR1.",
+      "basePoints": 3,
+      "points": 1.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.4 Signaling & Control",
+      "type": "Multi Choice",
+      "term": "SCCP",
+      "question": "Какие функции выполняет SCCP (Signaling Connection Control Part) в стеке SS7?",
+      "optA": "Обеспечение адресации на уровне приложений (глобальные заголовки вместо кодов точек)",
+      "optB": "Установление логических соединений для передачи данных (connection-oriented)",
+      "optC": "Сегментация и сборка больших сообщений",
+      "optD": "Маршрутизация на основе MTP",
+      "correct": "A,B,C",
+      "explanation": "SCCP добавляет к MTP возможность адресации по глобальным заголовкам (GT), установление соединений и сегментацию. Маршрутизация на основе MTP — это функция самого MTP.",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "question": "Что необходимо для совершения обычного голосового вызова в сети 2G/3G?",
+      "optA": "Наличие IMS-подписки",
+      "optB": "Активный EPS Bearer",
+      "optC": "Соединение с MSC через радиоинтерфейс",
+      "optD": "Подключение к PGW",
+      "correct": "C",
+      "explanation": "В сетях 2G/3G голос коммутируется через MSC (Mobile Switching Centre) по технологиям CS (Circuit Switched).",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "Multi Choice",
+      "question": "Какие преимущества дает использование SIGTRAN по сравнению с TDM SS7?",
+      "optA": "Использование стандартных IP-каналов вместо дорогих TDM-линий E1/T1",
+      "optB": "Возможность централизованного управления и мониторинга",
+      "optC": "Более высокая пропускная способность для сигнализации",
+      "optD": "Совместимость с аналоговыми телефонами",
+      "correct": "A,B,C",
+      "explanation": "SIGTRAN позволяет экономить на транспортной инфраструктуре, консолидировать трафик и легче масштабировать сигнализацию.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "term": "Signaling",
+      "question": "Что такое сигнализация в телефонной сети?",
+      "optA": "Передача голоса абонента",
+      "optB": "Обмен служебной информацией между оборудованием",
+      "optC": "Шифрование разговора",
+      "optD": "Тарификация услуг связи",
+      "correct": "B",
+      "explanation": "Сигнализация — это \"разговор\" коммутаторов, баз данных и других устройств сети друг с другом, чтобы организовать звонок, передать SMS или обеспечить роуминг.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "Convergent Billing",
+      "question": "Что позволяет делать конвергентная биллинговая система (Converged Billing System)?",
+      "optA": "Тарифицировать услуги из разных сетей (фиксированной, мобильной, IP) в единой системе",
+      "optB": "Поддерживать и prepaid, и postpaid модели расчетов",
+      "optC": "Обрабатывать CDR в реальном времени",
+      "optD": "Управлять сетевыми элементами напрямую",
+      "correct": "A,B",
+      "explanation": "Конвергентная биллинговая система объединяет тарификацию разных сервисов и поддерживает гибридные модели оплаты. Она не управляет сетевыми элементами (это задача OSS/NMS).",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.4 Signaling & Control",
+      "type": "True/False",
+      "term": "HTTP/2",
+      "question": "HTTP/2 используется в 5G Core для взаимодействия между сетевыми функциями (NF) в рамках сервис-ориентированной архитектуры (SBA).",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "В 5G Core сетевые функции (AMF, SMF и др.) общаются друг с другом через API поверх HTTP/2, что обеспечивает гибкость и стандартизацию взаимодействия.",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "question": "Как обычно оплачиваются услуги в postpaid-модели?",
+      "optA": "Абонент платит вперед за следующий месяц",
+      "optB": "Абонент получает счет в конце месяца за фактически использованные услуги",
+      "optC": "Абонент платит за каждую минуту разговора сразу",
+      "optD": "Услуги бесплатны",
+      "correct": "B",
+      "explanation": "Postpaid — это модель с постоплатой: сначала услуги предоставляются, а в конце расчетного периода выставляется счет за их использование.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "question": "Какой протокол отвечает за непосредственную передачу голосовых пакетов в IP-телефонии?",
+      "optA": "SIP",
+      "optB": "RTP",
+      "optC": "RTCP",
+      "optD": "SDP",
+      "correct": "B",
+      "explanation": "SIP устанавливает соединение, SDP описывает параметры, RTCP контролирует качество, а RTP (Real-time Transport Protocol) передает сами голосовые данные.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "Multi Choice",
+      "term": "SS7",
+      "question": "Для каких целей использовалась сигнализация SS7 (Signaling System 7)?",
+      "optA": "Установление и маршрутизация телефонных вызовов",
+      "optB": "Передача SMS-сообщений",
+      "optC": "Доступ к базам данных HLR/VLR для роуминга",
+      "optD": "Передача интернет-трафика",
+      "correct": "A,B,C",
+      "explanation": "SS7 использовалась для всего, что связано с голосовыми услугами и сигнализацией в 2G/3G сетях. Интернет-трафик передается через GTP, а не через SS7.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "True/False",
+      "term": "EPC+",
+      "question": "В режиме 5G NSA (Non-Standalone) управление (control plane) осуществляется через сеть 5G, а данные передаются по 4G.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "В режиме NSA все наоборот: управление осуществляется через 4G (LTE), а данные могут передаваться и через 4G, и через 5G (для увеличения скорости). В SA режиме все через 5G.",
+      "basePoints": 3,
+      "points": 1.5,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "True/False",
+      "term": "CSFB",
+      "question": "CSFB (Circuit Switched FallBack) позволяет совершать голосовые вызовы непосредственно в сети 4G без переключения на 2G/3G.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "CSFB как раз предполагает \"падение\" в 2G/3G сеть для совершения вызова, так как ранние версии LTE не поддерживали голос. VoLTE решил эту проблему.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "CS Core",
+      "question": "Какие узлы входят в состав CS Core (Core Network с коммутацией каналов)?",
+      "optA": "MSC",
+      "optB": "VLR",
+      "optC": "GGSN",
+      "optD": "HLR",
+      "correct": "ABD",
+      "explanation": "CS Core (Circuit Switched Core) обслуживает голосовые вызовы и SMS в 2G/3G. В его состав входят MSC (коммутатор), VLR (гостевая база) и HLR (домашняя база). GGSN (C) — это узел пакетного ядра (PS Core).",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "True/False",
+      "term": "TEID",
+      "question": "TEID (Tunnel Endpoint Identifier) уникален для каждого абонента в пределах одного сетевого элемента (например, SGW).",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "TEID уникально идентифицирует туннель для конкретного абонента на конкретном сетевом элементе. Когда пакет приходит на SGW, TEID говорит, какому абоненту он принадлежит.",
+      "basePoints": 3,
+      "points": 1.5,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "question": "От какого узла OFCS получает CDR для офлайн-тарификации?",
+      "optA": "Только от MME, PCRF",
+      "optB": "От PGW, SGW и MME",
+      "optC": "Только от PCRF",
+      "optD": "От HSS, PCRF",
+      "correct": "B",
+      "explanation": "OFCS собирает CDR от различных узлов: PGW (интернет-сессии), SGW (данные о перемещении), MME (события, SMS) через интерфейсы Ga/Rf.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "term": "MME",
+      "question": "Какие функции выполняет MME (Mobility Management Entity) в сети 4G?",
+      "optA": "Управление мобильностью абонентов в режиме ожидания",
+      "optB": "Обработка пользовательского трафика",
+      "optC": "Аутентификация абонентов",
+      "optD": "Коммутация пакетов пользовательских данных",
+      "correct": "A,C",
+      "explanation": "MME отвечает за управление мобильностью, аутентификацию и сигнализацию, но не обрабатывает пользовательский трафик. За пользовательские данные отвечают SGW и PGW.",
+      "basePoints": 2,
+      "points": 2.08,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "OCS",
+      "question": "Какие компоненты обычно входят в состав OCS (Online Charging System)?",
+      "optA": "Rating Function (расчет стоимости)",
+      "optB": "Account Balance Management Function (управление балансом)",
+      "optC": "Charging Gateway Function (сбор CDR)",
+      "optD": "Online Charging Function (контроль сессий)",
+      "correct": "A,B,D",
+      "explanation": "OCS содержит функции рейтинга, управления балансом и онлайн-контроля сессий. Charging Gateway Function (CGF) обычно относится к OFCS (офлайн).",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "PSTN",
+      "question": "Оператор сотовой связи внедряет VoLTE, но старые абоненты всё ещё используют 2G/3G телефоны. Какие элементы сети необходимы, чтобы обеспечить связь между абонентом VoLTE и абонентом на старом телефоне?",
+      "optA": "MGW (Media Gateway) для преобразования голосовых кодеков",
+      "optB": "IMS Core для обработки SIP-сигнализации от абонента VoLTE",
+      "optC": "MSC (Mobile Switching Centre) для обслуживания абонента 2G/3G",
+      "optD": "PGW для маршрутизации трафика в интернет",
+      "correct": "ABC",
+      "explanation": "Для связи \"VoLTE <-> старый телефон\" требуется мост между IP-миром IMS и миром TDM/CS (2G/3G). IMS обслуживает VoLTE-абонента, MSC — абонента 2G/3G, а MGW преобразует голосовые потоки (например, из AMR в G.711) и сигнализацию. PGW здесь не участвует.",
+      "basePoints": 1,
+      "points": 1.3,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "APN",
+      "question": "Для чего используется APN (Access Point Name) в настройках смартфона?",
+      "optA": "Для подключения к Wi-Fi сети",
+      "optB": "Для определения PGW и типа сети для подключения",
+      "optC": "Для регистрации и аутоинфекции в мобильной сети ",
+      "optD": "APN определяет набор идентификаторов абонента",
+      "correct": "B",
+      "explanation": "APN определяет, через какой PGW устройство будет выходить в интернет или корпоративную сеть, а также задает параметры соединения (IP-тип, аутентификацию).",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "VoWiFi",
+      "question": "Какие условия необходимы для работы VoWiFi?",
+      "optA": "Поддержка VoWiFi телефоном",
+      "optB": "Наличие Wi-Fi сети с выходом в интернет",
+      "optC": "Наличие SIM-карты в телефоне",
+      "optD": "Обязательная привязка к номеру домашнего Wi-Fi",
+      "correct": "ABC",
+      "explanation": "VoWiFi работает через любую Wi-Fi сеть, используя защищенный туннель к сети оператора. Для этого нужен совместимый телефон (A), доступ в интернет (B) и активная SIM-карта для аутентификации (C). Привязка к домашней сети не требуется.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "True/False",
+      "question": "Разные кодеки (например, AMR и EVS) по-разному сжимают голос, влияя на качество звука и объем передаваемых данных.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Более современные кодеки (EVS) обеспечивают лучшее качество (HD Voice) при том же или даже меньшем объеме данных, чем старые кодеки (AMR, G.711).",
+      "basePoints": 1,
+      "points": 0.6,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "term": "OCS",
+      "question": "Для какого типа абонентов критически важна система OCS (Online Charging System)?",
+      "optA": "Для postpaid-абонентов ",
+      "optB": "Для prepaid-абонентов",
+      "optC": "Для корпоративных клиентов",
+      "optD": "Для абонентов в роуминге",
+      "correct": "B",
+      "explanation": "OCS позволяет проверять баланс и списывать средства непосредственно во время оказания услуги, что необходимо для prepaid, чтобы абонент не мог уйти в минус.",
+      "basePoints": 1,
+      "points": 1.2,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "EPC",
+      "question": "Какой элемент сети 4G отвечает за управление мобильностью и аутентификацию абонентов?",
+      "optA": "PCRF",
+      "optB": "SGW",
+      "optC": "MME",
+      "optD": "HSS",
+      "correct": "C",
+      "explanation": "MME (Mobility Management Entity) — это сердце управления в EPC. PGW и SGW работают с пользовательскими данными, HSS хранит профили абонентов.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "Multi Choice",
+      "term": "SCTP",
+      "question": "Какие преимущества дает SCTP (Stream Control Transmission Protocol) для транспорта сигнализации по сравнению с TCP?",
+      "optA": "Поддержка нескольких независимых потоков в рамках одного соединения",
+      "optB": "Мультихоминг (возможность использовать несколько IP-адресов для надежности)",
+      "optC": "Сохранение границ сообщений",
+      "optD": "Более высокая скорость передачи данных",
+      "correct": "A,B,C",
+      "explanation": "SCTP специально разработан для сигнализации. Он не стирает границы сообщений (как UDP), но при этом надежен (как TCP), а потоки и мультихоминг делают его очень надежным.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "7.1 Subscriber Identity & Devices",
+      "type": "True/False",
+      "term": "5G-GUTI",
+      "question": "5G-GUTI (Globally Unique Temporary Identity) содержит информацию, позволяющую однозначно идентифицировать AMF, обслуживающий абонента.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "5G-GUTI состоит из GUAMI (Globally Unique AMF ID), который идентифицирует конкретный AMF в сети, и временного идентификатора абонента внутри этого AMF. Это позволяет направлять последующие сообщения к правильному AMF без лишних запросов.",
+      "basePoints": 3,
+      "points": 1.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "Quality of Service",
+      "question": "Какие параметры обычно включает в себя QoS (Quality of Service) в мобильных сетях?",
+      "optA": "Приоритет обработки трафика",
+      "optB": "Гарантированная скорость (GBR)",
+      "optC": "Баланс тарифного плана",
+      "optD": "Максимально допустимая задержка",
+      "correct": "",
+      "explanation": "QoS определяет, как сеть должна обрабатывать трафик: с каким приоритетом (A), с какой гарантией скорости (B) и в какие сроки (задержка, D). Цвет дисплея (C) к QoS не относится.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "IMS",
+      "question": "Для чего используется IMS (IP Multimedia Subsystem) в современных сетях?",
+      "optA": "Для маршрутизации интернет-трафика",
+      "optB": "Для предоставления мультимедийных услуг",
+      "optC": "Для управления базовыми станциями",
+      "optD": "Для шифрования пользовательских данных",
+      "correct": "B",
+      "explanation": "IMS — это архитектура для доставки IP-мультимедиа (голос, видео, сообщения). Именно IMS обеспечивает VoLTE, VoNR, ViLTE и другие сервисы.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "S-CSCF",
+      "question": "Какая информация о абоненте хранится в S-CSCF после успешной регистрации в IMS?",
+      "optA": "Привязка (binding) между IMPU и контактным IP-адресом UE",
+      "optB": "Сервисный профиль (iFC — initial Filter Criteria), полученный от HSS",
+      "optC": "Текущий баланс счета абонента",
+      "optD": "IMEI устройства",
+      "correct": "A,B",
+      "explanation": "S-CSCF хранит привязку публичного идентификатора к текущему местоположению (контактному адресу) и сервисный профиль (iFC), определяющий, какие серверы приложений (TAS) должны обрабатывать вызовы этого абонента.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "term": "QCI",
+      "question": "Для услуги Mobile Cloud Gaming оператор хочет настроить политику QoS, гарантирующую приоритет ресурсов даже при перегрузках, но не фиксированную скорость. Какие параметры для этого нужно использовать?",
+      "optA": "QCI/5QI со значением, соответствующим Non-GBR, но с высоким приоритетом",
+      "optB": "QCI/5QI со значением GBR",
+      "optC": "ARP с высоким приоритетом, чтобы пакеты не отбрасывались при перегрузке",
+      "optD": "Сочетание высокоприоритетного ARP и соответствующего Non-GBR QCI/5QI",
+      "correct": "D",
+      "explanation": "QCI/5QI определяет класс обслуживания (приоритет, задержка, потери пакетов). ARP (Allocation and Retention Priority) определяет, нужно ли сохранять ресурс (Bearer/Flow) при перегрузках сети. Для гарантии, что сессия не будет \"сброшена\" при перегрузке, нужен высокий ARP. Сама услуга Cloud Gaming может не требовать фиксированной скорости (GBR), поэтому используется Non-GBR QCI с нужными характеристиками задержки.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "IMS",
+      "question": "Какие функции выполняет IMS (IP Multimedia Subsystem) в сети оператора?",
+      "optA": "Предоставляет услуги на основе IP (VoLTE, ViLTE, RCS)",
+      "optB": "Обеспечивает взаимодействие с традиционными телефонными сетями (PSTN)",
+      "optC": "Управляет радиоресурсами на базовых станциях",
+      "optD": "Хранит список заблокированных телефонов (IMEI)",
+      "correct": "AB",
+      "explanation": "IMS — это «фабрика услуг» для IP-сетей оператора. Она отвечает за установление сессий (SIP) и предоставление мультимедийных услуг (A), а также через шлюзы (MGW) взаимодействует с «старыми» телефонными сетями (B). Радиоресурсами управляет RAN.",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "term": "MME",
+      "question": "Какие функции выполняет MME?",
+      "optA": "Аутентификация абонента",
+      "optB": "Выбор SGW при подключении",
+      "optC": "Буферизация данных при ожидании абонента",
+      "optD": "Шифрование пользовательского трафика",
+      "correct": "AB",
+      "explanation": "MME отвечает за управление (аутентификацию и выбор узлов), но не за пользовательские данные. Буферизацией занимается SGW. Шифрование пользовательских данных — задача UE и eNB.",
+      "basePoints": 1,
+      "points": 1.3,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "PSTN",
+      "question": "Что такое PSTN (Public Switched Telephone Network)?",
+      "optA": "Сеть ШПД",
+      "optB": "Всемирная сеть спутниковой связи",
+      "optC": "Традиционная телефонная сеть общего пользования",
+      "optD": "Мобильная сеть передачи данных",
+      "correct": "C",
+      "explanation": "PSTN — это глобальная сеть традиционных телефонных линий, коммутаторов и АТС, существовавшая задолго до интернета. С ней взаимодействуют современные сети через шлюзы.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "EPC",
+      "question": "Какое ядро сети используется в технологиях 4G LTE?",
+      "optA": "EPC (Evolved Packet Core)",
+      "optB": "5GC (5G Core)",
+      "optC": "IMS (IP Multimedia Subsystem)",
+      "optD": "PSTN (Public Switched Telephone Network)",
+      "correct": "A",
+      "explanation": "EPC — это базовое ядро для сетей 4G, обеспечивающее передачу данных и голоса. 5GC используется в 5G, IMS — для голосовых услуг поверх IP, PSTN — традиционная телефонная сеть.",
+      "basePoints": 2,
+      "points": 1.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "question": "Что происходит с записью в VLR, когда абонент покидает зону обслуживания данного MSC?",
+      "optA": "Она остается навсегда в этом VLR",
+      "optB": "Она удаляется после определенного времени/события",
+      "optC": "Она копируется в Home HLR",
+      "optD": "Она шифруется и копируется в HLR",
+      "correct": "B",
+      "explanation": "VLR хранит временные данные. Когда абонент уходит в другую зону, его данные в старом VLR удаляются для освобождения памяти.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "4.4 Signaling & Control",
+      "type": "True/False",
+      "term": "GTP",
+      "question": "Протокол GTP используется только для передачи голосовых вызовов в сетях 4G.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "GTP (GPRS Tunneling Protocol) используется для туннелирования всех пользовательских данных (интернет-трафика, а не только голоса) между базовой станцией и ядром сети. Голос в 4G (VoLTE) тоже идет по GTP, но как IP-пакеты.",
+      "basePoints": 1,
+      "points": 0.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "HSS",
+      "question": "Какая информация хранится в HSS (Home Subscriber Server)?",
+      "optA": "Текущее местоположение абонента (cell ID)",
+      "optB": "Профиль абонента, ключи аутентификации и список разрешенных услуг",
+      "optC": "Баланс счета абонента",
+      "optD": "IMEI устройства",
+      "correct": "B",
+      "explanation": "HSS хранит постоянную информацию об абоненте: профиль, ключи аутентификации, подписанные услуги. Местоположение хранится в VLR/MME, баланс — в OCS/биллинге, IMEI — в EIR.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "1.5 Network Domains & Segments",
+      "type": "Single Choice",
+      "term": "NR",
+      "question": "Как в 5G NR называется базовая станция?",
+      "optA": "BTS",
+      "optB": "NodeB",
+      "optC": "eNodeB",
+      "optD": "gNodeB",
+      "correct": "D",
+      "explanation": "gNodeB — это базовая станция 5G, поддерживающая новые технологии, такие как Massive MIMO и разделение на CU и DU.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "term": "SIP",
+      "question": "Для чего используется протокол SIP (Session Initiation Protocol) в современных сетях?",
+      "optA": "Для передачи самих голосовых пакетов",
+      "optB": "Для управления мультимедийными сессиями",
+      "optC": "Для шифрования трафика",
+      "optD": "Для маршрутизации интернет-пакетов",
+      "correct": "B",
+      "explanation": "SIP отвечает за \"сигнализацию\" — он договаривается о параметрах вызова, приглашает абонента, сообщает о завершении и т.д. Сами голосовые данные передаются по RTP.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "term": "Bearer",
+      "question": "В сети LTE (4G) устанавливается сквозное соединение для передачи данных. Какие компоненты и интерфейсы входят в состав логического EPC Bearer?",
+      "optA": "Радиоканал (Radio Bearer) между UE и eNB",
+      "optB": "S1-канал (S1 Bearer) между eNB и SGW",
+      "optC": "S5/S8-канал (S5/S8 Bearer) между SGW и PGW",
+      "optD": "Интерфейс S6a между MME и HSS",
+      "correct": "ABC",
+      "explanation": "EPS Bearer — это «труба» для данных, которая состоит из сегментов: Radio Bearer (эфир), S1 Bearer (транспорт между базовой станцией и шлюзом) и S5/S8 Bearer (транспорт между шлюзами). Интерфейс S6a (MME-HSS) служебный, для обмена сигнальной информацией, данные по нему не передаются.",
+      "basePoints": 1,
+      "points": 1.3,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "question": "Где физически или логически может располагаться PCEF (Policy and Charging Enforcement Function) в сети 4G?",
+      "optA": "В MME",
+      "optB": "В HSS",
+      "optC": "В PGW",
+      "optD": "В eNodeB",
+      "correct": "C",
+      "explanation": "PCEF — это функциональный блок, который обычно находится в PGW (а в 5G — в UPF). Он отвечает за применение правил PCRF (блокировка, QoS, тарификация) к трафику.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "AMR",
+      "question": "Оператор внедряет HD Voice (VoLTE) и выбирает аудиокодек. Какие характеристики присущие кодеку AMR (Adaptive Multi-Rate) делают его предпочтительным для мобильных сетей по сравнению со старыми кодекоми, такими как G.711?",
+      "optA": "Адаптация битрейта к качеству радиоканала",
+      "optB": "Значительно более низкое требование к пропускной способности сети",
+      "optC": "Отсутствие необходимости в лицензировании и роялти",
+      "optD": "Встроенная функция подавления эха (Echo Cancellation)",
+      "correct": "AB",
+      "explanation": "AMR специально разработан для мобильной связи. Он умеет подстраивать скорость кодирования под помехи в эфире (A) и эффективно сжимает голос, экономя радиоресурсы (B). Лицензирование сложное, а Echo Cancellation обычно делается на других уровнях. G.711 — старый несжатый кодек, требует много пропускной способности.",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "VoIP",
+      "question": "Какие преимущества дает VoIP перед традиционной телефонией?",
+      "optA": "Использование одного канала для голоса и данных",
+      "optB": "Более эффективное использование полосы пропускания",
+      "optC": "Гарантированное качество без задержек",
+      "optD": "Легкая интеграция с веб-сервисами",
+      "correct": "ABD",
+      "explanation": "VoIP позволяет передавать голос в пакетах вместе с данными (A), использует компрессию для экономии带宽 (B) и легко интегрируется с API (D). Гарантий без задержек (C) VoIP не дает — это проблема IP-сетей.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "term": "SIGTRAN",
+      "question": "Какую проблему решает протокол SIGTRAN?",
+      "optA": "Проблему низкой скорости интернета",
+      "optB": "Проблему устаревания TDM-сетей",
+      "optC": "Проблему безопасности Wi-Fi",
+      "optD": "Проблему качества голоса",
+      "correct": "B",
+      "explanation": "SIGTRAN (Signaling Transport) — это набор протоколов, который \"заворачивает\" сигнальные сообщения SS7 в IP-пакеты, позволяя операторам использовать дешевые IP-каналы вместо дорогих TDM-линий E1/T1.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "PCRF",
+      "question": "Какие входные данные учитывает PCRF при принятии решения о QoS?",
+      "optA": "Информацию от AF (P-CSCF) о типе услуги (Rx)",
+      "optB": "Профиль абонента из HSS (Sp)",
+      "optC": "Данные о балансе из OCS (Sy)",
+      "optD": "Текущую загрузку базовой станции",
+      "correct": "ABC",
+      "explanation": "PCRF учитывает запросы от AF (A), подписку из HSS (B) и баланс из OCS (C). Загрузку eNB (D) PCRF не видит напрямую.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "term": "5GC",
+      "question": "Какие из перечисленных функций являются частью архитектуры 5G Core (5GC) в контексте плоскости управления и пользователя?",
+      "optA": "UPF",
+      "optB": "AMF",
+      "optC": "eNB",
+      "optD": "SMF",
+      "correct": "ABD",
+      "explanation": "AMF (Access and Mobility Management Function) и SMF (Session Management Function) отвечают за управление доступом и сессиями (плоскость управления), а UPF (User Plane Function) — за обработку пользовательских данных (плоскость пользователя). eNB — это базовая станция 4G.",
+      "basePoints": 1,
+      "points": 1.3,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "PCRF",
+      "question": "Какие параметры может изменять PCRF динамически во время сессии?",
+      "optA": "Максимальную битовую скорость (AMBR)",
+      "optB": "Приоритет QCI",
+      "optC": "APN абонента",
+      "optD": "Правила тарификации (online/offline)",
+      "correct": "ABD",
+      "explanation": "PCRF может в реальном времени влиять на скорость (A) и приоритет (B) трафика, а также указывать, как его тарифицировать (D). Изменить APN (точку доступа) на лету нельзя — это требует новой сессии.",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "1.5 Network Domains & Segments",
+      "type": "Single Choice",
+      "term": "LTE",
+      "question": "С какими узлами ядра сети взаимодействует eNB (базовая станция LTE)?",
+      "optA": "Только с MME",
+      "optB": "Только с SGW",
+      "optC": "С MME (сигнализация) и SGW (пользовательские данные)",
+      "optD": "С HSS и PGW",
+      "correct": "C",
+      "explanation": "eNB имеет два интерфейса к ядру: S1-MME для сигнализации (к MME) и S1-U для пользовательских данных (к SGW).",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "1.5 Network Domains & Segments",
+      "type": "Single Choice",
+      "term": "LTE",
+      "question": "Какая технология множественного доступа используется в LTE для направления \"вниз\" (от базовой станции к телефону)?",
+      "optA": "CDMA",
+      "optB": "TDMA",
+      "optC": "OFDMA",
+      "optD": "FDMA",
+      "correct": "C",
+      "explanation": "LTE использует OFDMA (Orthogonal Frequency Division Multiple Access) в downlink, что позволяет эффективно распределять ресурсы между пользователями.",
+      "basePoints": 1,
+      "points": 1,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Multi Choice",
+      "term": "EPC",
+      "question": "Оператор модернизирует свою опорную сеть, внедряя SPGW. Какие функции объединяет в себе это решение и какую проблему это решает?",
+      "optA": "Объединение функций коммутации и шлюза для упрощения архитектуры GPRS/EPC",
+      "optB": "Замену функций MME и HSS для снижения нагрузки на сигнальную сеть",
+      "optC": "Уменьшение задержек за счет исключения интерфейсов между SGSN и GGSN (SGW и PGW)",
+      "optD": "Консолидацию плоскостей управления и пользователя в сетях 3G и 4G",
+      "correct": "AC",
+      "explanation": "SPGW (Serving and PDN Gateway) объединяет функции SGSN и GGSN (в 3G) или SGW и PGW (в 4G). Это упрощает архитектуру (А) и уменьшает задержки, так как данные не передаются между двумя отдельными физическими узлами (С). B и D неверны, так как MME/HSS и плоскости управления/пользователя остаются разделенными концептуально.",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "True/False",
+      "term": "DTMF",
+      "question": "DTMF используется не только для набора номера, но и для управления голосовым меню (IVR) при звонках в колл-центры.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "При звонке в банк или службу поддержки, нажатие клавиш для выбора опции в меню — это отправка DTMF-сигналов.",
+      "basePoints": 1,
+      "points": 0.5,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "VoNR",
+      "question": "Что означает аббревиатура VoNR?",
+      "optA": "Voice over Narrowband Radio",
+      "optB": "Voice over New Radio",
+      "optC": "Video over New Radio",
+      "optD": "Voice over Native Router",
+      "correct": "B",
+      "explanation": "VoNR (Voice over New Radio) — это технология передачи голоса в сетях 5G через IMS, аналогичная VoLTE в 4G.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "Multi Choice",
+      "term": "PCC",
+      "question": "Какие функции объединяет в себе архитектура PCC (Policy and Charging Control)?",
+      "optA": "Управление политиками (QoS)",
+      "optB": "Онлайн- и офлайн-тарификация",
+      "optC": "Управление мобильностью абонента (хэндоверы)",
+      "optD": "Выбор базовой станции при регистрации",
+      "correct": "AB",
+      "explanation": "PCC (Policy and Charging Control) — это архитектура, которая связывает воедино управление качеством услуг (политики) и тарификацию. Она включает PCRF (правила), PCEF (исполнение на PGW), OCS (онлайн) и OFCS (офлайн). За мобильность (C) и выбор соты (D) отвечают другие функции (MME, eNB).",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Multi Choice",
+      "term": "MRFP",
+      "question": "Какие функции выполняет MRFP (Media Resource Function Processor) в архитектуре IMS?",
+      "optA": "Микширование нескольких аудио/видеопотоков для конференций",
+      "optB": "Воспроизведение тональных сигналов и речевых объявлений",
+      "optC": "Транскодирование медиапотоков между разными кодеками",
+      "optD": "Маршрутизация SIP-сообщений между CSCF",
+      "correct": "A,B,C",
+      "explanation": "MRFP — это исполнительный компонент MRF, который реально обрабатывает медиа: смешивает потоки, генерирует тоны, транскодирует. Маршрутизация SIP — задача CSCF.",
+      "basePoints": 3,
+      "points": 4.68,
+      "usageCount": 0,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    }
+  ],
+  "targets": {
+    "level": {
+      "Level-0": 31,
+      "Level-1": 18.6,
+      "Level-2": 12.4,
+      "None": 0
+    },
+    "difficulty": {
+      "Базовый": 18.6,
+      "Средний": 27.9,
+      "Сложный": 15.5
+    },
+    "type": {
+      "tf": 12.4,
+      "single": 21.7,
+      "multi": 27.9
+    },
+    "topic": {
+      "1.5 Network Domains & Segments": 10.333333333333332,
+      "4.1 Mobile Core (EPC/5GC)": 10.333333333333332,
+      "4.2 IMS & Voice": 10.333333333333332,
+      "4.3 Policy & Charging": 10.333333333333332,
+      "4.4 Signaling & Control": 10.333333333333332,
+      "7.1 Subscriber Identity & Devices": 10.333333333333332
+    }
+  },
+  "stats": {
+    "total": 62,
+    "byType": {
+      "tf": 12,
+      "single": 22,
+      "multi": 28
+    },
+    "byLevel": {
+      "Level-0": 31,
+      "Level-1": 19,
+      "Level-2": 12,
+      "None": 0
+    },
+    "byDifficulty": {
+      "Базовый": 19,
+      "Средний": 29,
+      "Сложный": 14
+    },
+    "byTopic": {
+      "4.2 IMS & Voice": 16,
+      "4.1 Mobile Core (EPC/5GC)": 16,
+      "4.4 Signaling & Control": 14,
+      "4.3 Policy & Charging": 11,
+      "1.5 Network Domains & Segments": 4,
+      "7.1 Subscriber Identity & Devices": 1
+    },
+    "totalPoints": 112.65999999999997,
+    "usageStats": {
+      "new": 12,
+      "repeated": 50,
+      "byUsageCount": {
+        "0": 62
+      }
+    }
+  },
+  "lastModified": "2026-03-16T11:11:38.243Z",
+  "modificationHistory": [
+    {
+      "index": 3,
+      "oldQuestion": {
+        "level": "Level-1",
+        "difficulty": "Средний",
+        "topic": "4.1 Mobile Core (EPC/5GC)",
+        "type": "Multi Choice",
+        "term": "HSS",
+        "question": "Какая информация хранится в HSS (Home Subscriber Server)?",
+        "optA": "Профили абонентов и подписанные услуги",
+        "optB": "Ключи аутентификации (совместно с AuC)",
+        "optC": "Текущий баланс счета абонента",
+        "optD": "IMEI устройства",
+        "correct": "A, B, D",
+        "explanation": "HSS хранит постоянные данные абонента и ключи для аутентификации. Баланс хранится в OCS/биллинге, а IMEI — в EIR.",
+        "basePoints": 2,
+        "points": 2.6,
+        "usageCount": 0,
+        "coefficients": {
+          "type": 130,
+          "difficulty": 100
+        }
+      },
+      "newQuestion": {
+        "level": "Level-1",
+        "difficulty": "Средний",
+        "topic": "4.1 Mobile Core (EPC/5GC)",
+        "type": "Multi Choice",
+        "question": "С какими узлами взаимодействует HSS в сети 4G?",
+        "optA": "С MME (S6a) для аутентификации",
+        "optB": "С PCRF (Sp) для передачи профилей QoS",
+        "optC": "С SGW (S5) для управления сессиями",
+        "optD": "С 3GPP AAA Server (SWx) для non-3GPP доступа",
+        "correct": "ABD",
+        "explanation": "HSS общается с MME (A), PCRF (B) и AAA-сервером (D). С SGW (C) — напрямую нет.",
+        "basePoints": 2,
+        "points": 2.6,
+        "usageCount": 0,
+        "isNew": true
+      },
+      "timestamp": "2026-03-16T11:11:35.179Z"
+    }
+  ]
+}
