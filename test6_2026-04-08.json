@@ -1,0 +1,1575 @@
+{
+  "testName": "Телеком-опрос",
+  "mode": "quiz",
+  "dateGenerated": "2026-04-08T13:32:27.523Z",
+  "expires": "2026-04-09T13:32:27.504Z",
+  "expiresLocal": "09.04.2026, 16:32:27",
+  "maxViolations": 10,
+  "showResults": {
+    "showCorrectnessDuringTest": false,
+    "showExplanationsDuringTest": false,
+    "showDetailedResults": true
+  },
+  "basePoints": {
+    "level0": 1,
+    "level1": 2,
+    "level2": 3,
+    "levelNone": 1
+  },
+  "coefficients": {
+    "type": {
+      "tf": 50,
+      "single": 100,
+      "multi": 130
+    },
+    "difficulty": {
+      "easy": 80,
+      "medium": 100,
+      "hard": 120
+    }
+  },
+  "topicWeights": [
+    {
+      "topic": "1.5 Network Domains & Segments",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "2.3 RAN Procedures & Mobility",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "4.2 IMS & Voice",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "4.3 Policy & Charging",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "4.4 Signaling & Control",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "7.1 Subscriber Identity & Devices",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Charging & Billing Systems",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Cloud & Virtualization Architecture",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Core Protocols & Signaling",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Fixed Broadband (FBB) overview",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "IMS & Voice Architecture",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "IP Network Architecture",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Identity & Subscriber Data",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Industry & business",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Interconnect / Internet / Roaming",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Mobile Broadband (MBB) overview",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Mobile Core Network",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Network Architecture Concepts",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Network Metrics & KPIs",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Network domains overview",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "OSS/BSS & Operations",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Security & Compliance",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Transport network",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    },
+    {
+      "topic": "Wireless Network (RAN)",
+      "weight": 100,
+      "normalizedWeight": 0.04
+    }
+  ],
+  "questions": [
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "Single Choice",
+      "term": "Peering vs Transit",
+      "question": "В чем основное отличие Peering от Transit в контексте межсетевого взаимодействия?",
+      "optA": "Peering — взаимный бесплатный/партнёрский обмен, Transit — платный доступ к полному интернету",
+      "optB": "Transit — всегда бесплатный и взаимный, Peering — всегда платный и асимметричный",
+      "optC": "Peering применяется исключительно внутри одной локальной сети (LAN)",
+      "optD": "Peering — это технология роуминга между мобильными операторами разных стран",
+      "correct": "A",
+      "explanation": "Peering — обмен трафиком между сетями (часто взаимный); Transit — платная услуга передачи к остальному интернету.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 1,
+      "isNew": false,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "IMS & Voice Architecture",
+      "type": "Single Choice",
+      "term": "VoLTE vs CSFB",
+      "question": "Почему VoLTE предпочтительнее CSFB (Circuit Switched Fallback) для оператора?",
+      "optA": " VoLTE требует меньше базовых станций ",
+      "optB": " VoLTE не требует переключения в 2G/3G для голоса, быстрее установка вызова ",
+      "optC": " CSFB не поддерживает SMS ",
+      "optD": " VoLTE работает без ядра сети ",
+      "correct": "B",
+      "explanation": " VoLTE позволяет оставаться в LTE для голоса, что ускоряет установку вызова (1-2 сек vs 5-7 сек) и освобождает ресурсы 2G/3G. ",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 1,
+      "isNew": false,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Single Choice",
+      "term": "All-IP",
+      "question": "Какое поколение мобильной связи первым реализовало архитектуру All-IP без Circuit Switching?",
+      "optA": "2G (GSM/GPRS) — второе поколение с цифровой передачей голоса",
+      "optB": "4G (LTE) — четвертое поколение с полностью пакетной архитектурой",
+      "optC": "3G (UMTS/WCDMA) — третье поколение с высокоскоростной передачей данных",
+      "optD": "1G (AMPS/NMT) — первое поколение аналоговой мобильной связи",
+      "correct": "B",
+      "explanation": "LTE проектировалась как пакетная All-IP сеть; голос реализуется как VoLTE (через IMS) поверх Packet Switching.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 1,
+      "isNew": false,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "AS",
+      "question": "Как S-CSCF узнает, что нужно направить вызов на сервер приложений (AS) для услуги \"переадресация\"?",
+      "optA": "Из настроек самого S-CSCF",
+      "optB": "Из iFC (initial Filter Criteria), полученных из HSS при регистрации",
+      "optC": "Из запроса от UE",
+      "optD": "Из команды от PCRF",
+      "correct": "B",
+      "explanation": "При регистрации S-CSCF загружает из HSS iFC — фильтры, которые определяют, при каких условиях SIP-сообщения должны направляться на те или иные серверы приложений.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "term": "Prepaid",
+      "question": "Какова последовательность действий при открытии веб-страницы Prepaid-абонентом?",
+      "optA": "PGW пропускает трафик → OCS списывает деньги постфактум",
+      "optB": "UE запрашивает страницу → PGW замечает начало трафика → PGW запрашивает квоту у OCS → OCS резервирует средства и выдает квоту → PGW пропускает трафик",
+      "optC": "MME проверяет баланс → HSS дает добро",
+      "optD": "PCRF сам решает, сколько можно",
+      "correct": "B",
+      "explanation": "PCEF (PGW) при появлении трафика для Prepaid-абонента обязан запросить квоту у OCS. Только получив положительный ответ с квотой, PGW начинает пропускать трафик.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "UDM",
+      "question": "Какой аналог HSS в 5G?",
+      "optA": "AMF",
+      "optB": "UDM",
+      "optC": "AUSF",
+      "optD": "NSSF",
+      "correct": "B",
+      "explanation": "UDM (Unified Data Management) выполняет функции, схожие с HSS, но с более гибкой архитектурой.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "term": "HSS",
+      "question": "Абонент потерял телефон и купил новый с той же SIM-картой. Вставил SIM, включил — связь есть. Какие данные остались в старом телефоне, а какие живут в SIM и сети?",
+      "optA": " IMSI хранится в телефоне, а MSISDN — в SIM ",
+      "optB": " Все данные хранятся только в телефоне ",
+      "optC": " IMEI хранится в HSS, а IMSI — в телефоне ",
+      "optD": " Ключи аутентификации (Ki) хранятся в SIM и HSS, а временные данные (TMSI) — в сети ",
+      "correct": "D",
+      "explanation": " Ki (ключ аутентификации) \"зашит\" в SIM и дублируется в HSS. IMSI тоже на SIM. В телефоне остаётся только IMEI (идентификатор устройства).",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "2.3 RAN Procedures & Mobility",
+      "type": "Single Choice",
+      "term": "Handover",
+      "question": "Что происходит при хэндовере (смене соты) во время активной передачи данных?",
+      "optA": "Сессия прерывается, нужно все начинать заново",
+      "optB": "eNB решает, что нужен хэндовер, согласует с целевой eNB через MME, и SGW перенаправляет трафик на новую eNB",
+      "optC": "MME меняет IP-адрес абонента",
+      "optD": "SGW отключается",
+      "correct": "B",
+      "explanation": "При хэндовере eNB-source принимает решение, через MME согласует с eNB-target, и после команды UE переключается. SGW перенаправляет трафик на новую eNB, сохраняя соединение с PGW.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Wireless Network (RAN)",
+      "type": "Single Choice",
+      "term": "Fronthaul vs Backhaul",
+      "question": "В чем отличие Fronthaul от Backhaul в архитектуре мобильной сети?",
+      "optA": "Fronthaul — внутренний канал RAN (RRU↔BBU/DU), Backhaul — от БС к ядру/агрегации",
+      "optB": "Fronthaul используется только в фиксированных сетях FTTx, Backhaul — в мобильных",
+      "optC": "Backhaul работает исключительно на прикладном уровне L7, Fronthaul — на L1",
+      "optD": "Fronthaul и Backhaul — это полностью идентичные взаимозаменяемые термины",
+      "correct": "A",
+      "explanation": "Fronthaul — внутренний высокоскоростной сегмент распределённой RAN; Backhaul — транспорт от узла доступа к ядру.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Transport network",
+      "type": "Single Choice",
+      "term": "MPLS",
+      "question": "MPLS (Multiprotocol Label Switching) в транспортной сети чаще всего используется для…",
+      "optA": "Построения VPN, трафик-инжиниринга и QoS в операторских магистральных сетях",
+      "optB": "Беспроводного доступа абонентов к сети через технологию Wi-Fi (WLAN)",
+      "optC": "Преобразования доменных имен в IP-адреса через распределенную систему DNS",
+      "optD": "Пассивного оптического доступа с использованием разветвителей GPON",
+      "correct": "A",
+      "explanation": "MPLS — технология коммутации меток, широко применяемая в операторских транспортных сетях для VPN и TE.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "term": "PFCP",
+      "question": "Какой протокол в 5G пришел на смену GTP-C для взаимодействия между SMF и UPF?",
+      "optA": "GTP-C",
+      "optB": "Diameter",
+      "optC": "PFCP (Packet Forwarding Control Protocol)",
+      "optD": "SIP",
+      "correct": "C",
+      "explanation": "PFCP — это новый, более гибкий протокол управления, отделяющий плоскость управления (SMF) от плоскости данных (UPF). SMF передает по PFCP правила (PDR, FAR), а UPF их исполняет.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "term": "PON elements",
+      "question": "Какие элементы входят в пассивную оптическую сеть (PON)?",
+      "optA": "OLT (Optical Line Terminal)",
+      "optB": "ONT/ONU (Optical Network Terminal)",
+      "optC": "Оптический сплиттер (разветвитель)",
+      "optD": "Активный репитер в каждом доме",
+      "correct": "A, B, C",
+      "explanation": "PON — пассивная сеть, активных репитеров в распределительной сети нет.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "SIP Registration",
+      "question": "Что происходит при отправке SIP-запроса REGISTER от UE к IMS?",
+      "optA": "UE начинает передавать голосовые пакеты",
+      "optB": "UE сообщает свой текущий IP-адрес и контактную информацию, связывая ее со своим публичным идентификатором (IMPU)",
+      "optC": "UE запрашивает кодек для разговора",
+      "optD": "UE аутентифицируется в сети доступа (RAN)",
+      "correct": "B",
+      "explanation": "REGISTER сообщает IMS, что абонент доступен по данному IP-адресу и контактному URI. S-CSCF сохраняет эту привязку (binding) и может маршрутизировать входящие вызовы к этому UE.",
+      "basePoints": 2,
+      "points": 2.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Security & Compliance",
+      "type": "Multi Choice",
+      "term": "Security technologies",
+      "question": "Какие технологии обеспечивают безопасность сетевых соединений?",
+      "optA": "IPsec (IP Security)",
+      "optB": "Telnet",
+      "optC": "HTTPS (HTTP Secure)",
+      "optD": "TLS/SSL (Transport Layer Security)",
+      "correct": "A, C, D",
+      "explanation": "Telnet — небезопасный протокол.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "term": "Session-Based Charging",
+      "question": "Какой пример относится к Session-Based Charging?",
+      "optA": "Покупка игры в магазине приложений",
+      "optB": "Отправка USSD-запроса",
+      "optC": "Голосовой вызов, тарифицируемый поминутно",
+      "optD": "Подписка на новости",
+      "correct": "C",
+      "explanation": "Session-Based Charging (сессионная тарификация) зависит от длительности сессии (звонка, GPRS-сессии).",
+      "basePoints": 2,
+      "points": 2.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "OSS/BSS & Operations",
+      "type": "Multi Choice",
+      "term": "OSS vs BSS",
+      "question": "Какие системы относятся к домену OSS (Operations Support Systems) и отвечают за техническую эксплуатацию?",
+      "optA": " Fault Management (управление сбоями) ",
+      "optB": " Billing (биллинг и тарификация) ",
+      "optC": " Network Inventory (инвентаризация ресурсов) ",
+      "optD": " CRM (управление клиентами) ",
+      "correct": "A, C",
+      "explanation": " OSS фокусируется на сети (сбои, ресурсы). Billing и CRM относятся к бизнес-домену BSS. ",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "MME",
+      "question": "Как MME выбирает SGW для абонента?",
+      "optA": "Случайно из всех SGW сети",
+      "optB": "На основе местоположения (TAI) абонента, чтобы выбрать топологически ближайший SGW",
+      "optC": "По IMSI абонента",
+      "optD": "По времени суток",
+      "correct": "B",
+      "explanation": "MME выбирает SGW, максимально близкий к eNB, через которую пришел абонент, чтобы оптимизировать маршрут трафика и снизить задержки на транспортной сети.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Industry & business",
+      "type": "Multi Choice",
+      "term": "Billing",
+      "question": "Какие системы участвуют в процессе тарификации и списания средств в реальном времени (OCS)?",
+      "optA": " Сбор данных о сессиях (CDR/Event) ",
+      "optB": " Проверка баланса абонента ",
+      "optC": " Резервирование средств на счете ",
+      "optD": " Физическая печать чеков в салоне связи ",
+      "correct": "A, B, C",
+      "explanation": " OCS работает онлайн в сети. Печать чеков — офлайн процесс в рознице, не часть сетевого charging. ",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "term": "Discounting",
+      "question": "Где в биллинге применяется Discounting?",
+      "optA": "На базовых станциях",
+      "optB": "При применении скидок (например, \"20% на звонки после 20:00\") к рассчитанной стоимости",
+      "optC": "В процессе аутентификации",
+      "optD": "При выборе сети в роуминге",
+      "correct": "B",
+      "explanation": "Discounting — это модуль или этап в биллинге, который применяет правила скидок и акций к стоимости услуги после ее первичной тарификации (Rating).",
+      "basePoints": 2,
+      "points": 2.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "term": "PGW",
+      "question": "Абонент находится в роуминге. Его трафик идет в интернет. Через какой PGW (PDN Gateway) он выходит в интернет?",
+      "optA": " Через PGW домашнего оператора ",
+      "optB": " Через PGW гостевого оператора (в стране пребывания) ",
+      "optC": " Через любой PGW, который первым откликнется ",
+      "optD": " Через специальный роуминговый PGW ООН ",
+      "correct": "B",
+      "explanation": " В современном роуминге (Home Routing) трафик может идти через домашний PGW, но чаще используется Local Breakout — выход в интернет через PGW гостевой сети, чтобы не гонять трафик через домашнюю сеть.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "UC",
+      "question": "Что подразумевает термин Unified Communications (UC)?",
+      "optA": "Единый стандарт LTE",
+      "optB": "Объединение всех видов коммуникаций (голос, видео, чат, присутствие) на одной платформе",
+      "optC": "Протокол передачи файлов",
+      "optD": "Тип базовой станции",
+      "correct": "B",
+      "explanation": "UC (Унифицированные коммуникации) — это концепция интеграции различных сервисов общения (телефония, видеосвязь, обмен сообщениями) в единую среду.",
+      "basePoints": 2,
+      "points": 2.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Wireless Network (RAN)",
+      "type": "Multi Choice",
+      "term": "RAN elements",
+      "question": "Какие элементы относятся к сети радиодоступа (RAN)?",
+      "optA": "Антенна",
+      "optB": "RRU (Remote Radio Unit)",
+      "optC": "BBU (Baseband Unit)",
+      "optD": "HSS (Home Subscriber Server)",
+      "correct": "A, B, C",
+      "explanation": "HSS — это элемент ядра (Core), а не радиодоступа.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Network domains overview",
+      "type": "Multi Choice",
+      "term": "NFV",
+      "question": "Что позволяет технология NFV?",
+      "optA": "Заменять аппаратные сетевые функции программными",
+      "optB": "Запускать VNF на стандартных серверах",
+      "optC": "Полностью отказаться от оборудования",
+      "optD": "Гибко масштабировать сетевые функции",
+      "correct": "A, B, D",
+      "explanation": "Полный отказ от оборудования невозможен (серверы, СКС нужны).",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "2.3 RAN Procedures & Mobility",
+      "type": "Single Choice",
+      "term": "TAU",
+      "question": "Что происходит, когда абонент в режиме ожидания (IDLE) переходит в новую Tracking Area?",
+      "optA": "UE сразу теряет соединение",
+      "optB": "UE отправляет NAS-сообщение TAU Request в MME/AMF, чтобы сообщить новое местоположение",
+      "optC": "MME сам узнает о перемещении от базовых станций",
+      "optD": "Ничего не происходит",
+      "correct": "B",
+      "explanation": "В режиме IDLE UE сам отвечает за мобильность. При смене TA он инициирует Tracking Area Update, чтобы сеть знала, где его искать при входящем вызове.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "1.5 Network Domains & Segments",
+      "type": "True/False",
+      "term": "NR",
+      "question": "В 5G gNodeB может быть разделен на CU и DU, которые могут находиться в разных физических местах, соединяясь через транспортную сеть (fronthaul/midhaul).",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Это ключевая особенность 5G для реализации C-RAN. CU может находиться в центральном ЦОД, а DU — ближе к антенне, что позволяет централизовать обработку и экономить ресурсы.",
+      "basePoints": 1,
+      "points": 0.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "term": "xDSL technologies",
+      "question": "Какие технологии относятся к семейству xDSL (по медной паре)?",
+      "optA": "ADSL",
+      "optB": "VDSL",
+      "optC": "SHDSL",
+      "optD": "GPON",
+      "correct": "A, B, C",
+      "explanation": "GPON — оптическая технология. Остальные — медные.",
+      "basePoints": 2,
+      "points": 2.08,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "4.4 Signaling & Control",
+      "type": "Single Choice",
+      "term": "SIP Dialog",
+      "question": "Для чего используется заголовок Route в SIP-запросе?",
+      "optA": "Для указания обратного адреса",
+      "optB": "Для принудительной маршрутизации запроса через заданный набор прокси-серверов",
+      "optC": "Для указания транспортного протокола",
+      "optD": "Для передачи информации о местоположении",
+      "correct": "B",
+      "explanation": "Заголовок Route используется для задания строгого маршрута (strict routing) или слабого маршрута (loose routing). Сервер, получивший запрос с этим заголовком, должен отправить его на следующий URI в списке. Это важно в IMS для прохождения вызовов через P-CSCF и S-CSCF.",
+      "basePoints": 3,
+      "points": 3.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Network Metrics & KPIs",
+      "type": "Multi Choice",
+      "term": "Radio channel metrics",
+      "question": "Какие показатели используются для оценки качества радиоканала в LTE/5G?",
+      "optA": "RSRP (Reference Signal Received Power)",
+      "optB": "RSRQ (Reference Signal Received Quality)",
+      "optC": "SINR (Signal-to-Interference-plus-Noise Ratio)",
+      "optD": "RSSI (Received Signal Strength Indicator)",
+      "correct": "A, B, C, D",
+      "explanation": "Все четыре показателя используются в сетях.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Industry & business",
+      "type": "True/False",
+      "term": "IPTV",
+      "question": "IPTV передает телевизионный сигнал через коаксиальный антенный кабель без использования IP-протокола.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "IPTV использует сеть передачи данных (IP) для доставки видеоконтента, в отличие от традиционного кабельного ТВ.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Single Choice",
+      "term": "Network Slicing",
+      "question": "Какая концепция 5G позволяет создавать несколько логических сетей с разными SLA на одной физической инфраструктуре?",
+      "optA": "Carrier Aggregation — объединение нескольких частотных диапазонов для увеличения скорости",
+      "optB": "Network Slicing — логическая сегментация сети под разные сценарии и требования",
+      "optC": "Massive MIMO — использование большого числа антенн для увеличения емкости",
+      "optD": "Beamforming — направленная передача сигнала для улучшения покрытия и качества",
+      "correct": "B",
+      "explanation": "Network Slicing создает изолированные логические «срезы» сети с индивидуальными характеристиками под разные use cases.",
+      "basePoints": 2,
+      "points": 2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "term": "MPLS",
+      "question": "Какие протоколы могут работать поверх MPLS?",
+      "optA": "IP",
+      "optB": "Ethernet",
+      "optC": "ATM",
+      "optD": "Frame Relay",
+      "correct": "A, B, C, D",
+      "explanation": "MPLS мультипротокольный – поддерживает многие L2/L3 протоколы.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "True/False",
+      "term": "Traceroute",
+      "question": "Traceroute показывает маршрут (список узлов), через которые проходят пакеты до цели.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Да, утилита отображает путь (хопы) пакета в сети.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "term": "Containerization",
+      "question": "Какие технологии относятся к контейнеризации и оркестрации?",
+      "optA": "Docker",
+      "optB": "Kubernetes (K8s)",
+      "optC": "OpenStack",
+      "optD": "LXC/LXD",
+      "correct": "A, B, D",
+      "explanation": "OpenStack — для управления виртуальными машинами, не контейнерами (хотя может интегрироваться).",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "1.5 Network Domains & Segments",
+      "type": "Single Choice",
+      "term": "NR",
+      "question": "Что означает NR (New Radio) в контексте 5G?",
+      "optA": "Новый радиоинтерфейс для сетей 5G",
+      "optB": "Сеть национального роуминга",
+      "optC": "Новый тарифный план",
+      "optD": "Сервис уведомлений",
+      "correct": "A",
+      "explanation": "NR (New Radio) — это новый стандарт радиодоступа, разработанный для 5G. Он обеспечивает работу в разных частотных диапазонах (от низких до миллиметровых волн) и поддерживает новые технологии, такие как Massive MIMO и формирование луча.",
+      "basePoints": 1,
+      "points": 1.2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Security & Compliance",
+      "type": "True/False",
+      "term": "DDoS",
+      "question": "DDoS-атака направлена на кражу конфиденциальных данных пользователей.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "Цель DDoS — отказ в обслуживании (перегрузка ресурса), а не кража данных (хотя может служить прикрытием).",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Core Protocols & Signaling",
+      "type": "Multi Choice",
+      "term": "LTE signaling protocols",
+      "question": "Какие протоколы используются на интерфейсах между eNB и MME, eNB и SGW?",
+      "optA": "S1-AP (на S1-MME)",
+      "optB": "GTP-C (на S11)",
+      "optC": "GTP-U (на S1-U)",
+      "optD": "Diameter (на S6a)",
+      "correct": "A, C",
+      "explanation": "S1-AP и GTP-U — на интерфейсах с eNB. GTP-C — между MME и SGW, Diameter — между MME и HSS.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Network domains overview",
+      "type": "Single Choice",
+      "term": "Backbone",
+      "question": "Backbone Network в телеком-инфраструктуре — это…",
+      "optA": "Высокоскоростная опорная магистраль, соединяющая ключевые узлы и регионы оператора",
+      "optB": "Последний участок сети (last mile), подключающий абонента к первому узлу",
+      "optC": "Сеть доступа, обеспечивающая физическое подключение конечных пользователей",
+      "optD": "Сеть радиодоступа (RAN) с базовыми станциями и антеннами",
+      "correct": "A",
+      "explanation": "Backbone — опорная сеть/магистраль, связывающая ключевые узлы, регионы и точки обмена трафиком.",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "3GPP AAA Server",
+      "question": "Какую функцию выполняет 3GPP AAA Server?",
+      "optA": "Управляет мобильностью в LTE",
+      "optB": "Обрабатывает AAA-запросы для non-3GPP доступа (Wi-Fi, CDMA) к сети оператора",
+      "optC": "Генерирует голосовые вызовы",
+      "optD": "Хранит профили абонентов",
+      "correct": "B",
+      "explanation": "3GPP AAA Server — это специализированный сервер, который позволяет абонентам подключаться к сети оператора через сети non-3GPP (например, доверенные Wi-Fi сети) и проходить там аутентификацию.",
+      "basePoints": 3,
+      "points": 3.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Средний",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "Multi Choice",
+      "term": "Interconnection types",
+      "question": "Какие виды межоператорских соединений существуют?",
+      "optA": "Peering (пиринг)",
+      "optB": "VPN (Virtual Private Network)",
+      "optC": "IXP (Internet Exchange Point)",
+      "optD": "Transit (транзит)",
+      "correct": "A, C, D",
+      "explanation": "VPN — технология для частных сетей, не для межоператорских.",
+      "basePoints": 2,
+      "points": 2.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "4.4 Signaling & Control",
+      "type": "True/False",
+      "term": "SS7",
+      "question": "Протокол SS7, используемый в старых телефонных сетях, считается очень безопасным и защищенным от взлома.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "SS7 разрабатывался для \"закрытых\" сетей доверенных операторов и не имеет современных механизмов аутентификации и шифрования, что делает его уязвимым для атак.",
+      "basePoints": 1,
+      "points": 0.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "IMS & Voice Architecture",
+      "type": "True/False",
+      "term": "SMS",
+      "question": "SMS передается через сигнальные каналы сети, а не через каналы передачи данных пользователя.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Верно, поэтому SMS работает даже при занятом голосовом канале (в GSM) и без интернета.",
+      "basePoints": 3,
+      "points": 1.5,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "Codec",
+      "question": "Какой кодек чаще всего используется в VoLTE для обеспечения совместимости и хорошего качества?",
+      "optA": "G.711",
+      "optB": "AMR-NB (12.2 кбит/с) или AMR-WB (12.65 кбит/с)",
+      "optC": "MP3",
+      "optD": "AAC",
+      "correct": "B",
+      "explanation": "AMR (в узкополосной или широкополосной версии) является стандартным кодеком для VoLTE.",
+      "basePoints": 2,
+      "points": 1.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Сложный",
+      "topic": "Fixed Broadband (FBB) overview",
+      "type": "Multi Choice",
+      "term": "PON",
+      "question": "Какие компоненты PON являются пассивными?",
+      "optA": "Оптический сплиттер",
+      "optB": "Оптический кабель",
+      "optC": "OLT",
+      "optD": "ONT",
+      "correct": "A, B",
+      "explanation": "OLT и ONT – активное оборудование на концах.",
+      "basePoints": 1,
+      "points": 1.56,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "2.3 RAN Procedures & Mobility",
+      "type": "Single Choice",
+      "term": "TAU",
+      "question": "Абонент в режиме IDLE пересекает границу Tracking Area, обслуживаемую другой MME. Какова последовательность действий?",
+      "optA": "UE отправляет TAU Request на новую MME, новая MME запрашивает контекст у старой MME, обновляет HSS и SGW, подтверждает TAU",
+      "optB": "UE теряет соединение и инициирует полный Attach заново при следующей активности",
+      "optC": "Старая MME инициирует передачу контекста в новую MME при обнаружении потери сигнала",
+      "optD": "UE отправляет TAU Request на старую MME, старая MME перенаправляет в новую вместе с контекстом",
+      "correct": "A",
+      "explanation": "UE отправляет TAU с идентификатором старой MME. Базовая станция направляет запрос в новую MME. Новая MME запрашивает контекст у старой MME (по интерфейсу S10), затем обновляет HSS и SGW.",
+      "basePoints": 3,
+      "points": 3.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Wireless Network (RAN)",
+      "type": "True/False",
+      "term": "WLAN",
+      "question": "WLAN (Wireless LAN) всегда требует лицензируемого частотного спектра.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "WLAN (Wi-Fi) обычно работает в нелицензируемых диапазонах (ISM bands: 2.4 ГГц, 5 ГГц).",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Network Metrics & KPIs",
+      "type": "Multi Choice",
+      "term": "Latency types",
+      "question": "Какие типы задержек вносят вклад в общую Latency сети?",
+      "optA": "Задержка распространения (Propagation Delay)",
+      "optB": "Задержка обработки (Processing Delay)",
+      "optC": "Задержка в очереди (Queuing Delay)",
+      "optD": "Задержка сериализации (Serialization Delay)",
+      "correct": "A, B, C, D",
+      "explanation": "Все перечисленное составляет суммарную сетевую задержку.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Mobile Core Network",
+      "type": "Single Choice",
+      "term": "NAT",
+      "question": "Пользователь не может подключиться к онлайн-игре, требующей входящих соединений. Какая особенность NAT наиболее вероятно является причиной?",
+      "optA": " NAT шифрует весь исходящий трафик ",
+      "optB": " NAT преобразует только IPv4 в IPv6 ",
+      "optC": " NAT блокирует все входящие соединения без явного правила проброса портов ",
+      "optD": " NAT увеличивает задержку более чем на 100 мс ",
+      "correct": "C",
+      "explanation": " NAT скрывает внутреннюю структуру сети. Для входящих соединений из интернета требуется явное правило (Port Forwarding) или UPnP. ",
+      "basePoints": 1,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "True/False",
+      "term": "Diameter",
+      "question": "Интерфейс Ro используется только для offline charging в IMS и не поддерживает тарификацию в реальном времени.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "Интерфейс Ro (основанный на Diameter) предназначен для online charging (тарификации в реальном времени) в IMS. Он взаимодействует с OCS. Для offline charging используется интерфейс Rf.",
+      "basePoints": 2,
+      "points": 1.2,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Security & Compliance",
+      "type": "Multi Choice",
+      "term": "Security",
+      "question": "Какие три компонента составляют базовую триаду информационной безопасности (CIA)?",
+      "optA": " Confidentiality (Конфиденциальность) ",
+      "optB": " Integrity (Целостность) ",
+      "optC": " Availability (Доступность) ",
+      "optD": " Authentication (Аутентификация) ",
+      "correct": "A, B, C",
+      "explanation": " Классическая триада CIA. Аутентификация — это механизм обеспечения, а не базовое свойство безопасности в этой модели. ",
+      "basePoints": 1,
+      "points": 1.3,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "OSS/BSS & Operations",
+      "type": "True/False",
+      "term": "Billing",
+      "question": "Биллинг (Billing) относится к системам OSS (Operations Support Systems).",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "Биллинг — это часть BSS (Business Support Systems), так как связан с деньгами и клиентами.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "MME Pool",
+      "question": "Что происходит при добавлении новой MME в существующий MME Pool?",
+      "optA": "Нужно отключать всех абонентов",
+      "optB": "Балансировщик (например, eNB) начинает распределять часть новых абонентов на новую MME",
+      "optC": "Все старые абоненты перерегистрируются принудительно",
+      "optD": "Меняется архитектура сети",
+      "correct": "B",
+      "explanation": "MME Pool позволяет добавлять новые MME без остановки сервиса. eNB, настроенные на пул, просто начинают направлять часть новых подключений (или хэндоверов) на новую MME, постепенно распределяя нагрузку.",
+      "basePoints": 3,
+      "points": 3.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "Mobile Broadband (MBB) overview",
+      "type": "Multi Choice",
+      "term": "5G NSA/SA",
+      "question": "Какие типы развертывания 5G (Deployment Modes) существуют?",
+      "optA": "NSA (Non-Standalone)",
+      "optB": "SA (Standalone)",
+      "optC": "LTE-only",
+      "optD": "GSM-only",
+      "correct": "A, B",
+      "explanation": "NSA (на базе ядра 4G) и SA (на базе ядра 5G) — основные режимы.",
+      "basePoints": 3,
+      "points": 3.9,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Interconnect / Internet / Roaming",
+      "type": "True/False",
+      "term": "Roaming",
+      "question": "Роуминг (Roaming) позволяет абоненту пользоваться услугами связи в зоне покрытия чужого оператора.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Да, это механизм обслуживания гостевых абонентов в партнерских сетях.",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Сложный",
+      "topic": "4.1 Mobile Core (EPC/5GC)",
+      "type": "Single Choice",
+      "term": "SGW",
+      "question": "Абонент на большой скорости едет в поезде из Москвы в Санкт-Петербург. Его смартфон последовательно переключается между десятками базовых станций. Какой узел ядра сети выступает в роли «якоря» (anchor point), обеспечивая неизменность IP-адреса и маршрута данных на внешний шлюз (PGW) на протяжении всей поездки?",
+      "optA": "MME, так как он управляет зонами отслеживания",
+      "optB": "Исходная eNB, которая первой обслужила абонента",
+      "optC": "SGW (Serving Gateway)",
+      "optD": "PGW (PDN Gateway)",
+      "correct": "C",
+      "explanation": "SGW выполняет функцию локального якоря мобильности. При перемещении абонента между eNB, SGW перенаправляет трафик на новую базовую станцию, но при этом соединение с PGW остается неизменным. Это позволяет сохранить IP-адрес и минимизировать сигнальную нагрузку на внешние сети. PGW — это уже внешний (глобальный) якорь.",
+      "basePoints": 2,
+      "points": 2.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Средний",
+      "topic": "Transport network",
+      "type": "Multi Choice",
+      "term": "Transmission network",
+      "question": "Какие среды передачи данных могут использоваться в транспортной сети (Transport Network) оператора?",
+      "optA": " Оптоволокно (Fiber Optic) ",
+      "optB": " Радиорелейная связь (Microwave) ",
+      "optC": " Спутниковый канал (Satellite) ",
+      "optD": " Витая пара (Twisted Pair) на магистральных участках ",
+      "correct": "A, B, C",
+      "explanation": " Витая пара используется в доступе (LAN/Last Mile), но не на магистральных транспортных участках из-за затухания. ",
+      "basePoints": 1,
+      "points": 1.3,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 100
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Базовый",
+      "topic": "Industry & business",
+      "type": "True/False",
+      "term": "System Integrator",
+      "question": "Интегратор (System Integrator) производит собственное оборудование на заводах.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "B",
+      "explanation": "Интегратор обычно объединяет (интегрирует) оборудование разных вендоров в единое решение, но редко производит своё.",
+      "basePoints": 2,
+      "points": 0.8,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Сложный",
+      "topic": "4.3 Policy & Charging",
+      "type": "Single Choice",
+      "term": "Policy Rule",
+      "question": "Что содержит в себе правило политики (PCC Rule), отправляемое из PCRF в PCEF?",
+      "optA": "Только имя абонента",
+      "optB": "Идентификатор потока (flow description), параметры QoS (QCI, ARP, Bitrates) и инструкции по тарификации (online/offline, Charging Key)",
+      "optC": "Только IP-адрес назначения",
+      "optD": "Только время действия",
+      "correct": "B",
+      "explanation": "PCC Rule — это комплексная инструкция: она говорит PCEF, какой трафик искать (flow), как его обрабатывать (QoS) и как тарифицировать (charging).",
+      "basePoints": 3,
+      "points": 3.6,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-1",
+      "difficulty": "Высокий",
+      "topic": "Cloud & Virtualization Architecture",
+      "type": "Multi Choice",
+      "term": "NFV",
+      "question": "Какие изменения в инфраструктуре требуются для перехода на NFV?",
+      "optA": " Закупка стандартных x86-серверов вместо специализированных коробок ",
+      "optB": " Внедрение систем оркестрации виртуальных функций ",
+      "optC": " Полная замена оптоволокна на медь ",
+      "optD": " Обучение персонала работе с облачными технологиями ",
+      "correct": "A, B, D",
+      "explanation": " NFV требует смены «железа» на серверы, ПО для управления и новых компетенций. Кабельная инфраструктура не меняется. ",
+      "basePoints": 2,
+      "points": 3.12,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 130,
+        "difficulty": 120
+      }
+    },
+    {
+      "level": "Level-0",
+      "difficulty": "Базовый",
+      "topic": "Network domains overview",
+      "type": "True/False",
+      "term": "Access Network",
+      "question": "Сеть доступа (Access Network) соединяет абонента с первым узлом оператора.",
+      "optA": "Верно",
+      "optB": "Неверно",
+      "optC": "",
+      "optD": "",
+      "correct": "A",
+      "explanation": "Да, это «последняя миля».",
+      "basePoints": 1,
+      "points": 0.4,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 50,
+        "difficulty": 80
+      }
+    },
+    {
+      "level": "Level-2",
+      "difficulty": "Средний",
+      "topic": "4.2 IMS & Voice",
+      "type": "Single Choice",
+      "term": "Codec",
+      "question": "Какой кодек чаще всего используется для обеспечения высокого качества голоса (HD Voice) в сетях 4G/5G?",
+      "optA": "G.711 (64 кбит/с)",
+      "optB": "AMR-NB (12.2 кбит/с)",
+      "optC": "AMR-WB (Adaptive Multi-Rate Wideband)",
+      "optD": "G.729 (8 кбит/с)",
+      "correct": "C",
+      "explanation": "AMR-WB (также известный как G.722.2) обеспечивает широкополосный голос (HD Voice) с частотой дискретизации 16 кГц, что дает значительно более чистое и естественное звучание, чем старые кодеки.",
+      "basePoints": 3,
+      "points": 3,
+      "usageCount": 0,
+      "isNew": true,
+      "coefficients": {
+        "type": 100,
+        "difficulty": 100
+      }
+    }
+  ],
+  "targets": {
+    "level": {
+      "Level-0": 12,
+      "Level-1": 36,
+      "Level-2": 12,
+      "None": 0
+    },
+    "difficulty": {
+      "Базовый": 12,
+      "Средний": 30,
+      "Сложный": 18
+    },
+    "type": {
+      "tf": 12,
+      "single": 30,
+      "multi": 18
+    },
+    "topic": {
+      "1.5 Network Domains & Segments": 2.4,
+      "2.3 RAN Procedures & Mobility": 2.4,
+      "4.1 Mobile Core (EPC/5GC)": 2.4,
+      "4.2 IMS & Voice": 2.4,
+      "4.3 Policy & Charging": 2.4,
+      "4.4 Signaling & Control": 2.4,
+      "7.1 Subscriber Identity & Devices": 2.4,
+      "Charging & Billing Systems": 2.4,
+      "Cloud & Virtualization Architecture": 2.4,
+      "Core Protocols & Signaling": 2.4,
+      "Fixed Broadband (FBB) overview": 2.4,
+      "IMS & Voice Architecture": 2.4,
+      "IP Network Architecture": 2.4,
+      "Identity & Subscriber Data": 2.4,
+      "Industry & business": 2.4,
+      "Interconnect / Internet / Roaming": 2.4,
+      "Mobile Broadband (MBB) overview": 2.4,
+      "Mobile Core Network": 2.4,
+      "Network Architecture Concepts": 2.4,
+      "Network Metrics & KPIs": 2.4,
+      "Network domains overview": 2.4,
+      "OSS/BSS & Operations": 2.4,
+      "Security & Compliance": 2.4,
+      "Transport network": 2.4,
+      "Wireless Network (RAN)": 2.4
+    }
+  },
+  "stats": {
+    "total": 60,
+    "byType": {
+      "tf": 12,
+      "single": 30,
+      "multi": 18
+    },
+    "byLevel": {
+      "Level-0": 12,
+      "Level-1": 36,
+      "Level-2": 12,
+      "None": 0
+    },
+    "byDifficulty": {
+      "Базовый": 12,
+      "Средний": 30,
+      "Сложный": 17
+    },
+    "byTopic": {
+      "Interconnect / Internet / Roaming": 3,
+      "IMS & Voice Architecture": 2,
+      "Mobile Broadband (MBB) overview": 3,
+      "4.2 IMS & Voice": 5,
+      "4.3 Policy & Charging": 5,
+      "4.1 Mobile Core (EPC/5GC)": 5,
+      "Mobile Core Network": 3,
+      "2.3 RAN Procedures & Mobility": 3,
+      "Wireless Network (RAN)": 3,
+      "Transport network": 3,
+      "4.4 Signaling & Control": 3,
+      "Fixed Broadband (FBB) overview": 3,
+      "Security & Compliance": 3,
+      "OSS/BSS & Operations": 3,
+      "Industry & business": 3,
+      "Network domains overview": 3,
+      "1.5 Network Domains & Segments": 2,
+      "Network Metrics & KPIs": 2,
+      "Cloud & Virtualization Architecture": 2,
+      "Core Protocols & Signaling": 1
+    },
+    "totalPoints": 124.47999999999999,
+    "usageStats": {
+      "new": 57,
+      "repeated": 3,
+      "byUsageCount": {
+        "0": 57,
+        "1": 3
+      }
+    }
+  }
+}
